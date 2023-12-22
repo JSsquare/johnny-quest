@@ -1,4 +1,5 @@
 'use client'
+import { Button } from '@chakra-ui/react'
 import { SyntheticEvent, useState } from 'react'
 
 const ChatContainer = () => {
@@ -44,21 +45,21 @@ const ChatContainer = () => {
 const CityPills = () => {
   return (
     <div className="flex flex-row gap-6 justify-center">
-      <p className="city-pill">
-        <code className="font-mono font-bold">San Francisco</code>
-      </p>
-      <p className="city-pill">
-        <code className="font-mono font-bold">New York City</code>
-      </p>
-      <p className="city-pill">
-        <code className="font-mono font-bold">Arizona</code>
-      </p>
-      <p className="city-pill">
-        <code className="font-mono font-bold">Kochi, Kerala</code>
-      </p>
-      <p className="city-pill">
-        <code className="font-mono font-bold">Pune, India</code>
-      </p>
+      <Button colorScheme="teal" variant="outline">
+        San Francisco
+      </Button>
+      <Button colorScheme="teal" variant="outline">
+        New York City
+      </Button>
+      <Button colorScheme="teal" variant="outline">
+        Arizona
+      </Button>
+      <Button colorScheme="teal" variant="outline">
+        Kochi, Kerala
+      </Button>
+      <Button colorScheme="teal" variant="outline">
+        Pune, India
+      </Button>
     </div>
   )
 }
