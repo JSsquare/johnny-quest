@@ -1,8 +1,15 @@
+import Link from 'next/link'
 import React from 'react'
 
 const AboutPage: React.FC = () => {
   return (
     <div className="h-screen bg-gray-100 flex flex-col items-center justify-center">
+      <Link
+        href="/"
+        className="absolute top-0 left-0 m-4 text-yellow-500 font-bold"
+      >
+        Home
+      </Link>
       <h1 className="text-4xl font-bold mb-4">About Johnny</h1>
       <p className="text-lg mb-8">Welcome to the About Page!</p>
 
@@ -12,15 +19,6 @@ const AboutPage: React.FC = () => {
           Johnny is a passionate creator in the tech industry. He has been
           coding for over 10 years and loves building innovative solutions.
         </p>
-      </section>
-
-      <section className="mb-8">
-        <h2 className="text-2xl font-bold mb-2">Skills</h2>
-        <ul>
-          <li>Web Development</li>
-          <li>Mobile App Development</li>
-          <li>UI/UX Design</li>
-        </ul>
       </section>
 
       <section className="mb-8">

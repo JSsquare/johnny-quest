@@ -11,22 +11,6 @@ export default function Home() {
         >
           About Johnny
         </Link>
-
-        <p className="city-pill">
-          <code className="font-mono font-bold">San Francisco</code>
-        </p>
-        <p className="city-pill">
-          <code className="font-mono font-bold">New York City</code>
-        </p>
-        <p className="city-pill">
-          <code className="font-mono font-bold">Arizona</code>
-        </p>
-        <p className="city-pill">
-          <code className="font-mono font-bold">Kochi, Kerala</code>
-        </p>
-        <p className="city-pill">
-          <code className="font-mono font-bold">Pune, India</code>
-        </p>
       </div>
 
       <div className="">

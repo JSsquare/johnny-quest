@@ -13,6 +13,24 @@ const ChatContainer = () => {
 
   return (
     <div className="p-4 bg-gray-200 rounded-md h-screen w-screen">
+      <div className="flex flex-row gap-6 justify-center">
+        <p className="city-pill">
+          <code className="font-mono font-bold">San Francisco</code>
+        </p>
+        <p className="city-pill">
+          <code className="font-mono font-bold">New York City</code>
+        </p>
+        <p className="city-pill">
+          <code className="font-mono font-bold">Arizona</code>
+        </p>
+        <p className="city-pill">
+          <code className="font-mono font-bold">Kochi, Kerala</code>
+        </p>
+        <p className="city-pill">
+          <code className="font-mono font-bold">Pune, India</code>
+        </p>
+      </div>
+
       <div className="flex flex-col items-end">
         {chatHistory.map((message, index) => (
           <div key={index} className="bg-white p-4 rounded-md shadow-md">
