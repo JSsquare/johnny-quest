@@ -1,45 +1,48 @@
 'use client'
-import { Button, Center, Stack } from '@chakra-ui/react'
-import { SyntheticEvent, useState } from 'react'
+import { Button, Stack } from '@chakra-ui/react'
+import { useState } from 'react'
 
 const ChatContainer = () => {
   const [inputText, setInputText] = useState('')
   const [chatHistory, setChatHistory] = useState<string[]>([])
 
   const handleSubmit = () => {
-    if (inputText.length)
+    if (inputText.length) {
       setChatHistory((prevChatHistory) => [...prevChatHistory, inputText])
-    setInputText('')
+      setInputText('')
+    }
   }
 
   return (
     <div className="p-4 bg-gray-200 rounded-md h-screen w-screen">
       <CityPills />
 
-      <Stack align="center">
+      <Stack spacing={4}>
         {chatHistory.map((message, index) => (
           <div key={index} className="bg-white p-4 rounded-md shadow-md">
             <p className="text-lg">{message}</p>
           </div>
         ))}
-        <input
-          className="px-4 py-2 border border-gray-300 rounded-md"
-          type="text"
-          placeholder="Type your message..."
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              handleSubmit()
-            }
-          }}
-        />
-        <button
-          className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md"
-          onClick={() => handleSubmit()}
-        >
-          Submit
-        </button>
+        <div className="flex">
+          <input
+            className="flex-grow px-4 py-2 border border-gray-300 rounded-md"
+            type="text"
+            placeholder="Type your message..."
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleSubmit()
+              }
+            }}
+          />
+          <button
+            className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md"
+            onClick={() => handleSubmit()}
+          >
+            Submit
+          </button>
+        </div>
       </Stack>
     </div>
   )
@@ -47,7 +50,7 @@ const ChatContainer = () => {
 
 const CityPills = () => {
   return (
-    <Stack direction="row" spacing={4} align="center" justify="center">
+    <Stack direction="row" spacing={4} align="center" justify="center" mb={4}>
       <Button colorScheme="teal" variant="outline">
         San Francisco
       </Button>
