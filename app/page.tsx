@@ -15,9 +15,7 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="">
-          <ChatContainer />
-        </div>
+        <ChatContainer />
       </main>
     </ChakraProvider>
   )
