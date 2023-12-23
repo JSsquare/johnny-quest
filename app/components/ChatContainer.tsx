@@ -6,15 +6,28 @@ const ChatContainer = () => {
   const [inputText, setInputText] = useState('')
   const [chatHistory, setChatHistory] = useState<string[]>([])
 
-  const handleSubmit = () => {
+  const hndleAskMessage = async () => {
     if (inputText.length) {
       setChatHistory((prevChatHistory) => [...prevChatHistory, inputText])
       setInputText('')
+      try {
+        const response = await fetch('/api/ask', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ message: inputText }),
+        })
+        const data = await response.json()
+        setChatHistory((prevChatHistory) => [...prevChatHistory, data.message])
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 
   return (
-    <div className="p-4 rounded-md h-screen w-screen  place-content-center">
+    <div className="p-4 rounded-md h-screen w-screen justify-center justify-self-center justify-items-center">
       <CityPills />
       <Stack
         spacing={8}
@@ -33,11 +46,11 @@ const ChatContainer = () => {
           onChange={(e) => setInputText(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
-              handleSubmit()
+              hndleAskMessage()
             }
           }}
         />
-        <Button colorScheme="teal" onClick={() => handleSubmit()}>
+        <Button colorScheme="teal" onClick={() => hndleAskMessage()}>
           Ask
         </Button>
       </Stack>
