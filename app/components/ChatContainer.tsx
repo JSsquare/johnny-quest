@@ -1,5 +1,5 @@
 'use client'
-import { Button, Input, Stack, Text } from '@chakra-ui/react'
+import { Button, Center, HStack, Input, Stack, Text } from '@chakra-ui/react'
 import { useState } from 'react'
 
 const ChatContainer = () => {
@@ -27,19 +27,17 @@ const ChatContainer = () => {
   }
 
   return (
-    <div className="p-4 rounded-md h-screen w-screen justify-center justify-self-center justify-items-center">
+    <div className="p-4 rounded-md h-screen w-1/2 justify-center justify-self-center justify-items-center">
       <CityPills />
-      <Stack
-        spacing={8}
-        className="w-3/4 justify-center justify-self-center justify-items-center"
-      >
-        {chatHistory.map((message, index) => (
-          <div key={index} className="bg-white p-4 rounded-md shadow-md">
-            <Text fontSize="xl">{message}</Text>
-          </div>
-        ))}
+
+      {chatHistory.map((message, index) => (
+        <div key={index} className="bg-white p-4 rounded-md shadow-md mb-4">
+          <Text fontSize="xl">{message}</Text>
+        </div>
+      ))}
+      <HStack spacing={4} align="center" justify="center" mb={4}>
         <Input
-          variant="flushed"
+          variant="outline"
           type="text"
           placeholder="Ask Johnny for Recommendations...."
           value={inputText}
@@ -53,7 +51,7 @@ const ChatContainer = () => {
         <Button colorScheme="teal" onClick={() => hndleAskMessage()}>
           Ask
         </Button>
-      </Stack>
+      </HStack>
     </div>
   )
 }

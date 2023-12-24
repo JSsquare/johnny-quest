@@ -1,4 +1,4 @@
-1. RestaurantName: Sol Food ; RestaurantLocation: San Rafael, CA ; CuisineAndDishes: Latin American, Puerto Rican ; MyNotes: Great service, lovely Puerto Rican food
+export const recommendationsFromYelp = `1. RestaurantName: Sol Food ; RestaurantLocation: San Rafael, CA ; CuisineAndDishes: Latin American, Puerto Rican ; MyNotes: Great service, lovely Puerto Rican food
 2. RestaurantName: Sorella Caffe ; RestaurantLocation: Fairfax, CA ; CuisineAndDishes: Italian, Wine Bars ; MyNotes: beautiful interior
 3. RestaurantName: Smitten Ice Cream ; RestaurantLocation: San Jose, CA ; CuisineAndDishes: Ice Cream & Frozen Yogurt ; MyNotes: N/A
 4. RestaurantName: Bar Sprezzatura ; RestaurantLocation: San Francisco, CA ; CuisineAndDishes: Bars, Italian ; MyNotes: N/A
@@ -148,4 +148,4 @@
 148. RestaurantName: Cafe Colucci ; RestaurantLocation: Oakland, CA ; CuisineAndDishes: Ethiopian ; MyNotes: N/A
 149. RestaurantName: Wat Mongkolratanaram ; RestaurantLocation: Berkeley, CA ; CuisineAndDishes: Buddhist Temples ; MyNotes: They have free Thai food on some Sundays
 150. RestaurantName: Acme Bread Company ; RestaurantLocation: Berkeley, CA ; CuisineAndDishes: Bakeries ; MyNotes: N/A
-151. RestaurantName: Grégoire ; RestaurantLocation: Berkeley, CA ; CuisineAndDishes: French, Sandwiches ; MyNotes: Famous for Crispy Potato Puffs and Fried Buttermilk Chicken
+151. RestaurantName: Grégoire ; RestaurantLocation: Berkeley, CA ; CuisineAndDishes: French, Sandwiches ; MyNotes: Famous for Crispy Potato Puffs and Fried Buttermilk Chicken`
