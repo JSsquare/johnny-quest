@@ -9,7 +9,7 @@ export default function Home() {
         <div className="z-10 max-w-5xl w-full items-center font-bold justify-between font-mono lg:flex text-xs">
           <Link
             href="/about"
-            className="fixed top-5 left-5 flex justify-center items-center w-24 h-24 bg-yellow-500 text-white rounded-full shadow-lg"
+            className="fixed top-5 left-5 flex justify-center items-center w-24 h-24 bg-orange-500 text-white rounded-full shadow-lg"
           >
             About Johnny
           </Link>

@@ -1,3 +1,5 @@
+import { OpenAIModelParams } from './types/openai'
+
 export const recommendationsFromYelp = `1. RestaurantName: Sol Food ; RestaurantLocation: San Rafael, CA ; CuisineAndDishes: Latin American, Puerto Rican ; MyNotes: Great service, lovely Puerto Rican food
 2. RestaurantName: Sorella Caffe ; RestaurantLocation: Fairfax, CA ; CuisineAndDishes: Italian, Wine Bars ; MyNotes: beautiful interior
 3. RestaurantName: Smitten Ice Cream ; RestaurantLocation: San Jose, CA ; CuisineAndDishes: Ice Cream & Frozen Yogurt ; MyNotes: N/A
@@ -149,3 +151,65 @@ export const recommendationsFromYelp = `1. RestaurantName: Sol Food ; Restaurant
 149. RestaurantName: Wat Mongkolratanaram ; RestaurantLocation: Berkeley, CA ; CuisineAndDishes: Buddhist Temples ; MyNotes: They have free Thai food on some Sundays
 150. RestaurantName: Acme Bread Company ; RestaurantLocation: Berkeley, CA ; CuisineAndDishes: Bakeries ; MyNotes: N/A
 151. RestaurantName: Grégoire ; RestaurantLocation: Berkeley, CA ; CuisineAndDishes: French, Sandwiches ; MyNotes: Famous for Crispy Potato Puffs and Fried Buttermilk Chicken`
+
+export enum OpenAIModelID {
+  GPT_4 = 'gpt-4',
+}
+
+export const OpenAIModelsParams: Record<OpenAIModelID, OpenAIModelParams> = {
+  [OpenAIModelID.GPT_4]: {
+    id: OpenAIModelID.GPT_4,
+    name: 'GPT-4',
+    maxLength: 24000,
+    maxTokens: 256,
+    temperature: 0.7,
+  },
+}
+export type CityStatesJohnnyHasBeenToType = {
+  [city: string]: string
+}
+
+export const CityStatesJohnnyHasBeenTo: CityStatesJohnnyHasBeenToType = {
+  'San Francisco': 'CA',
+  Berkeley: 'CA',
+  Oakland: 'CA',
+  'San Jose': 'CA',
+  Seattle: 'WA',
+  Issaquah: 'WA',
+  Tempe: 'AZ',
+  'Las Vegas': 'NV',
+  'San Diego': 'CA',
+  Kochi: 'Kerala',
+  Pune: 'Maharashtra',
+}
+
+export type CityStatesType = {
+  [city: string]: keyof typeof StateCountry
+}
+
+export const CityStates: CityStatesType = {
+  'San Francisco': 'CA',
+  Berkeley: 'CA',
+  Oakland: 'CA',
+  'San Jose': 'CA',
+  Seattle: 'WA',
+  Issaquah: 'WA',
+  Tempe: 'AZ',
+  'Las Vegas': 'NV',
+  'San Diego': 'CA',
+  Kochi: 'Kerala',
+  Pune: 'Maharashtra',
+}
+
+export type StateCountryType = {
+  [state: string]: string
+}
+
+export const StateCountry: StateCountryType = {
+  CA: 'USA',
+  WA: 'USA',
+  AZ: 'USA',
+  NV: 'USA',
+  Kerala: 'India',
+  Maharashtra: 'India',
+}

@@ -1,12 +1,25 @@
 'use client'
-import { Button, Center, HStack, Input, Stack, Text } from '@chakra-ui/react'
+import {
+  Button,
+  Collapse,
+  HStack,
+  Input,
+  Stack,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react'
 import { useState } from 'react'
+import {
+  CityStatesJohnnyHasBeenTo,
+  CityStates,
+  StateCountry,
+} from '../constants'
 
 const ChatContainer = () => {
   const [inputText, setInputText] = useState('')
   const [chatHistory, setChatHistory] = useState<string[]>([])
 
-  const hndleAskMessage = async () => {
+  const handleAskMessage = async () => {
     if (inputText.length) {
       setChatHistory((prevChatHistory) => [...prevChatHistory, inputText])
       setInputText('')
@@ -26,9 +39,13 @@ const ChatContainer = () => {
     }
   }
 
+  const setInputMessage = (message: string) => {
+    setInputText(message)
+  }
+
   return (
     <div className="p-4 rounded-md h-screen w-1/2 justify-center justify-self-center justify-items-center">
-      <CityPills />
+      <CityPills setInputMessage={setInputMessage} />
 
       {chatHistory.map((message, index) => (
         <div key={index} className="bg-white p-4 rounded-md shadow-md mb-4">
@@ -41,14 +58,14 @@ const ChatContainer = () => {
           type="text"
           placeholder="Ask Johnny for Recommendations...."
           value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
+          onChange={(e) => setInputMessage(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
-              hndleAskMessage()
+              handleAskMessage()
             }
           }}
         />
-        <Button colorScheme="teal" onClick={() => hndleAskMessage()}>
+        <Button colorScheme="orange" onClick={() => handleAskMessage()}>
           Ask
         </Button>
       </HStack>
@@ -56,43 +73,64 @@ const ChatContainer = () => {
   )
 }
 
-const CityPills = () => {
-  const [isHovered, setIsHovered] = useState(false)
+const CityPills = ({ setInputMessage }: { setInputMessage: any }) => {
+  const { isOpen, onToggle } = useDisclosure()
+
+  const mainButtonText = isOpen
+    ? "No Don't Give City Recommendations"
+    : 'I Would Like City Recommendations'
 
   return (
-    <Stack direction="row" spacing={4} align="center" justify="center" mb={4}>
-      <div onMouseEnter={() => setIsHovered(true)}>
-        {!isHovered && (
-          <Text fontSize="xl" color="#48BB78">
-            I Would Like Recommendations On A City
-          </Text>
-        )}
-      </div>
+    <Stack
+      direction="column"
+      spacing={4}
+      align="center"
+      justify="center"
+      mb={4}
+    >
+      <Button
+        fontSize="xl"
+        colorScheme={isOpen ? 'blackAlpha' : 'orange'}
+        onClick={() => onToggle()}
+      >
+        {mainButtonText}
+      </Button>
 
-      {isHovered && (
-        <Stack
-          direction="row"
-          spacing={6}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <Button colorScheme="teal" variant="outline">
-            San Francisco
-          </Button>
-          <Button colorScheme="teal" variant="outline">
-            New York City
-          </Button>
-          <Button colorScheme="teal" variant="outline">
-            Arizona
-          </Button>
-          <Button colorScheme="teal" variant="outline">
-            Kochi, Kerala
-          </Button>
-          <Button colorScheme="teal" variant="outline">
-            Pune, India
-          </Button>
+      <Collapse in={isOpen} animateOpacity>
+        <Stack direction="row" spacing={6}>
+          {Object.keys(CityStatesJohnnyHasBeenTo).map((city) => (
+            <CityButton
+              key={city}
+              city={city}
+              setInputMessage={setInputMessage}
+            />
+          ))}
         </Stack>
-      )}
+      </Collapse>
     </Stack>
+  )
+}
+
+const CityButton = ({
+  city,
+  setInputMessage,
+}: {
+  city: string
+  setInputMessage: any
+}) => {
+  const stateCode = CityStatesJohnnyHasBeenTo[city]
+  return (
+    <Button
+      colorScheme="orange"
+      variant="outline"
+      onClick={() =>
+        setInputMessage(
+          `I would like a recommendation from ${city} ${stateCode} ${StateCountry[stateCode]}`,
+        )
+      }
+    >
+      {city}
+    </Button>
   )
 }
 

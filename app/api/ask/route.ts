@@ -1,5 +1,8 @@
-import { recommendationsFromYelp } from '@/app/constants'
-import { OpenAIModelID, OpenAIModelsParams } from '@/app/types/openai'
+import {
+  OpenAIModelID,
+  OpenAIModelsParams,
+  recommendationsFromYelp,
+} from '@/app/constants'
 import { NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
 
