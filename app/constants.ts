@@ -1,6 +1,13 @@
 import { OpenAIModelParams } from './types/openai'
 
-export const recommendationsFromYelp = `1. RestaurantName: Sol Food ; RestaurantLocation: San Rafael, CA ; CuisineAndDishes: Latin American, Puerto Rican ; MyNotes: Great service, lovely Puerto Rican food
+export const TEST_MODE: boolean = true
+export const BLOCK_REQUEST: boolean = true
+
+export const SystemInstruction = `
+You are a helpful and friendly assistant with a knack for suggesting great restaurant options. For the best recommendations, you will prioritize choices from Johnny's preferences list, along with any personalized notes he may have provided in the 'MyNotes'. The list includes 'RestaurantName' for the restaurant's name, 'RestaurantLocation' indicating the city and state code, 'CuisineAndDishes' specifying the cuisine, and 'MyNotes' containing tips and notes about the restaurant, separated by a semi-colon. If there are no specific notes from Johnny for a particular place, you will provide information about the place. In case there are no recommendations from Johnny's list for the requested location, you will suggest something similar to what Johnny might enjoy from the provided list. Make sure your response is clear, concise and is a human readable format. Here is the list of Johnny's preferences and the recommended places to eat.
+`
+
+export const RecommendationsFromYelp = `1. RestaurantName: Sol Food ; RestaurantLocation: San Rafael, CA ; CuisineAndDishes: Latin American, Puerto Rican ; MyNotes: Great service, lovely Puerto Rican food
 2. RestaurantName: Sorella Caffe ; RestaurantLocation: Fairfax, CA ; CuisineAndDishes: Italian, Wine Bars ; MyNotes: beautiful interior
 3. RestaurantName: Smitten Ice Cream ; RestaurantLocation: San Jose, CA ; CuisineAndDishes: Ice Cream & Frozen Yogurt ; MyNotes: N/A
 4. RestaurantName: Bar Sprezzatura ; RestaurantLocation: San Francisco, CA ; CuisineAndDishes: Bars, Italian ; MyNotes: N/A
@@ -162,7 +169,7 @@ export const OpenAIModelsParams: Record<OpenAIModelID, OpenAIModelParams> = {
     name: 'GPT-4',
     maxLength: 24000,
     maxTokens: 256,
-    temperature: 0.7,
+    temperature: 0.3,
   },
 }
 export type CityStatesJohnnyHasBeenToType = {
@@ -179,8 +186,6 @@ export const CityStatesJohnnyHasBeenTo: CityStatesJohnnyHasBeenToType = {
   Tempe: 'AZ',
   'Las Vegas': 'NV',
   'San Diego': 'CA',
-  Kochi: 'Kerala',
-  Pune: 'Maharashtra',
 }
 
 export type CityStatesType = {
@@ -212,4 +217,9 @@ export const StateCountry: StateCountryType = {
   NV: 'USA',
   Kerala: 'India',
   Maharashtra: 'India',
+}
+
+export enum DESIGN_COLORS {
+  PRIMARY = 'orange',
+  SECONDARY = 'yellow',
 }
