@@ -1,5 +1,13 @@
 'use client'
-import { Button, HStack, Input, Skeleton, Stack, Text } from '@chakra-ui/react'
+import {
+  Button,
+  Input,
+  Show,
+  Skeleton,
+  Stack,
+  Text,
+  Textarea,
+} from '@chakra-ui/react'
 import { useState } from 'react'
 import { CityPills } from './CityPills'
 import { DESIGN_COLORS } from '../constants'
@@ -36,11 +44,11 @@ const ChatContainer = () => {
   }
 
   return (
-    <Stack align="center" mt={32}>
+    <Stack align="center" mt={32} marginX={16}>
       <CityPills setInputMessage={setInputMessage} />
       <Stack className="lg:w-3/4">
         {chatHistory.map((message, index) => (
-          <div key={index} className="bg-white p-4 rounded-md shadow-md mb-4">
+          <div key={index} className="bg-white rounded-md shadow-md p-5">
             <Text fontSize="xl">{message}</Text>
           </div>
         ))}
@@ -52,19 +60,38 @@ const ChatContainer = () => {
             className="mb-4 p4"
           />
         )}
-        <HStack spacing={4} className="mt-24">
-          <Input
-            variant="outline"
-            type="text"
-            placeholder="Ask Johnny for Recommendations...."
-            value={inputText}
-            onChange={(e) => setInputMessage(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                handleAskMessage()
-              }
-            }}
-          />
+        <Stack
+          spacing={4}
+          className="mt-24"
+          direction={{ base: 'column', md: 'row' }}
+        >
+          <Show above="sm">
+            <Input
+              variant="outline"
+              type="text"
+              placeholder="Ask Johnny for Recommendations...."
+              value={inputText}
+              onChange={(e) => setInputMessage(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleAskMessage()
+                }
+              }}
+            />
+          </Show>
+          <Show below="md">
+            <Textarea
+              placeholder="Ask Johnny for Recommendations...."
+              value={inputText}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleAskMessage()
+                }
+              }}
+              onChange={(e) => setInputMessage(e.target.value)}
+            />
+          </Show>
+
           <Button
             colorScheme={DESIGN_COLORS.PRIMARY}
             onClick={() => handleAskMessage()}
@@ -72,7 +99,7 @@ const ChatContainer = () => {
           >
             Ask Johnny
           </Button>
-        </HStack>
+        </Stack>
       </Stack>
     </Stack>
   )
