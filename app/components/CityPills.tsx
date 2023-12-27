@@ -1,12 +1,23 @@
 'use client'
-import { Button, Collapse, Stack, useDisclosure } from '@chakra-ui/react'
+import {
+  Button,
+  Collapse,
+  Stack,
+  Tooltip,
+  useDisclosure,
+} from '@chakra-ui/react'
 import {
   CityStatesJohnnyHasBeenTo,
   DESIGN_COLORS,
+  StateCodeToState,
   StateCountry,
 } from '../constants'
 
-export const CityPills = ({ setInputMessage }: { setInputMessage: any }) => {
+export const CityPillMainButton = ({
+  setInputMessage,
+}: {
+  setInputMessage: any
+}) => {
   const { isOpen, onToggle } = useDisclosure()
 
   const mainButtonText = isOpen
@@ -46,16 +57,24 @@ const CityButton = ({
 }) => {
   const stateCode = CityStatesJohnnyHasBeenTo[city]
   return (
-    <Button
-      colorScheme={DESIGN_COLORS.PRIMARY}
-      variant="outline"
-      onClick={() =>
-        setInputMessage(
-          `Can you give me recommendations from ${city}, ${stateCode}, ${StateCountry[stateCode]}`,
-        )
-      }
+    <Tooltip
+      hasArrow
+      label={`${city} is in ${StateCodeToState[stateCode]}, ${StateCountry[stateCode]}`}
+      bg={DESIGN_COLORS.SECONDARY}
+      arrowSize={15}
+      color="black"
     >
-      {city}
-    </Button>
+      <Button
+        colorScheme={DESIGN_COLORS.PRIMARY}
+        variant="outline"
+        onClick={() =>
+          setInputMessage(
+            `Can you give me recommendations from ${city}, ${StateCodeToState[stateCode]}, ${StateCountry[stateCode]}`,
+          )
+        }
+      >
+        {city}
+      </Button>
+    </Tooltip>
   )
 }

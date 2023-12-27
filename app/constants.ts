@@ -204,6 +204,16 @@ export const CityStates: CityStatesType = {
   'East Bay': 'CA',
 }
 
+export type StateCodeToStateType = {
+  [code: string]: string
+}
+export const StateCodeToState: StateCodeToStateType = {
+  CA: 'California',
+  WA: 'Washington',
+  AZ: 'Arizona',
+  PR: 'Puerto Rico',
+}
+
 export type StateCountryType = {
   [state: string]: string
 }

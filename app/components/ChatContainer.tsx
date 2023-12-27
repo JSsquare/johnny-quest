@@ -9,7 +9,7 @@ import {
   Textarea,
 } from '@chakra-ui/react'
 import { useState } from 'react'
-import { CityPills } from './CityPills'
+import { CityPillMainButton } from './CityPills'
 import { DESIGN_COLORS } from '../constants'
 
 const ChatContainer = () => {
@@ -43,9 +43,13 @@ const ChatContainer = () => {
     setInputText(message)
   }
 
+  const placeholderMessage = isFetching
+    ? 'hmmm thinking...'
+    : 'Ask Johnny for Recommendations....'
+
   return (
     <Stack align="center" mt={32} marginX={16}>
-      <CityPills setInputMessage={setInputMessage} />
+      <CityPillMainButton setInputMessage={setInputMessage} />
       <Stack className="lg:w-3/4">
         {chatHistory.map((message, index) => (
           <div key={index} className="bg-white rounded-md shadow-md p-5">
@@ -69,7 +73,7 @@ const ChatContainer = () => {
             <Input
               variant="outline"
               type="text"
-              placeholder="Ask Johnny for Recommendations...."
+              placeholder={placeholderMessage}
               value={inputText}
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyDown={(e) => {
@@ -81,7 +85,7 @@ const ChatContainer = () => {
           </Show>
           <Show below="md">
             <Textarea
-              placeholder="Ask Johnny for Recommendations...."
+              placeholder={placeholderMessage}
               value={inputText}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
