@@ -11,16 +11,10 @@ export const CityPills = ({ setInputMessage }: { setInputMessage: any }) => {
 
   const mainButtonText = isOpen
     ? 'No Do Not Give City Recommendations'
-    : 'Give Me Recommendations from Cities Johnny Has Been To'
+    : `Give Me Recommendations from Cities Johnny's City List`
 
   return (
-    <Stack
-      direction="column"
-      spacing={4}
-      align="center"
-      justify="center"
-      mb={24}
-    >
+    <Stack direction="column" spacing={4} align="center" justify="center">
       <Button
         fontSize="xl"
         colorScheme={isOpen ? DESIGN_COLORS.ATTENTION : DESIGN_COLORS.PRIMARY}

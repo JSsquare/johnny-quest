@@ -182,10 +182,9 @@ export const CityStatesJohnnyHasBeenTo: CityStatesJohnnyHasBeenToType = {
   Oakland: 'CA',
   'San Jose': 'CA',
   Seattle: 'WA',
-  Issaquah: 'WA',
   Tempe: 'AZ',
-  'Las Vegas': 'NV',
   'San Diego': 'CA',
+  'East Bay': 'CA',
 }
 
 export type CityStatesType = {
@@ -222,4 +221,5 @@ export enum DESIGN_COLORS {
   PRIMARY = 'orange',
   SECONDARY = 'yellow',
   ATTENTION = 'red',
+  SUBTLE = 'gray.200',
 }
