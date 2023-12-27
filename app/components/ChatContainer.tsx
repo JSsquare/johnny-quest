@@ -50,8 +50,8 @@ const ChatContainer = () => {
           height="60px"
           className="mb-4 p4"
         />
-      )}
-      <HStack spacing={4} align="center" justify="center">
+      )}      
+      <HStack spacing={4} align="center" justify="center" className="mt-24">
         <Input
           variant="outline"
           type="text"

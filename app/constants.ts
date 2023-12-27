@@ -200,10 +200,9 @@ export const CityStates: CityStatesType = {
   Seattle: 'WA',
   Issaquah: 'WA',
   Tempe: 'AZ',
-  'Las Vegas': 'NV',
   'San Diego': 'CA',
-  Kochi: 'Kerala',
-  Pune: 'Maharashtra',
+  'San Juan': 'PR',
+  'East Bay': 'CA',
 }
 
 export type StateCountryType = {
@@ -222,4 +221,5 @@ export const StateCountry: StateCountryType = {
 export enum DESIGN_COLORS {
   PRIMARY = 'orange',
   SECONDARY = 'yellow',
+  ATTENTION = 'red',
 }

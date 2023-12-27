@@ -10,8 +10,8 @@ export const CityPills = ({ setInputMessage }: { setInputMessage: any }) => {
   const { isOpen, onToggle } = useDisclosure()
 
   const mainButtonText = isOpen
-    ? "No Don't Give City Recommendations"
-    : 'I Would Like City Recommendations'
+    ? 'No Do Not Give City Recommendations'
+    : 'Give Me Recommendations from Cities Johnny Has Been To'
 
   return (
     <Stack
@@ -23,7 +23,7 @@ export const CityPills = ({ setInputMessage }: { setInputMessage: any }) => {
     >
       <Button
         fontSize="xl"
-        colorScheme={isOpen ? DESIGN_COLORS.SECONDARY : DESIGN_COLORS.PRIMARY}
+        colorScheme={isOpen ? DESIGN_COLORS.ATTENTION : DESIGN_COLORS.PRIMARY}
         onClick={() => onToggle()}
       >
         {mainButtonText}
@@ -57,7 +57,7 @@ const CityButton = ({
       variant="outline"
       onClick={() =>
         setInputMessage(
-          `I would like a recommendation from ${city} ${stateCode} ${StateCountry[stateCode]}`,
+          `Can you give me recommendations from ${city}, ${stateCode}, ${StateCountry[stateCode]}`,
         )
       }
     >
