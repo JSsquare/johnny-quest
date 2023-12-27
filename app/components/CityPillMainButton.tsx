@@ -3,8 +3,10 @@ import {
   Button,
   Collapse,
   Stack,
+  HStack,
   Tooltip,
   useDisclosure,
+  VStack,
 } from '@chakra-ui/react'
 import {
   CityStatesJohnnyHasBeenTo,
@@ -22,20 +24,26 @@ export const CityPillMainButton = ({
 
   const mainButtonText = isOpen
     ? 'No Do Not Give City Recommendations'
-    : `Give Me Recommendations from Cities Johnny's City List`
+    : `Give Me Recommendations from Johnny's City List`
 
   return (
     <Stack direction="column" spacing={4} align="center" justify="center">
       <Button
-        fontSize="xl"
+        fontSize={{ base: 'xs', md: 'xl' }}
         colorScheme={isOpen ? DESIGN_COLORS.ATTENTION : DESIGN_COLORS.PRIMARY}
         onClick={() => onToggle()}
+        size={{ base: 'xs', md: 'lg' }}
+        padding={8}
+        style={{
+          whiteSpace: 'normal',
+          wordWrap: 'break-word',
+        }}
       >
         {mainButtonText}
       </Button>
 
       <Collapse in={isOpen} animateOpacity>
-        <Stack direction="row" spacing={6}>
+        <HStack spacing={6} overflowX="auto" wrap="wrap">
           {Object.keys(CityStatesJohnnyHasBeenTo).map((city) => (
             <CityButton
               key={city}
@@ -43,7 +51,7 @@ export const CityPillMainButton = ({
               setInputMessage={setInputMessage}
             />
           ))}
-        </Stack>
+        </HStack>
       </Collapse>
     </Stack>
   )

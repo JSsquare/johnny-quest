@@ -9,7 +9,7 @@ import {
   Textarea,
 } from '@chakra-ui/react'
 import { useState } from 'react'
-import { CityPillMainButton } from './CityPills'
+import { CityPillMainButton } from './CityPillMainButton'
 import { DESIGN_COLORS } from '../constants'
 
 const ChatContainer = () => {
@@ -100,6 +100,7 @@ const ChatContainer = () => {
             colorScheme={DESIGN_COLORS.PRIMARY}
             onClick={() => handleAskMessage()}
             isLoading={isFetching}
+            loadingText="Thinking ..."
           >
             Ask Johnny
           </Button>
