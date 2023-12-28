@@ -22,7 +22,7 @@ const ChatContainer = () => {
         if(recsAllowed === false) {
             const timer = setTimeout(() => {
                 setRecsAllowed(true)
-            }, 30000)
+            }, 60000)
             return () => {
     
                 if(timer) clearTimeout(timer)
@@ -124,8 +124,8 @@ const ChatContainer = () => {
         )}
 
         {recsAllowed === false && (
-            <Text className="mt-24" fontSize="2xl" color={DESIGN_COLORS.SECONDARY} align='center'>
-                I hope you found Johnnys Recommendation useful! <br /> You can ask more recommendations in 1 minute. <br/>
+            <Text className="mt-24" fontSize="xl" color={DESIGN_COLORS.SECONDARY} align='center'>
+                I hope you found Johnnys Recommendation useful <br /> You can ask more recommendations in 1 minute. <br/>
                 Meanwhile checkout <a target='_blank' href="https://foodieyouall.substack.com" className="underline">Johnny`s Substack</a>!
             </Text>
             )}
