@@ -23,14 +23,14 @@ export const CityPillMainButton = ({
   const { isOpen, onToggle } = useDisclosure()
 
   const mainButtonText = isOpen
-    ? 'No Do Not Give City Recommendations'
+    ? 'No, Do Not Give Me City Recommendations'
     : `Give Me Recommendations from Johnny's City List`
 
   return (
     <Stack direction="column" spacing={4} align="center" justify="center">
       <Button
         fontSize={{ base: 'xs', md: 'xl' }}
-        colorScheme={isOpen ? DESIGN_COLORS.SECONDARY : DESIGN_COLORS.PRIMARY}
+        colorScheme={isOpen ? DESIGN_COLORS.PRIMARY : DESIGN_COLORS.SECONDARY}
         onClick={() => {
           if(isOpen) setInputMessage('')
           onToggle()
@@ -71,7 +71,7 @@ const CityButton = ({
     <Tooltip
       hasArrow
       label={`${city} is in ${StateCodeToState[stateCode]}, ${StateCountry[stateCode]}`}
-      bg={DESIGN_COLORS.SECONDARY}
+      bg={DESIGN_COLORS.PRIMARY}
       arrowSize={15}
       color="black"
     >

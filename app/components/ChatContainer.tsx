@@ -62,7 +62,7 @@ const ChatContainer = () => {
     : 'Ask Johnny for Recommendations....'
 
   return (
-    <Stack align="center" mt={32} marginX={16}>
+    <Stack align="center" mt={40} marginX={16}>
 
       {Boolean(recsAllowed) && isFetching === false && <CityPillMainButton setInputMessage={setInputMessage} />}
       <Stack className="lg:w-3/4">
@@ -74,7 +74,7 @@ const ChatContainer = () => {
         {isFetching && (
           <Skeleton
             startColor={DESIGN_COLORS.PRIMARY}
-            endColor={DESIGN_COLORS.SECONDARY}
+            endColor={DESIGN_COLORS.SUBTLE}
             height="60px"
             className="mb-4 p4"
           />
@@ -129,7 +129,7 @@ const ChatContainer = () => {
         {recsAllowed === false && (
             <Text className="mt-24" fontSize="xl" color={DESIGN_COLORS.SECONDARY} align='center'>
                 I hope you found Johnnys Recommendation useful <br /> You can ask more recommendations after 1 minute. <br/>
-                Meanwhile checkout <a target='_blank' href="https://foodieyouall.substack.com" className="underline">Johnny`s Substack</a>!
+                Meanwhile buy him a coffee or checkout <a target='_blank' href="https://foodieyouall.substack.com" className="underline">His Substack</a>!
             </Text>
             )}
       </Stack>
