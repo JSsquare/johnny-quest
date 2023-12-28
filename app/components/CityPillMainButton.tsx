@@ -31,7 +31,10 @@ export const CityPillMainButton = ({
       <Button
         fontSize={{ base: 'xs', md: 'xl' }}
         colorScheme={isOpen ? DESIGN_COLORS.SECONDARY : DESIGN_COLORS.PRIMARY}
-        onClick={() => onToggle()}
+        onClick={() => {
+          if(isOpen) setInputMessage('')
+          onToggle()
+        }}
         size={{ base: 'xs', md: 'lg' }}
         padding={8}
         style={{
