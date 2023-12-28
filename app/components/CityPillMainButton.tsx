@@ -29,6 +29,7 @@ export const CityPillMainButton = ({
     <Stack direction="column" spacing={4} align="center" justify="center">
       <Button
         fontSize={{ base: 'xs', md: 'xl' }}
+        variant="outline"
         colorScheme={isOpen ? DESIGN_COLORS.PRIMARY : DESIGN_COLORS.SECONDARY}
         onClick={() => {
           if (isOpen) setInputMessage('')
