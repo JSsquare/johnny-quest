@@ -30,7 +30,7 @@ export const CityPillMainButton = ({
     <Stack direction="column" spacing={4} align="center" justify="center">
       <Button
         fontSize={{ base: 'xs', md: 'xl' }}
-        colorScheme={isOpen ? DESIGN_COLORS.ATTENTION : DESIGN_COLORS.PRIMARY}
+        colorScheme={isOpen ? DESIGN_COLORS.SECONDARY : DESIGN_COLORS.PRIMARY}
         onClick={() => onToggle()}
         size={{ base: 'xs', md: 'lg' }}
         padding={8}

@@ -59,7 +59,7 @@ const ChatContainer = () => {
         {isFetching && (
           <Skeleton
             startColor={DESIGN_COLORS.PRIMARY}
-            endColor={DESIGN_COLORS.SUBTLE}
+            endColor={DESIGN_COLORS.SECONDARY}
             height="60px"
             className="mb-4 p4"
           />

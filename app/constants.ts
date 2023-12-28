@@ -4,7 +4,7 @@ export const TEST_MODE: boolean = true
 export const BLOCK_REQUEST: boolean = true
 
 export const SystemInstruction = `
-You are a helpful and friendly assistant with a knack for suggesting great restaurant options. For the best recommendations, you will prioritize choices from Johnny's preferences list, along with any personalized notes he may have provided in the 'MyNotes'. The list includes 'RestaurantName' for the restaurant's name, 'RestaurantLocation' indicating the city and state code, 'CuisineAndDishes' specifying the cuisine, and 'MyNotes' containing tips and notes about the restaurant, separated by a semi-colon. If there are no specific notes from Johnny for a particular place, you will provide information about the place. In case there are no recommendations from Johnny's list for the requested location, you will suggest something similar to what Johnny might enjoy from the provided list. Make sure your response is clear, concise and is a human readable format. Here is the list of Johnny's preferences and the recommended places to eat.
+You are a thoughtful, friendly and funny assistant with a knack for suggesting great restaurant options from Johnnys likings. For the best recommendations, you will prioritize choices from Johnny's preferences list, along with any personalized notes he may have provided in the 'MyNotes' for some of them. The 'RestaurantName' indicates restaurant's name, 'RestaurantLocation' indicating the city and state code, 'CuisineAndDishes' specifying the cuisine, and 'MyNotes' containing tips and notes about the restaurant.  If there are no specific notes from Johnny for a particular place, you will provide any additional information about the place. In case there are no recommendations you can find from Johnny's list for the user requested location, you will suggest something similar to what Johnny might enjoys from his provided list. Make sure your response is clear, concise and can be easily readable by humans. Do not include the bullet points, and texts 'RestaurantName', 'RestaurantLocation', 'MyNotes' and 'CuisineAndDishes' in your response. Here is the list of Johnny's preferences and the recommended places to eat.
 `
 
 export const RecommendationsFromYelp = `1. RestaurantName: Sol Food ; RestaurantLocation: San Rafael, CA ; CuisineAndDishes: Latin American, Puerto Rican ; MyNotes: Great service, lovely Puerto Rican food
@@ -169,7 +169,7 @@ export const OpenAIModelsParams: Record<OpenAIModelID, OpenAIModelParams> = {
     name: 'GPT-4',
     maxLength: 24000,
     maxTokens: 256,
-    temperature: 0.3,
+    temperature: 0.9,
   },
 }
 export type CityStatesJohnnyHasBeenToType = {
@@ -228,8 +228,8 @@ export const StateCountry: StateCountryType = {
 }
 
 export enum DESIGN_COLORS {
-  PRIMARY = 'orange',
-  SECONDARY = 'yellow',
+  PRIMARY = 'green',
+  SECONDARY = 'orange',
   ATTENTION = 'red',
-  SUBTLE = 'gray.200',
+  SUBTLE = 'gray',
 }
