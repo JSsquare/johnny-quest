@@ -1,77 +1,66 @@
 'use client'
 import {
-    Button,
-    Input,
-    Show,
-    Skeleton,
-    Stack,
-    Text,
-    Textarea,
+  Button,
+  Input,
+  Show,
+  Skeleton,
+  Stack,
+  Text,
+  Textarea,
 } from '@chakra-ui/react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, FormEvent } from 'react'
 import { CityPillMainButton } from './CityPillMainButton'
 import { DESIGN_COLORS } from '../constants'
+import { useChat } from 'ai/react'
 
 const ChatContainer = () => {
-    const [inputText, setInputText] = useState('')
-    const [isFetching, setIsFetching] = useState(false)
-    const [chatHistory, setChatHistory] = useState<string[]>([])
-    const [recsAllowed, setRecsAllowed] = useState(true)
+  const [recsAllowed, setRecsAllowed] = useState(true)
+  const {
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    isLoading,
+    setInput,
+  } = useChat({
+    api: '/api/ask',
+  })
 
-    useEffect(() => {
-        if(recsAllowed === false) {
-            const timer = setTimeout(() => {
-                setRecsAllowed(true)
-            }, 60000)
-            return () => {
-    
-                if(timer) clearTimeout(timer)
-            }
-        }
-    }, [recsAllowed])
-
-    const handleAskMessage = async () => {
-        if (inputText.length) {
-            setChatHistory((prevChatHistory) => [...prevChatHistory, inputText])
-            setInputText('')
-            try {
-                setIsFetching(true)
-                const response = await fetch('/api/ask', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ message: inputText }),
-                })
-                const data = await response.json()
-                setChatHistory((prevChatHistory) => [...prevChatHistory, data.message])
-                setIsFetching(false)
-                setRecsAllowed(false)
-      } catch (e) {
-        console.log(e)
+  useEffect(() => {
+    if (recsAllowed === false) {
+      const timer = setTimeout(() => {
+        setRecsAllowed(true)
+      }, 90000)
+      return () => {
+        if (timer) clearTimeout(timer)
       }
     }
+  }, [recsAllowed])
+
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    await handleSubmit(e)
+    setRecsAllowed(false)
   }
 
-  const setInputMessage = (message: string) => {
-    setInputText(message)
-  }
-
-  const placeholderMessage = isFetching
+  const placeholderMessage = isLoading
     ? 'hmmm thinking...'
     : 'Ask Johnny for Recommendations....'
 
   return (
     <Stack align="center" mt={40} marginX={16}>
+      {Boolean(recsAllowed) && (
+        <CityPillMainButton setInputMessage={setInput} />
+      )}
 
-      {Boolean(recsAllowed) && isFetching === false && <CityPillMainButton setInputMessage={setInputMessage} />}
       <Stack className="lg:w-3/4">
-        {chatHistory.map((message, index) => (
-          <div key={index} className="bg-white rounded-md shadow-md p-5">
-            <Text fontSize="xl">{message}</Text>
+        {messages.map((m) => (
+          <div key={m.id} className="bg-white rounded-md shadow-md p-5">
+            <Text fontSize="xl">{m.content}</Text>
           </div>
         ))}
-        {isFetching && (
+
+        {isLoading && (
           <Skeleton
             startColor={DESIGN_COLORS.PRIMARY}
             endColor={DESIGN_COLORS.SUBTLE}
@@ -79,61 +68,89 @@ const ChatContainer = () => {
             className="mb-4 p4"
           />
         )}
-        {Boolean(recsAllowed) && (
-        <Stack
-          spacing={4}
-          className="mt-24"
-          direction={{ base: 'column', md: 'row' }}
-        >
-          <Show above="md">
-            <Input
-              variant="outline"
-              type="text"
-              placeholder={placeholderMessage}
-              value={inputText}
-              focusBorderColor={DESIGN_COLORS.PRIMARY}
-              onChange={(e) => setInputMessage(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  handleAskMessage()
-                }
-              }}
-            />
-          </Show>
-          <Show below="md">
-            <Textarea
-              placeholder={placeholderMessage}
-              size="lg"
-              focusBorderColor={DESIGN_COLORS.PRIMARY}
-              value={inputText}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  handleAskMessage()
-                }
-              }}
-              onChange={(e) => setInputMessage(e.target.value)}
-            />
-          </Show>
-
-          <Button
-            colorScheme={DESIGN_COLORS.PRIMARY}
-            onClick={() => handleAskMessage()}
-            isLoading={isFetching}
-            loadingText="Thinking ..."
-          >
-            Ask Johnny
-          </Button>
-        </Stack>
+        {Boolean(recsAllowed) && isLoading === false && (
+          <form onSubmit={handleFormSubmit}>
+            <Stack
+              spacing={4}
+              className="mt-24"
+              direction={{ base: 'column', md: 'row' }}
+            >
+              <Show above="md">
+                <Input
+                  value={input}
+                  variant="outline"
+                  type="text"
+                  placeholder={placeholderMessage}
+                  onChange={handleInputChange}
+                />
+              </Show>
+              <Show below="md">
+                <Textarea
+                  placeholder={placeholderMessage}
+                  size="lg"
+                  focusBorderColor={DESIGN_COLORS.PRIMARY}
+                  value={input}
+                  onChange={handleInputChange}
+                />
+              </Show>
+              <Button
+                colorScheme={DESIGN_COLORS.PRIMARY}
+                type="submit"
+                isLoading={isLoading}
+                loadingText="Thinking ..."
+              >
+                Ask Johnny
+              </Button>
+            </Stack>
+          </form>
         )}
 
-        {recsAllowed === false && (
-            <Text className="mt-24" fontSize="xl" color={DESIGN_COLORS.SECONDARY} align='center'>
-                I hope you found Johnnys Recommendation useful <br /> You can ask more recommendations after 1 minute. <br/>
-                Meanwhile buy him a coffee or checkout <a target='_blank' href="https://foodieyouall.substack.com" className="underline">His Substack</a>!
-            </Text>
-            )}
+        {recsAllowed === false && isLoading === false && (
+          <Text
+            className="mt-24"
+            fontSize="xl"
+            color={DESIGN_COLORS.SECONDARY}
+            align="center"
+          >
+            I hope you found Johnnys Recommendation useful <br /> You can ask for
+            more recommendations in 3 minutes. <br />
+            While you wait, buy him a coffee or checkout{' '}
+            <a
+              target="_blank"
+              href="https://foodieyouall.substack.com"
+              className="underline"
+            >
+              His Newsletter
+            </a>
+            !
+          </Text>
+        )}
       </Stack>
     </Stack>
+  )
+}
+
+const ChatForm = () => {
+  const { messages, input, handleInputChange, handleSubmit } = useChat({
+    api: '/api/ask',
+  })
+
+  return (
+    <div>
+      {messages.map((m) => (
+        <div key={m.id}>
+          {m.role}: {m.content}
+        </div>
+      ))}
+
+      <form onSubmit={handleSubmit}>
+        <input
+          value={input}
+          placeholder="Say something..."
+          onChange={handleInputChange}
+        />
+      </form>
+    </div>
   )
 }
 

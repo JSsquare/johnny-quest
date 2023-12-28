@@ -188,7 +188,7 @@ export const CityStatesJohnnyHasBeenTo: CityStatesJohnnyHasBeenToType = {
   Tempe: 'AZ',
   'San Diego': 'CA',
   'San Juan': 'PR',
-  Honolulu: 'HI'
+  Honolulu: 'HI',
 }
 
 export type CityStatesType = {
@@ -205,7 +205,7 @@ export const CityStates: CityStatesType = {
   Tempe: 'AZ',
   'San Diego': 'CA',
   'San Juan': 'PR',
-  Honolulu: 'HI'
+  Honolulu: 'HI',
 }
 
 export type StateCodeToStateType = {
@@ -216,7 +216,7 @@ export const StateCodeToState: StateCodeToStateType = {
   WA: 'Washington',
   AZ: 'Arizona',
   PR: 'Puerto Rico',
-  HI: 'Hawaii'
+  HI: 'Hawaii',
 }
 
 export type StateCountryType = {

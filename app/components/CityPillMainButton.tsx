@@ -6,7 +6,6 @@ import {
   HStack,
   Tooltip,
   useDisclosure,
-  VStack,
 } from '@chakra-ui/react'
 import {
   CityStatesJohnnyHasBeenTo,
@@ -32,7 +31,7 @@ export const CityPillMainButton = ({
         fontSize={{ base: 'xs', md: 'xl' }}
         colorScheme={isOpen ? DESIGN_COLORS.PRIMARY : DESIGN_COLORS.SECONDARY}
         onClick={() => {
-          if(isOpen) setInputMessage('')
+          if (isOpen) setInputMessage('')
           onToggle()
         }}
         size={{ base: 'xs', md: 'lg' }}
