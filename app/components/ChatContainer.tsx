@@ -64,7 +64,7 @@ const ChatContainer = () => {
   return (
     <Stack align="center" mt={32} marginX={16}>
 
-      {Boolean(recsAllowed) && <CityPillMainButton setInputMessage={setInputMessage} />}
+      {Boolean(recsAllowed) && isFetching === false && <CityPillMainButton setInputMessage={setInputMessage} />}
       <Stack className="lg:w-3/4">
         {chatHistory.map((message, index) => (
           <div key={index} className="bg-white rounded-md shadow-md p-5">
@@ -125,7 +125,7 @@ const ChatContainer = () => {
 
         {recsAllowed === false && (
             <Text className="mt-24" fontSize="xl" color={DESIGN_COLORS.SECONDARY} align='center'>
-                I hope you found Johnnys Recommendation useful <br /> You can ask more recommendations in 1 minute. <br/>
+                I hope you found Johnnys Recommendation useful <br /> You can ask more recommendations after 1 minute. <br/>
                 Meanwhile checkout <a target='_blank' href="https://foodieyouall.substack.com" className="underline">Johnny`s Substack</a>!
             </Text>
             )}
