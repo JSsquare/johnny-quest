@@ -91,6 +91,7 @@ const ChatContainer = () => {
               type="text"
               placeholder={placeholderMessage}
               value={inputText}
+              focusBorderColor={DESIGN_COLORS.PRIMARY}
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
@@ -102,6 +103,8 @@ const ChatContainer = () => {
           <Show below="md">
             <Textarea
               placeholder={placeholderMessage}
+              size="lg"
+              focusBorderColor={DESIGN_COLORS.PRIMARY}
               value={inputText}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
