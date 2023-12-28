@@ -107,7 +107,7 @@ const ChatContainer = () => {
 
         {recsAllowed === false && isLoading === false && (
           <Text
-            className="mt-24"
+            className="mt-24 mb-8"
             fontSize="xl"
             color={DESIGN_COLORS.SECONDARY}
             align="center"
