@@ -125,7 +125,7 @@ const ChatContainer = () => {
 
         {recsAllowed === false && (
             <Text className="mt-24" fontSize="2xl" color={DESIGN_COLORS.SECONDARY} align='center'>
-                I hope you found Johnnys Recommendation useful! <br /> You can ask more recommendations from Johnny in 1 minute from now. <br/>
+                I hope you found Johnnys Recommendation useful! <br /> You can ask more recommendations in 1 minute. <br/>
                 Meanwhile checkout <a target='_blank' href="https://foodieyouall.substack.com" className="underline">Johnny`s Substack</a>!
             </Text>
             )}
