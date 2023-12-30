@@ -52,12 +52,12 @@ const ChatContainer = () => {
     : 'Ask Johnny for Recommendations....'
 
   return (
-    <Stack align="center" mt={40} marginX={16}>
+    <Stack align="center" mt={40} marginX={16} className="w-100">
       {Boolean(recsAllowed) && (
         <CityPillMainButton setInputMessage={setInput} />
       )}
 
-      <Stack className="lg:w-3/4">
+      <Stack className="lg:w-3/4 min-w-52">
         {messages.map((m) => (
           <div key={m.id} className="bg-white rounded-md shadow-md p-5">
             <Text fontSize={{ base: 'xs', md: '2xl' }}>{m.content}</Text>
@@ -68,8 +68,8 @@ const ChatContainer = () => {
           <Skeleton
             startColor={DESIGN_COLORS.PRIMARY}
             endColor={DESIGN_COLORS.SUBTLE}
-            height="60px"
-            className="mb-4 p4"
+            height="30px"
+            className="mb-4 p4 min-w-52"
           />
         )}
         {Boolean(recsAllowed) && isLoading === false && (
