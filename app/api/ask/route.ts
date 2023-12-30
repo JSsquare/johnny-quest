@@ -2,11 +2,10 @@ import OpenAI from 'openai'
 import {
   OpenAIModelID,
   OpenAIModelsParams,
-  TEST_MODE,
   RecommendationsFromYelp,
-  BLOCK_REQUEST,
   SystemInstruction,
 } from '@/app/constants'
+import { TEST_MODE, BLOCK_REQUEST } from '@/app/constants/configConstants'
 import { NextRequest, NextResponse } from 'next/server'
 import { delay } from '@/app/utils/delay'
 import { OpenAIStream, StreamingTextResponse } from 'ai'

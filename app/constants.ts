@@ -1,8 +1,5 @@
 import { OpenAIModelParams } from './types/openai'
 
-export const BLOCK_REQUEST: boolean = false
-export const TEST_MODE: boolean = true
-
 export const SystemInstruction = `
 You are a thoughtful, friendly and funny assistant with a knack for suggesting great restaurant options from Johnnys likings. For the best recommendations, you will prioritize choices from Johnny's preferences list, along with any personalized notes he may have provided in 'MyNotes' if there are any. The 'RestaurantName' indicates restaurant's name, 'RestaurantLocation' indicating the city and state code, 'CuisineAndDishes' specifying the cuisine, and 'MyNotes' containing tips and notes about the restaurant.  If there are no specific notes from Johnny for a particular place, you will provide any additional information about the place. In case there are no recommendations you can find from Johnny's list for the user requested location, you will suggest something similar to what Johnny might enjoys from his provided list. Make sure your response is clear, concise and can be easily readable by humans. Do not include the bullet points, and texts 'RestaurantName', 'RestaurantLocation', 'MyNotes' and 'CuisineAndDishes' in your response. Here is the list of Johnny's preferences and the recommended places to eat.
 `
@@ -176,64 +173,7 @@ export const OpenAIModelsParams: Record<OpenAIModelID, OpenAIModelParams> = {
     temperature: 0.9,
   },
 }
-export type CityStatesJohnnyHasBeenToType = {
-  [city: string]: string
-}
 
-export const CityStatesJohnnyHasBeenTo: CityStatesJohnnyHasBeenToType = {
-  'San Francisco': 'CA',
-  'San Francisco Bay Area': 'CA',
-  Berkeley: 'CA',
-  Oakland: 'CA',
-  Seattle: 'WA',
-  Tempe: 'AZ',
-  'San Diego': 'CA',
-  'San Juan': 'PR',
-  Honolulu: 'HI',
-}
-
-export type CityStatesType = {
-  [city: string]: keyof typeof StateCountry
-}
-
-export const CityStates: CityStatesType = {
-  'San Francisco': 'CA',
-  'San Francisco Bay Area': 'CA',
-  Berkeley: 'CA',
-  Oakland: 'CA',
-  Seattle: 'WA',
-  Issaquah: 'WA',
-  Tempe: 'AZ',
-  'San Diego': 'CA',
-  'San Juan': 'PR',
-  Honolulu: 'HI',
-}
-
-export type StateCodeToStateType = {
-  [code: string]: string
-}
-export const StateCodeToState: StateCodeToStateType = {
-  CA: 'California',
-  WA: 'Washington',
-  AZ: 'Arizona',
-  PR: 'Puerto Rico',
-  HI: 'Hawaii',
-}
-
-export type StateCountryType = {
-  [state: string]: string
-}
-
-export const StateCountry: StateCountryType = {
-  CA: 'USA',
-  WA: 'USA',
-  AZ: 'USA',
-  NV: 'USA',
-  PR: 'USA',
-  HI: 'USA',
-  Kerala: 'India',
-  Maharashtra: 'India',
-}
 
 export enum DESIGN_COLORS {
   PRIMARY = 'green',

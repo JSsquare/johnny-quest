@@ -9,11 +9,9 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import {
-  CityStatesJohnnyHasBeenTo,
   DESIGN_COLORS,
-  StateCodeToState,
-  StateCountry,
 } from '../constants'
+import { CityStatesJohnnyHasBeenTo, StateCodeToState, StateCountry } from '../constants/placesConstants'
 
 export const CityPillMainButton = ({
   setInputMessage,
