@@ -174,7 +174,6 @@ export const OpenAIModelsParams: Record<OpenAIModelID, OpenAIModelParams> = {
   },
 }
 
-
 export enum DESIGN_COLORS {
   PRIMARY = 'green',
   SECONDARY = 'orange',

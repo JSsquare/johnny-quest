@@ -1,23 +1,14 @@
 'use client'
 import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons'
+import { Button, Collapse, Stack, HStack, Tooltip, useDisclosure } from '@chakra-ui/react'
+import { DESIGN_COLORS } from '../constants/commonConstants'
 import {
-  Button,
-  Collapse,
-  Stack,
-  HStack,
-  Tooltip,
-  useDisclosure,
-} from '@chakra-ui/react'
-import {
-  DESIGN_COLORS,
-} from '../constants/commonConstants'
-import { CityStatesJohnnyHasBeenTo, StateCodeToState, StateCountry } from '../constants/placesConstants'
+  CityStatesJohnnyHasBeenTo,
+  StateCodeToState,
+  StateCountry,
+} from '../constants/placesConstants'
 
-export const CityPillMainButton = ({
-  setInputMessage,
-}: {
-  setInputMessage: any
-}) => {
+export const CityPillMainButton = ({ setInputMessage }: { setInputMessage: any }) => {
   const { isOpen, onToggle } = useDisclosure()
 
   const mainButtonText = isOpen
@@ -48,24 +39,14 @@ export const CityPillMainButton = ({
       <Collapse in={isOpen} animateOpacity>
         <HStack spacing={6} overflowX="auto" wrap="wrap">
           {Object.keys(CityStatesJohnnyHasBeenTo).map((city) => (
-            <CityButton
-              key={city}
-              city={city}
-              setInputMessage={setInputMessage}
-            />
+            <CityButton key={city} city={city} setInputMessage={setInputMessage} />
           ))}
         </HStack>
       </Collapse>
     </Stack>
   )
 }
-const CityButton = ({
-  city,
-  setInputMessage,
-}: {
-  city: string
-  setInputMessage: any
-}) => {
+const CityButton = ({ city, setInputMessage }: { city: string; setInputMessage: any }) => {
   const stateCode = CityStatesJohnnyHasBeenTo[city]
   return (
     <Tooltip

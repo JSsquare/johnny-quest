@@ -1,13 +1,5 @@
 'use client'
-import {
-  Button,
-  Input,
-  Show,
-  Skeleton,
-  Stack,
-  Text,
-  Textarea,
-} from '@chakra-ui/react'
+import { Button, Input, Show, Skeleton, Stack, Text, Textarea } from '@chakra-ui/react'
 import { useState, useEffect, FormEvent } from 'react'
 import { CityPillMainButton } from './CityPillMainButton'
 import { DESIGN_COLORS } from '../constants/commonConstants'
@@ -16,14 +8,7 @@ import { minutesToMilliseconds } from '../utils/common'
 
 const ChatContainer = () => {
   const [recsAllowed, setRecsAllowed] = useState(true)
-  const {
-    messages,
-    input,
-    handleInputChange,
-    handleSubmit,
-    isLoading,
-    setInput,
-  } = useChat({
+  const { messages, input, handleInputChange, handleSubmit, isLoading, setInput } = useChat({
     api: '/api/ask',
     onFinish: () => {
       setRecsAllowed(false)
@@ -47,15 +32,11 @@ const ChatContainer = () => {
     await handleSubmit(e)
   }
 
-  const placeholderMessage = isLoading
-    ? 'hmmm thinking...'
-    : 'Ask Johnny for Recommendations....'
+  const placeholderMessage = isLoading ? 'hmmm thinking...' : 'Ask Johnny for Recommendations....'
 
   return (
     <Stack align="center" mt={40} marginX={16} className="w-100">
-      {Boolean(recsAllowed) && (
-        <CityPillMainButton setInputMessage={setInput} />
-      )}
+      {Boolean(recsAllowed) && <CityPillMainButton setInputMessage={setInput} />}
 
       <Stack className="lg:w-3/4 min-w-52">
         {messages.map((m) => (
@@ -74,11 +55,7 @@ const ChatContainer = () => {
         )}
         {Boolean(recsAllowed) && isLoading === false && (
           <form onSubmit={handleFormSubmit}>
-            <Stack
-              spacing={4}
-              className="mt-24"
-              direction={{ base: 'column', md: 'row' }}
-            >
+            <Stack spacing={4} className="mt-24" direction={{ base: 'column', md: 'row' }}>
               <Show above="md">
                 <Input
                   value={input}
@@ -110,20 +87,11 @@ const ChatContainer = () => {
         )}
 
         {recsAllowed === false && isLoading === false && (
-          <Text
-            className="mt-24 mb-8"
-            fontSize="xl"
-            color={DESIGN_COLORS.SECONDARY}
-            align="center"
-          >
-            I hope you found Johnnys Recommendation useful <br /> You can ask for
-            more recommendations in 3 minutes. <br />
+          <Text className="mt-24 mb-8" fontSize="xl" color={DESIGN_COLORS.SECONDARY} align="center">
+            I hope you found Johnnys Recommendation useful <br /> You can ask for more
+            recommendations in 3 minutes. <br />
             While you wait, buy him a coffee or checkout{' '}
-            <a
-              target="_blank"
-              href="https://foodieyouall.substack.com"
-              className="underline"
-            >
+            <a target="_blank" href="https://foodieyouall.substack.com" className="underline">
               His Newsletter
             </a>
             !
@@ -148,11 +116,7 @@ const ChatForm = () => {
       ))}
 
       <form onSubmit={handleSubmit}>
-        <input
-          value={input}
-          placeholder="Say something..."
-          onChange={handleInputChange}
-        />
+        <input value={input} placeholder="Say something..." onChange={handleInputChange} />
       </form>
     </div>
   )

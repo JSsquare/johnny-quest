@@ -4,10 +4,7 @@ import React from 'react'
 const AboutPage: React.FC = () => {
   return (
     <div className="h-screen bg-gray-100 flex flex-col items-center justify-center">
-      <Link
-        href="/"
-        className="absolute top-0 left-0 m-4 text-yellow-500 font-bold"
-      >
+      <Link href="/" className="absolute top-0 left-0 m-4 text-yellow-500 font-bold">
         Go Back Home
       </Link>
       <h1 className="text-4xl font-bold mb-4">About Johnny</h1>
@@ -20,9 +17,7 @@ const AboutPage: React.FC = () => {
         <h2 className="text-2xl font-bold mb-2">Projects</h2>
         <ul>
           <li>
-            <Link href="https://foodieyouall.substack.com">
-              Johnny&apos;s Substack
-            </Link>
+            <Link href="https://foodieyouall.substack.com">Johnny&apos;s Substack</Link>
           </li>
           <li>
             <Link href="https://calppuccino.vercel.app">Calpuccino App</Link>
@@ -39,9 +34,7 @@ const AboutPage: React.FC = () => {
         <div>
           <p className="text-lg font-bold">Contact:</p>
           <p>Email: googling.johnny@gmail.com</p>
-          <Link href="https://instagram.com/foodie.youall">
-            Johnny&apos;s Insta
-          </Link>
+          <Link href="https://instagram.com/foodie.youall">Johnny&apos;s Insta</Link>
         </div>
       </div>
     </div>
