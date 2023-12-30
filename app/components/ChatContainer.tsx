@@ -12,6 +12,7 @@ import { useState, useEffect, FormEvent } from 'react'
 import { CityPillMainButton } from './CityPillMainButton'
 import { DESIGN_COLORS } from '../constants'
 import { useChat } from 'ai/react'
+import { minutesToMilliseconds } from '../utils/common'
 
 const ChatContainer = () => {
   const [recsAllowed, setRecsAllowed] = useState(true)
@@ -24,13 +25,17 @@ const ChatContainer = () => {
     setInput,
   } = useChat({
     api: '/api/ask',
+    onFinish: () => {
+      setRecsAllowed(false)
+      window.scrollTo(0, document.body.scrollHeight)
+    },
   })
 
   useEffect(() => {
     if (recsAllowed === false) {
       const timer = setTimeout(() => {
         setRecsAllowed(true)
-      }, 90000)
+      }, minutesToMilliseconds(2))
       return () => {
         if (timer) clearTimeout(timer)
       }
@@ -40,7 +45,6 @@ const ChatContainer = () => {
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     await handleSubmit(e)
-    setRecsAllowed(false)
   }
 
   const placeholderMessage = isLoading
@@ -56,7 +60,7 @@ const ChatContainer = () => {
       <Stack className="lg:w-3/4">
         {messages.map((m) => (
           <div key={m.id} className="bg-white rounded-md shadow-md p-5">
-            <Text fontSize="xl">{m.content}</Text>
+            <Text fontSize={{ base: 'xs', md: '2xl' }}>{m.content}</Text>
           </div>
         ))}
 

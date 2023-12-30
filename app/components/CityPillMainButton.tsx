@@ -1,4 +1,5 @@
 'use client'
+import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons'
 import {
   Button,
   Collapse,
@@ -22,8 +23,8 @@ export const CityPillMainButton = ({
   const { isOpen, onToggle } = useDisclosure()
 
   const mainButtonText = isOpen
-    ? 'No, Do Not Give Me City Recommendations'
-    : `Give Me Recommendations from Johnny's City List`
+    ? 'No! Do Not Give Me City Recommendations'
+    : `Ask Recommendations from Johnny's Cities`
 
   return (
     <Stack direction="column" spacing={4} align="center" justify="center">
@@ -41,6 +42,7 @@ export const CityPillMainButton = ({
           whiteSpace: 'normal',
           wordWrap: 'break-word',
         }}
+        leftIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
       >
         {mainButtonText}
       </Button>

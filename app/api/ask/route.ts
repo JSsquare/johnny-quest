@@ -20,9 +20,7 @@ const openai = new OpenAI({
 export const POST = async (request: NextRequest, res: Response) => {
   if (BLOCK_REQUEST) {
     await delay(2000)
-    return NextResponse.json({
-      message: 'Sorry, requests are blocked, currently not accepting requests.',
-    })
+    return NextResponse.json('Sorry, requests are blocked, currently not accepting requests.')
   }
 
   const data = await request.json()
@@ -50,7 +48,7 @@ export const POST = async (request: NextRequest, res: Response) => {
     return new StreamingTextResponse(stream)
   } else {
     return NextResponse.json({
-      message: 'No data message provided.',
+      message: 'ERROR: No data message provided.',
     })
   }
 }
