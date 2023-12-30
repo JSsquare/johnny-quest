@@ -4,7 +4,7 @@ import {
   OpenAIModelsParams,
   RecommendationsFromYelp,
   SystemInstruction,
-} from '@/app/constants'
+} from '@/app/constants/commonConstants'
 import { TEST_MODE, BLOCK_REQUEST } from '@/app/constants/configConstants'
 import { NextRequest, NextResponse } from 'next/server'
 import { delay } from '@/app/utils/delay'

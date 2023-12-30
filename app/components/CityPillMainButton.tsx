@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import {
   DESIGN_COLORS,
-} from '../constants'
+} from '../constants/commonConstants'
 import { CityStatesJohnnyHasBeenTo, StateCodeToState, StateCountry } from '../constants/placesConstants'
 
 export const CityPillMainButton = ({

@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { useState, useEffect, FormEvent } from 'react'
 import { CityPillMainButton } from './CityPillMainButton'
-import { DESIGN_COLORS } from '../constants'
+import { DESIGN_COLORS } from '../constants/commonConstants'
 import { useChat } from 'ai/react'
 import { minutesToMilliseconds } from '../utils/common'
 
