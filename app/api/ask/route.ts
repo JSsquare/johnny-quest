@@ -2,9 +2,11 @@ import OpenAI from 'openai'
 import {
   OpenAIModelID,
   OpenAIModelsParams,
-  RecommendationsFromYelp,
-  SystemInstruction,
 } from '@/app/constants/commonConstants'
+import {
+  RecommendationsFromYelp,
+  SystemInstruction
+} from '@/app/constants/promptConstants'
 import { TEST_MODE, BLOCK_REQUEST } from '@/app/constants/configConstants'
 import { NextRequest, NextResponse } from 'next/server'
 import { delay } from '@/app/utils/delay'
