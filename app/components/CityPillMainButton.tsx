@@ -32,6 +32,7 @@ export const CityPillMainButton = ({ setInputMessage }: { setInputMessage: any }
           wordWrap: 'break-word',
         }}
         leftIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
+        rightIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
       >
         {mainButtonText}
       </Button>

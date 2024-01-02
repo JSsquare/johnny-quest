@@ -2,11 +2,11 @@
 import { Button, Input, InputGroup, InputLeftElement, Show, Skeleton, Stack, Text, Textarea } from '@chakra-ui/react'
 import { useState, useEffect, FormEvent } from 'react'
 import { CityPillMainButton } from './CityPillMainButton'
-import { DESIGN_COLORS } from '../constants/commonConstants'
+import { DESIGN_COLORS, SUBSTACK_NEWSLETTER } from '../constants/commonConstants'
 import { useChat } from 'ai/react'
 import { minutesToMilliseconds } from '../utils/common'
 import { DEFAULT_INPUT_PLACEHOLDER, LOADING_INPUT_PLACEHOLDER } from '../constants/copyConstants'
-import { QuestionIcon, QuestionOutlineIcon } from '@chakra-ui/icons'
+import { QuestionOutlineIcon } from '@chakra-ui/icons'
 
 const ChatContainer = () => {
   const [recsAllowed, setRecsAllowed] = useState(true)
@@ -41,7 +41,7 @@ const ChatContainer = () => {
       I hope you found Johnnys Recommendation useful <br /> You can ask for more
       recommendations in 3 minutes. <br />
       While you wait, buy him a coffee or checkout{' '}
-      <a target="_blank" href="https://foodieyouall.substack.com" className="underline">
+      <a target="_blank" href={SUBSTACK_NEWSLETTER} className="underline">
         His Newsletter
       </a>
       !
