@@ -7,13 +7,13 @@ import {
   StateCodeToState,
   StateCountry,
 } from '../constants/placesConstants'
+import { BUTTON_TEXTS } from '../constants/copyConstants'
 
 export const CityPillMainButton = ({ setInputMessage }: { setInputMessage: any }) => {
   const { isOpen, onToggle } = useDisclosure()
 
   const mainButtonText = isOpen
-    ? 'No! Do Not Give Me City Recommendations'
-    : `Ask Recommendations from Johnny's Cities`
+    ? BUTTON_TEXTS.CITIES_OPEN : BUTTON_TEXTS.CITIES_CLOSED
 
   return (
     <Stack direction="column" spacing={4} align="center" justify="center">
