@@ -1,10 +1,12 @@
 'use client'
-import { Button, Input, Show, Skeleton, Stack, Text, Textarea } from '@chakra-ui/react'
+import { Button, Input, InputGroup, InputLeftElement, Show, Skeleton, Stack, Text, Textarea } from '@chakra-ui/react'
 import { useState, useEffect, FormEvent } from 'react'
 import { CityPillMainButton } from './CityPillMainButton'
 import { DESIGN_COLORS } from '../constants/commonConstants'
 import { useChat } from 'ai/react'
 import { minutesToMilliseconds } from '../utils/common'
+import { DEFAULT_INPUT_PLACEHOLDER, LOADING_INPUT_PLACEHOLDER } from '../constants/copyConstants'
+import { QuestionIcon, QuestionOutlineIcon } from '@chakra-ui/icons'
 
 const ChatContainer = () => {
   const [recsAllowed, setRecsAllowed] = useState(true)
@@ -32,13 +34,26 @@ const ChatContainer = () => {
     await handleSubmit(e)
   }
 
-  const placeholderMessage = isLoading ? 'hmmm thinking...' : 'Ask Johnny for Recommendations....'
+  const placeholderMessage = isLoading ? LOADING_INPUT_PLACEHOLDER  : DEFAULT_INPUT_PLACEHOLDER
+
+  const RecsDisabledText = () => {
+    return <Text className="mt-24 mb-8" fontSize="xl" color={DESIGN_COLORS.SECONDARY} align="center">
+      I hope you found Johnnys Recommendation useful <br /> You can ask for more
+      recommendations in 3 minutes. <br />
+      While you wait, buy him a coffee or checkout{' '}
+      <a target="_blank" href="https://foodieyouall.substack.com" className="underline">
+        His Newsletter
+      </a>
+      !
+    </Text>
+  }
+
 
   return (
     <Stack align="center" mt={40} marginX={16} className="w-100">
       {Boolean(recsAllowed) && <CityPillMainButton setInputMessage={setInput} />}
 
-      <Stack className="lg:w-3/4 min-w-52">
+      <Stack className="lg:w-3/4 min-w-56">
         {messages.map((m) => (
           <div key={m.id} className="bg-white rounded-md shadow-md p-5">
             <Text fontSize={{ base: 'xs', md: '2xl' }}>{m.content}</Text>
@@ -57,6 +72,10 @@ const ChatContainer = () => {
           <form onSubmit={handleFormSubmit}>
             <Stack spacing={4} className="mt-24" direction={{ base: 'column', md: 'row' }}>
               <Show above="md">
+              <InputGroup>
+              <InputLeftElement pointerEvents='none'>                
+                <QuestionOutlineIcon color={DESIGN_COLORS.PRIMARY} />
+              </InputLeftElement>
                 <Input
                   value={input}
                   variant="outline"
@@ -64,6 +83,7 @@ const ChatContainer = () => {
                   placeholder={placeholderMessage}
                   onChange={handleInputChange}
                 />
+              </InputGroup>
               </Show>
               <Show below="md">
                 <Textarea
@@ -87,39 +107,12 @@ const ChatContainer = () => {
         )}
 
         {recsAllowed === false && isLoading === false && (
-          <Text className="mt-24 mb-8" fontSize="xl" color={DESIGN_COLORS.SECONDARY} align="center">
-            I hope you found Johnnys Recommendation useful <br /> You can ask for more
-            recommendations in 3 minutes. <br />
-            While you wait, buy him a coffee or checkout{' '}
-            <a target="_blank" href="https://foodieyouall.substack.com" className="underline">
-              His Newsletter
-            </a>
-            !
-          </Text>
+          <RecsDisabledText />
         )}
       </Stack>
     </Stack>
   )
-}
 
-const ChatForm = () => {
-  const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: '/api/ask',
-  })
-
-  return (
-    <div>
-      {messages.map((m) => (
-        <div key={m.id}>
-          {m.role}: {m.content}
-        </div>
-      ))}
-
-      <form onSubmit={handleSubmit}>
-        <input value={input} placeholder="Say something..." onChange={handleInputChange} />
-      </form>
-    </div>
-  )
 }
 
 export default ChatContainer
