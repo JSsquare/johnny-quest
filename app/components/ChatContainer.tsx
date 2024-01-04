@@ -9,25 +9,25 @@ import { DEFAULT_INPUT_PLACEHOLDER, LOADING_INPUT_PLACEHOLDER } from '../constan
 import { QuestionOutlineIcon } from '@chakra-ui/icons'
 
 const ChatContainer = () => {
-  const [recsAllowed, setRecsAllowed] = useState(true)
+  const [isRecsAllowed, setIsRecsAllowed] = useState(true)
   const { messages, input, handleInputChange, handleSubmit, isLoading, setInput } = useChat({
     api: '/api/ask',
     onFinish: () => {
-      setRecsAllowed(false)
+      setIsRecsAllowed(false)
       window.scrollTo(0, document.body.scrollHeight)
     },
   })
 
   useEffect(() => {
-    if (recsAllowed === false) {
+    if (isRecsAllowed === false) {
       const timer = setTimeout(() => {
-        setRecsAllowed(true)
+        setIsRecsAllowed(true)
       }, minutesToMilliseconds(2))
       return () => {
         if (timer) clearTimeout(timer)
       }
     }
-  }, [recsAllowed])
+  }, [isRecsAllowed])
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -51,7 +51,7 @@ const ChatContainer = () => {
 
   return (
     <Stack align="center" mt={40} marginX={16} className="w-100">
-      {Boolean(recsAllowed) && <CityPillMainButton setInputMessage={setInput} />}
+      {isRecsAllowed && <CityPillMainButton setInputMessage={setInput} />}
 
       <Stack className="lg:w-3/4 min-w-56">
         {messages.map((m) => (
@@ -68,15 +68,15 @@ const ChatContainer = () => {
             className="mb-4 p4 min-w-52"
           />
         )}
-        {Boolean(recsAllowed) && isLoading === false && (
+        {isRecsAllowed && (
           <form onSubmit={handleFormSubmit}>
             <Stack spacing={4} className="mt-24" direction={{ base: 'column', md: 'row' }}>
-              <Show above="md">
+              <div className='hidden lg:block w-full'>
               <InputGroup>
               <InputLeftElement pointerEvents='none'>                
                 <QuestionOutlineIcon color={DESIGN_COLORS.PRIMARY} />
               </InputLeftElement>
-                <Input
+                <Input                
                   value={input}
                   variant="outline"
                   type="text"
@@ -84,7 +84,7 @@ const ChatContainer = () => {
                   onChange={handleInputChange}
                 />
               </InputGroup>
-              </Show>
+              </div>
               <Show below="md">
                 <Textarea
                   placeholder={placeholderMessage}
@@ -106,7 +106,7 @@ const ChatContainer = () => {
           </form>
         )}
 
-        {recsAllowed === false && isLoading === false && (
+        {!isRecsAllowed && isLoading === false && (
           <RecsDisabledText />
         )}
       </Stack>
