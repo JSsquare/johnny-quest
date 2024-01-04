@@ -9,7 +9,7 @@ import {
 } from '../constants/placesConstants'
 import { BUTTON_TEXTS } from '../constants/copyConstants'
 
-export const CityPillMainButton = ({ setInputMessage }: { setInputMessage: any }) => {
+export const CityPillMainButton = ({ setUserAskQuery }: { setUserAskQuery: any }) => {
   const { isOpen, onToggle } = useDisclosure()
 
   const mainButtonText = isOpen
@@ -22,7 +22,7 @@ export const CityPillMainButton = ({ setInputMessage }: { setInputMessage: any }
         variant="outline"
         colorScheme={isOpen ? DESIGN_COLORS.PRIMARY : DESIGN_COLORS.SECONDARY}
         onClick={() => {
-          if (isOpen) setInputMessage('')
+          if (isOpen) setUserAskQuery('')
           onToggle()
         }}
         size={{ base: 'xs', md: 'lg' }}
@@ -40,14 +40,14 @@ export const CityPillMainButton = ({ setInputMessage }: { setInputMessage: any }
       <Collapse in={isOpen} animateOpacity>
         <HStack spacing={6} overflowX="auto" wrap="wrap">
           {Object.keys(CityStatesJohnnyHasBeenTo).map((city) => (
-            <CityButton key={city} city={city} setInputMessage={setInputMessage} />
+            <CityButton key={city} city={city} setUserAskQuery={setUserAskQuery} />
           ))}
         </HStack>
       </Collapse>
     </Stack>
   )
 }
-const CityButton = ({ city, setInputMessage }: { city: string; setInputMessage: any }) => {
+const CityButton = ({ city, setUserAskQuery }: { city: string; setUserAskQuery: any }) => {
   const stateCode = CityStatesJohnnyHasBeenTo[city]
   return (
     <Tooltip
@@ -61,7 +61,7 @@ const CityButton = ({ city, setInputMessage }: { city: string; setInputMessage: 
         colorScheme={DESIGN_COLORS.PRIMARY}
         variant="outline"
         onClick={() =>
-          setInputMessage(
+          setUserAskQuery(
             `Can you give me recommendations from ${city}, ${StateCodeToState[stateCode]}, ${StateCountry[stateCode]}`,
           )
         }

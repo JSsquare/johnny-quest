@@ -51,7 +51,7 @@ const ChatContainer = () => {
 
   return (
     <Stack align="center" mt={40} marginX={16} className="w-100">
-      {isRecsAllowed && <CityPillMainButton setInputMessage={setInput} />}
+      {isRecsAllowed && <CityPillMainButton setUserAskQuery={setInput} />}
 
       <Stack className="lg:w-3/4 min-w-56">
         {messages.map((m) => (
