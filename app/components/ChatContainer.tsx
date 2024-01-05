@@ -117,7 +117,6 @@ const ChatContainer = () => {
         </Stack>
       </Stack>
       {!isRecsAllowed && isLoading === false && <RecsDisabledBanner />}
-      {<RecsDisabledBanner />}
     </>
   )
 }
