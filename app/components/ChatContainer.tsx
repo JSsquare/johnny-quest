@@ -1,4 +1,5 @@
 'use client'
+import { QuestionOutlineIcon } from '@chakra-ui/icons'
 import {
   Button,
   Input,
@@ -10,14 +11,13 @@ import {
   Text,
   Textarea,
 } from '@chakra-ui/react'
-import { useState, useEffect, FormEvent } from 'react'
-import { CityPillMainButton } from './CityPillMainButton'
-import { DESIGN_COLORS, SUBSTACK_NEWSLETTER } from '../constants/commonConstants'
 import { useChat } from 'ai/react'
-import { minutesToMilliseconds } from '../utils/common'
-import { DEFAULT_INPUT_PLACEHOLDER, LOADING_INPUT_PLACEHOLDER } from '../constants/copyConstants'
-import { QuestionOutlineIcon } from '@chakra-ui/icons'
 import Link from 'next/link'
+import { FormEvent, useEffect, useState } from 'react'
+import { DESIGN_COLORS, SUBSTACK_NEWSLETTER } from '../constants/commonConstants'
+import { DEFAULT_INPUT_PLACEHOLDER, LOADING_INPUT_PLACEHOLDER } from '../constants/copyConstants'
+import { minutesToMilliseconds } from '../utils/common'
+import { CityPillMainButton } from './CityPillMainButton'
 
 const ChatContainer = () => {
   const [isRecsAllowed, setIsRecsAllowed] = useState(true)

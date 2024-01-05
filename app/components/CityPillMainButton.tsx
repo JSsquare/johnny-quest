@@ -1,19 +1,18 @@
 'use client'
 import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons'
-import { Button, Collapse, Stack, HStack, Tooltip, useDisclosure } from '@chakra-ui/react'
+import { Button, Collapse, HStack, Stack, Tooltip, useDisclosure } from '@chakra-ui/react'
 import { DESIGN_COLORS } from '../constants/commonConstants'
+import { BUTTON_TEXTS } from '../constants/copyConstants'
 import {
   CityStatesJohnnyHasBeenTo,
   StateCodeToState,
   StateCountry,
 } from '../constants/placesConstants'
-import { BUTTON_TEXTS } from '../constants/copyConstants'
 
 export const CityPillMainButton = ({ setUserAskQuery }: { setUserAskQuery: any }) => {
   const { isOpen, onToggle } = useDisclosure()
 
-  const mainButtonText = isOpen
-    ? BUTTON_TEXTS.CITIES_OPEN : BUTTON_TEXTS.CITIES_CLOSED
+  const mainButtonText = isOpen ? BUTTON_TEXTS.CITIES_OPEN : BUTTON_TEXTS.CITIES_CLOSED
 
   return (
     <Stack direction="column" spacing={4} align="center" justify="center">

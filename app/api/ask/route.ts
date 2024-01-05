@@ -1,16 +1,10 @@
-import OpenAI from 'openai'
-import {
-  OpenAIModelID,
-  OpenAIModelsParams,
-} from '@/app/constants/commonConstants'
-import {
-  RecommendationsFromYelp,
-  SystemInstruction
-} from '@/app/constants/promptConstants'
-import { TEST_MODE, BLOCK_REQUEST } from '@/app/constants/configConstants'
-import { NextRequest, NextResponse } from 'next/server'
+import { OpenAIModelID, OpenAIModelsParams } from '@/app/constants/commonConstants'
+import { BLOCK_REQUEST, TEST_MODE } from '@/app/constants/configConstants'
+import { RecommendationsFromYelp, SystemInstruction } from '@/app/constants/promptConstants'
 import { delay } from '@/app/utils/delay'
 import { OpenAIStream, StreamingTextResponse } from 'ai'
+import { NextRequest, NextResponse } from 'next/server'
+import OpenAI from 'openai'
 
 export const runtime = 'edge'
 

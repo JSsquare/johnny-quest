@@ -1,6 +1,5 @@
-import Link from 'next/link'
-import ChatContainer from './components/ChatContainer'
 import { ChakraProvider } from '@chakra-ui/react'
+import ChatContainer from './components/ChatContainer'
 
 export default function Home() {
   return (

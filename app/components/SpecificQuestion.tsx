@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
 import {
   Button,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
   ModalBody,
+  ModalContent,
   ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Select,
 } from '@chakra-ui/react'
+import React, { useState } from 'react'
 import { CityStatesJohnnyHasBeenTo } from '../constants/placesConstants'
 
 const SpecificQuestion = () => {
