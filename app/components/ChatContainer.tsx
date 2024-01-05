@@ -1,6 +1,9 @@
 'use client'
 import { QuestionOutlineIcon } from '@chakra-ui/icons'
 import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
   Button,
   Input,
   InputGroup,
@@ -111,25 +114,29 @@ const ChatContainer = () => {
               </Stack>
             </form>
           )}
-
-          {!isRecsAllowed && isLoading === false && <RecsDisabledText />}
         </Stack>
       </Stack>
+      {!isRecsAllowed && isLoading === false && <RecsDisabledBanner />}
+      {<RecsDisabledBanner />}
     </>
   )
 }
 
-const RecsDisabledText = () => {
+const RecsDisabledBanner = () => {
   return (
-    <Text className="mt-24 mb-8" fontSize="xl" color={DESIGN_COLORS.SECONDARY} align="center">
-      I hope you found Johnnys Recommendation useful <br /> You can ask for more recommendations in
-      3 minutes. <br />
-      While you wait, buy him a coffee or checkout{' '}
-      <a target="_blank" href={SUBSTACK_NEWSLETTER} className="underline">
-        His Newsletter
-      </a>
-      !
-    </Text>
+    <Alert status="info" className="flex flex-col mt-12 text-orange-500 text-xs text-center">
+      <AlertTitle>
+        I hope you found Johnnys Recommendation useful. You can ask for more recommendations in 3
+        minutes.
+      </AlertTitle>
+      <AlertDescription>
+        While you wait, buy him a coffee or checkout{' '}
+        <a target="_blank" href={SUBSTACK_NEWSLETTER} className="underline">
+          His Newsletter
+        </a>
+        !
+      </AlertDescription>
+    </Alert>
   )
 }
 
