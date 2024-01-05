@@ -30,6 +30,7 @@ export const CityPillMainButton = ({ setUserAskQuery }: { setUserAskQuery: any }
           whiteSpace: 'normal',
           wordWrap: 'break-word',
         }}
+        borderColor={isOpen ? DESIGN_COLORS.SECONDARY : DESIGN_COLORS.PRIMARY}
         leftIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
         rightIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
       >

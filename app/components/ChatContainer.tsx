@@ -12,11 +12,11 @@ import {
   Textarea,
 } from '@chakra-ui/react'
 import { useChat } from 'ai/react'
-import Link from 'next/link'
 import { FormEvent, useEffect, useState } from 'react'
 import { DESIGN_COLORS, SUBSTACK_NEWSLETTER } from '../constants/commonConstants'
 import { DEFAULT_INPUT_PLACEHOLDER, LOADING_INPUT_PLACEHOLDER } from '../constants/copyConstants'
 import { minutesToMilliseconds } from '../utils/common'
+import { AboutJohnny } from './AboutJohnny'
 import { CityPillMainButton } from './CityPillMainButton'
 
 const ChatContainer = () => {
@@ -130,19 +130,6 @@ const RecsDisabledText = () => {
       </a>
       !
     </Text>
-  )
-}
-
-const AboutJohnny = () => {
-  return (
-    <div className="lg:flex text-xs">
-      <Link
-        href="/about"
-        className="fixed bg-green-500 top-5 left-5 flex justify-center font-bold items-center w-24 h-16  text-white rounded-full shadow-lg"
-      >
-        About Johnny
-      </Link>
-    </div>
   )
 }
 

@@ -3,10 +3,14 @@ import React from 'react'
 
 const AboutPage: React.FC = () => {
   return (
-    <div className="h-screen bg-gray-100 flex flex-col items-center justify-center">
-      <Link href="/" className="absolute top-0 left-0 m-4 text-yellow-500 font-bold">
+    <div className="h-screen bg-gray-100 flex flex-col items-center justify-center text-green-500">
+      <Link
+        href="/"
+        className="fixed bg-orange-400 top-5 left-5 flex justify-center font-bold items-center w-24 h-8  text-white text-xs rounded-full shadow-lg"
+      >
         Go Back Home
       </Link>
+
       <h1 className="text-4xl font-bold mb-4">About Johnny</h1>
 
       <section className="mb-8">
@@ -34,7 +38,7 @@ const AboutPage: React.FC = () => {
         <div>
           <p className="text-lg font-bold">Contact:</p>
           <p>Email: googling.johnny@gmail.com</p>
-          <Link href="https://instagram.com/foodie.youall">Johnny&apos;s Insta</Link>
+          <Link href="https://instagram.com/foodie.youall">Instagram</Link>
         </div>
       </div>
     </div>

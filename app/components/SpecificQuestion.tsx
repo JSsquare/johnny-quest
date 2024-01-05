@@ -35,7 +35,7 @@ const SpecificQuestion = () => {
 
   return (
     <>
-      <Button onClick={handleOpenModal}>Open Modal</Button>
+      <Button onClick={handleOpenModal}>Ask A Specific Question</Button>
 
       <Modal isOpen={isOpen} onClose={handleCloseModal}>
         <ModalOverlay />
