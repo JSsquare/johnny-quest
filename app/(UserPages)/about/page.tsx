@@ -6,7 +6,7 @@ const AboutPage: React.FC = () => {
     <div className="h-screen bg-gray-100 flex flex-col items-center justify-center text-green-500">
       <Link
         href="/"
-        className="fixed bg-orange-400 top-5 left-5 flex justify-center font-bold items-center w-24 h-8  text-white text-xs rounded-full shadow-lg"
+        className="fixed bg-orange-400 top-5 left-5 flex justify-center font-bold items-center w-24 h-8  text-white text-xs rounded-full shadow-xl"
       >
         Go Back Home
       </Link>

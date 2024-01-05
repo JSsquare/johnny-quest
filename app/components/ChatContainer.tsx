@@ -57,13 +57,13 @@ const ChatContainer = () => {
       <Stack align="center" mt={48} marginX={16} className="w-100">
         {isRecsAllowed && <CityPillMainButton setUserAskQuery={setInput} />}
 
-        <Stack className="lg:w-3/4 min-w-56">
+        <Stack className="lg:w-3/4 min-w-56" gap="1rem">
           {messages.map((m) => (
             <div
               key={m.id}
               className={`${
                 m.role === 'assistant' ? 'bg-green-200' : 'bg-green-50'
-              } rounded-md shadow-md p-5`}
+              } rounded-md shadow-2xl p-5`}
             >
               <Text fontSize={{ base: 'xs', md: '2xl' }}>{m.content}</Text>
             </div>
