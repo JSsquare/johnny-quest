@@ -16,9 +16,12 @@ import {
 } from '@chakra-ui/react'
 import { useChat } from 'ai/react'
 import { FormEvent, useEffect, useState } from 'react'
-import { DESIGN_COLORS, SUBSTACK_NEWSLETTER } from '../constants/commonConstants'
+import {
+  DESIGN_COLORS,
+  RECS_ALLOWED_MILLISECONDS,
+  SUBSTACK_NEWSLETTER,
+} from '../constants/commonConstants'
 import { DEFAULT_INPUT_PLACEHOLDER, LOADING_INPUT_PLACEHOLDER } from '../constants/copyConstants'
-import { minutesToMilliseconds } from '../utils/common'
 import { AboutJohnny } from './AboutJohnny'
 import { CityPillMainButton } from './CityPillMainButton'
 
@@ -36,7 +39,7 @@ const ChatContainer = () => {
     if (isRecsAllowed === false) {
       const timer = setTimeout(() => {
         setIsRecsAllowed(true)
-      }, minutesToMilliseconds(2))
+      }, RECS_ALLOWED_MILLISECONDS)
       return () => {
         if (timer) clearTimeout(timer)
       }

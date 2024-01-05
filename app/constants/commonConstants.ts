@@ -1,4 +1,5 @@
 import { OpenAIModelParams } from '../types/openai'
+import { minutesToMilliseconds } from '../utils/common'
 
 export enum OpenAIModelID {
   GPT_4 = 'gpt-4',
@@ -22,3 +23,5 @@ export enum DESIGN_COLORS {
   ATTENTION = 'red',
   SUBTLE = 'gray.300',
 }
+
+export const RECS_ALLOWED_MILLISECONDS = minutesToMilliseconds(2)
