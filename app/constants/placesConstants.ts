@@ -14,23 +14,6 @@ export const CityStatesJohnnyHasBeenTo: CityStatesJohnnyHasBeenToType = {
   Honolulu: 'HI',
 }
 
-export type CityStatesType = {
-  [city: string]: keyof typeof StateCountry
-}
-
-export const CityStates: CityStatesType = {
-  'San Francisco': 'CA',
-  'San Francisco Bay Area': 'CA',
-  Berkeley: 'CA',
-  Oakland: 'CA',
-  Seattle: 'WA',
-  Issaquah: 'WA',
-  Tempe: 'AZ',
-  'San Diego': 'CA',
-  'San Juan': 'PR',
-  Honolulu: 'HI',
-}
-
 export type StateCodeToStateType = {
   [code: string]: string
 }

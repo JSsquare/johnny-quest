@@ -25,3 +25,15 @@ export enum DESIGN_COLORS {
 }
 
 export const RECS_ALLOWED_MILLISECONDS = minutesToMilliseconds(2)
+
+export type AskRecsStepType = {
+  stepNo: number
+  title: string
+  description: string
+}
+
+export const askRecsSteps: AskRecsStepType[] = [
+  { stepNo: 1, title: 'Choose Place', description: 'Choose The Location' },
+  { stepNo: 2, title: 'Cuisine', description: 'Do you have a Cuisine in Mind?' },
+  { stepNo: 3, title: 'Other', description: 'Anything else you like to add?' },
+]
