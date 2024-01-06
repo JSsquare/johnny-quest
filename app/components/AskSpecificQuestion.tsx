@@ -22,7 +22,6 @@ import { RecommendationStep } from './RecommendationStep'
 
 const AskSpecificQuestion = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [size, setSize] = useState('full')
   const totalNumberOfSteps = askRecsSteps.length
 
   const { activeStep, goToNext, goToPrevious } = useSteps({
@@ -30,7 +29,6 @@ const AskSpecificQuestion = () => {
     count: totalNumberOfSteps,
   })
   const isLastStep = activeStep === askRecsSteps.length
-  const hasCompletedAllSteps = activeStep === totalNumberOfSteps
 
   const handleOpenModal = () => {
     setIsOpen(true)
@@ -48,7 +46,7 @@ const AskSpecificQuestion = () => {
     <>
       <Button onClick={handleOpenModal}>Ask A Specific Question</Button>
 
-      <Modal isOpen={isOpen} onClose={handleCloseModal} size={size}>
+      <Modal isOpen={isOpen} onClose={handleCloseModal} size="full">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>What Are You Looking For?</ModalHeader>
