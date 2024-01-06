@@ -106,6 +106,8 @@ const ChatContainer = () => {
                     focusBorderColor={DESIGN_COLORS.PRIMARY}
                     value={input}
                     onChange={handleInputChange}
+                    minHeight={40}
+                    lineHeight={2}
                   />
                 </Show>
                 <Button
