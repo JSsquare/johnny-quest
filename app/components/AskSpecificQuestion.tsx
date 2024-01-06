@@ -7,7 +7,9 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Stack,
   Step,
+  StepDescription,
   StepIcon,
   StepIndicator,
   StepNumber,
@@ -18,13 +20,13 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { DESIGN_COLORS, askRecsSteps } from '../constants/commonConstants'
-import { RecommendationStep } from './RecommendationStep'
+import { RecommendationSteps } from './RecommendationSteps'
 
 const AskSpecificQuestion = () => {
   const [isOpen, setIsOpen] = useState(false)
   const totalNumberOfSteps = askRecsSteps.length
 
-  const { activeStep, goToNext, goToPrevious } = useSteps({
+  const { activeStep, goToNext, goToPrevious, setActiveStep } = useSteps({
     index: 1,
     count: totalNumberOfSteps,
   })
@@ -57,10 +59,15 @@ const AskSpecificQuestion = () => {
               index={activeStep}
               colorScheme={DESIGN_COLORS.PRIMARY}
               orientation="vertical"
+              gap={12}
             >
               {askRecsSteps.map((step, index) => (
-                <Step key={index} className="flex flex-col w-full">
-                  <Box className="flex">
+                <Step
+                  key={index}
+                  onClick={() => setActiveStep(index + 1)}
+                  className="flex flex-col w-full cursor-pointer gap-6"
+                >
+                  <Box className="flex gap-6">
                     <StepIndicator>
                       <StepStatus
                         complete={<StepIcon />}
@@ -68,10 +75,13 @@ const AskSpecificQuestion = () => {
                         active={<StepNumber />}
                       />
                     </StepIndicator>
-                    <StepTitle>{step.title}</StepTitle>
+                    <Stack>
+                      <StepTitle>{step.title}</StepTitle>
+                      <StepDescription>{step.description}</StepDescription>
+                    </Stack>
                   </Box>
 
-                  {activeStep === index + 1 && <RecommendationStep step={step} />}
+                  {activeStep === index + 1 && <RecommendationSteps step={step} />}
                 </Step>
               ))}
             </Stepper>
@@ -80,7 +90,7 @@ const AskSpecificQuestion = () => {
             <Button onClick={() => handleProgress()} colorScheme={DESIGN_COLORS.PRIMARY}>
               {isLastStep ? 'Prev' : 'Next'}
             </Button>
-            <Button onClick={handleCloseModal}>Cancel</Button>
+            <Button onClick={handleCloseModal}>No, Cancel My Ask</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

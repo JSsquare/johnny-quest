@@ -9,6 +9,15 @@
   .heading-nav-pill {
     @apply fixed top-5 left-5 flex justify-center font-bold items-center w-24 h-8  text-white rounded-full shadow-xl text-xs;
   }
+  .heading-nav-pill:hover {
+    @apply drop-shadow-xl;
+  }
+  .heading-nav-pill:active {
+    @apply drop-shadow-none;
+  }
+  .rounded-shadow-card {
+    @apply rounded-md shadow-2xl p-5;
+  }
 }
 
 :root {

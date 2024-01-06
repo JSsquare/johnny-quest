@@ -33,7 +33,11 @@ export type AskRecsStepType = {
 }
 
 export const askRecsSteps: AskRecsStepType[] = [
-  { stepNo: 1, title: 'Choose Place', description: 'Choose The Location' },
-  { stepNo: 2, title: 'Cuisine', description: 'Do you have a Cuisine in Mind?' },
-  { stepNo: 3, title: 'Other', description: 'Anything else you like to add?' },
+  {
+    stepNo: 1,
+    title: 'Choose Place',
+    description: 'Choose The Location You Like Recommendations For',
+  },
+  { stepNo: 2, title: 'Cuisine', description: 'Do you have a Cuisine or a Kind of food you like?' },
+  { stepNo: 3, title: 'More Details', description: 'Anything else you like to add?' },
 ]

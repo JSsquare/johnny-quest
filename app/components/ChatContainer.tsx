@@ -23,6 +23,7 @@ import {
 } from '../constants/commonConstants'
 import { DEFAULT_INPUT_PLACEHOLDER, LOADING_INPUT_PLACEHOLDER } from '../constants/copyConstants'
 import { AboutJohnny } from './AboutJohnny'
+import AskSpecificQuestion from './AskSpecificQuestion'
 import { CityPillMainButton } from './CityPillMainButton'
 
 const ChatContainer = () => {
@@ -59,6 +60,7 @@ const ChatContainer = () => {
 
       <Stack align="center" mt={48} marginX={16} className="w-100">
         {isRecsAllowed && <CityPillMainButton setUserAskQuery={setInput} />}
+        <AskSpecificQuestion />
 
         <Stack className="lg:w-3/4 min-w-56" gap="1rem">
           {messages.map((m) => (
@@ -66,7 +68,7 @@ const ChatContainer = () => {
               key={m.id}
               className={`${
                 m.role === 'assistant' ? 'bg-green-200' : 'bg-green-50'
-              } rounded-md shadow-2xl p-5`}
+              } rounded-shadow-card`}
             >
               <Text fontSize={{ base: 'xs', md: '2xl' }}>{m.content}</Text>
             </div>
