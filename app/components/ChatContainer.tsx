@@ -60,7 +60,7 @@ const ChatContainer = () => {
 
       <Stack align="center" mt={48} marginX={16} className="w-100">
         {isRecsAllowed && <CityPillMainButton setUserAskQuery={setInput} />}
-        <AskSpecificQuestion />
+        {true && <AskSpecificQuestion />}
 
         <Stack className="lg:w-3/4 min-w-56" gap="1rem">
           {messages.map((m) => (
