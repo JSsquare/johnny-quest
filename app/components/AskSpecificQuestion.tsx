@@ -1,3 +1,4 @@
+import { NotAllowedIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
@@ -46,7 +47,9 @@ const AskSpecificQuestion = () => {
 
   return (
     <>
-      <Button onClick={handleOpenModal}>Ask A Specific Question</Button>
+      <Button leftIcon={<NotAllowedIcon />} onClick={handleOpenModal}>
+        [WIP] Ask A Specific Question
+      </Button>
 
       <Modal isOpen={isOpen} onClose={handleCloseModal} size="full">
         <ModalOverlay />

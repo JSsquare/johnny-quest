@@ -132,8 +132,7 @@ const RecsDisabledBanner = () => {
   return (
     <Alert status="info" className="flex flex-col mt-12 text-orange-500 text-xs text-center">
       <AlertTitle>
-        I hope you found Johnnys Recommendation useful. You can ask for more recommendations in 3
-        minutes.
+        I hope you found Johnnys Recommendation useful. Ask for more recommendations in 3 minutes.
       </AlertTitle>
       <AlertDescription>
         While you wait, buy him a coffee or checkout{' '}

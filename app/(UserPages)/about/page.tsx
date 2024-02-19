@@ -3,7 +3,7 @@ import React from 'react'
 
 const AboutPage: React.FC = () => {
   return (
-    <div className="h-screen bg-gray-100 flex flex-col items-center justify-center text-green-500">
+    <div className="h-screen flex flex-col items-center justify-center text-green-500">
       <Link href="/" className="bg-orange-400 heading-nav-pill">
         Go Back Home
       </Link>
