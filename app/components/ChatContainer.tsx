@@ -15,7 +15,7 @@ import {
   Textarea,
 } from '@chakra-ui/react'
 import { useChat } from 'ai/react'
-import { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useEffect, useRef, useState } from 'react'
 import {
   DESIGN_COLORS,
   RECS_ALLOWED_MILLISECONDS,
@@ -29,6 +29,7 @@ import { CityPillMainButton } from './CityPillMainButton'
 
 const ChatContainer = () => {
   const [isRecsAllowed, setIsRecsAllowed] = useState(true)
+  const askSubmitButtonRef = useRef(null)
   const { messages, input, handleInputChange, handleSubmit, isLoading, setInput } = useChat({
     api: '/api/ask',
     onFinish: () => {
@@ -60,7 +61,9 @@ const ChatContainer = () => {
       {isRecsAllowed && <AboutJohnny />}
 
       <Stack align="center" mt={48} marginX={16} className="w-100">
-        {isRecsAllowed && <CityPillMainButton setUserAskQuery={setInput} />}
+        {isRecsAllowed && (
+          <CityPillMainButton askSubmitButtonRef={askSubmitButtonRef} setUserAskQuery={setInput} />
+        )}
         {ENABLE_SPECIFIC_QUESTION && <AskSpecificQuestion />}
 
         <Stack className="lg:w-3/4 min-w-56" gap="1rem">
@@ -115,7 +118,8 @@ const ChatContainer = () => {
                   colorScheme={DESIGN_COLORS.PRIMARY}
                   type="submit"
                   isLoading={isLoading}
-                  loadingText="Thinking ..."
+                  ref={askSubmitButtonRef}
+                  loadingText="Processing ..."
                 >
                   Ask Johnny
                 </Button>

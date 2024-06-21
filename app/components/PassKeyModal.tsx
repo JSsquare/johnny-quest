@@ -16,7 +16,6 @@ const PassKeyModal = () => {
   const [isOpen, setIsOpen] = useState(true)
   const [passkey, setPasskey] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
-  const passKeyLastSubmissionStorage = localStorage.getItem('passKeyLastSubmission')
 
   const handleClose = () => {
     if (passkey === 'JSPFRIEND') {
@@ -30,7 +29,7 @@ const PassKeyModal = () => {
   return (
     <Modal isOpen={isOpen} size="full" onClose={handleClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent alignItems="center">
         <ModalHeader>Enter Passkey</ModalHeader>
         <ModalBody>
           <Input

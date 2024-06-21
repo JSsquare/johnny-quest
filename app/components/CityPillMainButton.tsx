@@ -9,7 +9,13 @@ import {
   StateCountry,
 } from '../constants/placesConstants'
 
-export const CityPillMainButton = ({ setUserAskQuery }: { setUserAskQuery: any }) => {
+export const CityPillMainButton = ({
+  askSubmitButtonRef,
+  setUserAskQuery,
+}: {
+  askSubmitButtonRef: any
+  setUserAskQuery: any
+}) => {
   const { isOpen, onToggle } = useDisclosure()
 
   const mainButtonText = isOpen ? BUTTON_TEXTS.CITIES_OPEN : BUTTON_TEXTS.CITIES_CLOSED
@@ -40,14 +46,27 @@ export const CityPillMainButton = ({ setUserAskQuery }: { setUserAskQuery: any }
       <Collapse in={isOpen} animateOpacity>
         <HStack spacing={6} overflowX="auto" wrap="wrap">
           {Object.keys(CityStatesJohnnyHasBeenTo).map((city) => (
-            <CityButton key={city} city={city} setUserAskQuery={setUserAskQuery} />
+            <CityButton
+              key={city}
+              city={city}
+              setUserAskQuery={setUserAskQuery}
+              askSubmitButtonRef={askSubmitButtonRef}
+            />
           ))}
         </HStack>
       </Collapse>
     </Stack>
   )
 }
-const CityButton = ({ city, setUserAskQuery }: { city: string; setUserAskQuery: any }) => {
+const CityButton = ({
+  city,
+  setUserAskQuery,
+  askSubmitButtonRef,
+}: {
+  city: string
+  setUserAskQuery: any
+  askSubmitButtonRef: any
+}) => {
   const stateCode = CityStatesJohnnyHasBeenTo[city]
   return (
     <Tooltip
@@ -60,11 +79,13 @@ const CityButton = ({ city, setUserAskQuery }: { city: string; setUserAskQuery: 
       <Button
         colorScheme={DESIGN_COLORS.PRIMARY}
         variant="outline"
-        onClick={() =>
+        onClick={() => {
           setUserAskQuery(
             `Can you give me recommendations from ${city}, ${StateCodeToState[stateCode]}, ${StateCountry[stateCode]}`,
           )
-        }
+          askSubmitButtonRef.current.scrollIntoView({ behavior: 'smooth' })
+          askSubmitButtonRef.current.focus()
+        }}
       >
         {city}
       </Button>
