@@ -21,6 +21,7 @@ import {
   RECS_ALLOWED_MILLISECONDS,
   SUBSTACK_NEWSLETTER,
 } from '../constants/commonConstants'
+import { ENABLE_SPECIFIC_QUESTION } from '../constants/configConstants'
 import { DEFAULT_INPUT_PLACEHOLDER, LOADING_INPUT_PLACEHOLDER } from '../constants/copyConstants'
 import { AboutJohnny } from './AboutJohnny'
 import AskSpecificQuestion from './AskSpecificQuestion'
@@ -60,7 +61,7 @@ const ChatContainer = () => {
 
       <Stack align="center" mt={48} marginX={16} className="w-100">
         {isRecsAllowed && <CityPillMainButton setUserAskQuery={setInput} />}
-        {true && <AskSpecificQuestion />}
+        {ENABLE_SPECIFIC_QUESTION && <AskSpecificQuestion />}
 
         <Stack className="lg:w-3/4 min-w-56" gap="1rem">
           {messages.map((m) => (

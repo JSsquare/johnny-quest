@@ -1,3 +1,4 @@
+'use client'
 import { ChakraProvider } from '@chakra-ui/react'
 import ChatContainer from './components/ChatContainer'
 import PassKeyModal from './components/PassKeyModal'

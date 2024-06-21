@@ -47,15 +47,18 @@ const AskSpecificQuestion = () => {
 
   return (
     <>
-      <Button leftIcon={<NotAllowedIcon />} onClick={handleOpenModal}>
+      <Button
+        leftIcon={<NotAllowedIcon color={'red'} />}
+        rightIcon={<NotAllowedIcon color={'red'} />}
+        onClick={handleOpenModal}
+      >
         [WIP] Ask A Specific Question
       </Button>
 
       <Modal isOpen={isOpen} onClose={handleCloseModal} size="full">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>What Are You Looking For?</ModalHeader>
-
+          <ModalHeader>What Exactly Are You Looking For? (not ready)</ModalHeader>
           <ModalBody>
             <Stepper
               size="sm"

@@ -16,9 +16,11 @@ const PassKeyModal = () => {
   const [isOpen, setIsOpen] = useState(true)
   const [passkey, setPasskey] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
+  const passKeyLastSubmissionStorage = localStorage.getItem('passKeyLastSubmission')
 
   const handleClose = () => {
     if (passkey === 'JSPFRIEND') {
+      localStorage.setItem('passKeyLastSubmission', Date.now().toString())
       setIsOpen(false)
     } else {
       setErrorMessage('Incorrect passkey')
