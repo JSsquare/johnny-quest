@@ -12,6 +12,9 @@ export const CityStatesJohnnyHasBeenTo: CityStatesJohnnyHasBeenToType = {
   'San Diego': 'CA',
   'San Juan': 'PR',
   Honolulu: 'HI',
+  Fremont: 'CA',
+  Kochi: 'Kerala',
+  Pune: 'Maharashtra',
 }
 
 export type StateCodeToStateType = {

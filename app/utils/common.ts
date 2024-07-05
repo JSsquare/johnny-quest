@@ -5,15 +5,15 @@ export const minutesToMilliseconds = (minutes: number): number => {
 }
 export const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
-export const getUniqueCountryCodes = () => {
-  const uniqueCountryCodes: string[] = []
+export const getUniqueCountryNames = () => {
+  const uniqueCountryNames: string[] = []
   const stateCountryValues = Object.values(StateCountry)
 
-  for (const countryCode of stateCountryValues) {
-    if (!uniqueCountryCodes.includes(countryCode)) {
-      uniqueCountryCodes.push(countryCode)
+  for (const countryName of stateCountryValues) {
+    if (!uniqueCountryNames.includes(countryName)) {
+      uniqueCountryNames.push(countryName)
     }
   }
 
-  return uniqueCountryCodes
+  return uniqueCountryNames
 }
