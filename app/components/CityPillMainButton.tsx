@@ -83,8 +83,8 @@ const CityButton = ({
           setUserAskQuery(
             `Can you give me recommendations from ${city}, ${StateCodeToState[stateCode]}, ${StateCountry[stateCode]}`,
           )
-          askSubmitButtonRef.current.scrollIntoView({ behavior: 'smooth' })
-          askSubmitButtonRef.current.focus()
+          askSubmitButtonRef?.current?.scrollIntoView({ behavior: 'smooth' })
+          askSubmitButtonRef?.current?.focus()
         }}
       >
         {city}

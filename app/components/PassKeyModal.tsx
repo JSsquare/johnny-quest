@@ -1,33 +1,40 @@
-'use client'
-import {
-  Button,
-  Input,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Text,
-} from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
+import Cookies from "js-cookie";
+import { 
+  Modal, ModalOverlay, ModalContent, ModalHeader, 
+  ModalBody, ModalFooter, Input, Button, Text 
+} from '@chakra-ui/react';
 
-const PassKeyModal = () => {
-  const [isOpen, setIsOpen] = useState(true)
-  const [passkey, setPasskey] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
+interface PassKeyModalProps {
+  onClose: () => void;
+}
+
+const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
+  const [isOpen, setIsOpen] = useState(true);
+  const [passkey, setPasskey] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    setIsOpen(true); // Ensure modal opens properly when rendered
+  }, []);
+
+  // Function to set cookie when modal is closed
+  const setModalClosed = () => {  
+    Cookies.set("passkeyModalClosed", "true", { expires: 1 / 3, path: "/" }); // Expires in 1 day
+  };
 
   const handleClose = () => {
     if (passkey === 'JSPFRIEND') {
-      localStorage.setItem('passKeyLastSubmission', Date.now().toString())
-      setIsOpen(false)
+      setModalClosed();
+      setIsOpen(false);
+      onClose(); // Notify Home component to remove modal
     } else {
-      setErrorMessage('Incorrect passkey')
+      setErrorMessage('Incorrect passkey');
     }
-  }
+  };
 
   return (
-    <Modal isOpen={isOpen} size="full" onClose={handleClose}>
+    <Modal isOpen={isOpen} size="full" onClose={() => setIsOpen(false)}>
       <ModalOverlay />
       <ModalContent alignItems="center">
         <ModalHeader>Enter Passkey</ModalHeader>
@@ -37,7 +44,7 @@ const PassKeyModal = () => {
             onChange={(e) => setPasskey(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                handleClose()
+                handleClose();
               }
             }}
             placeholder="Enter Passkey"
@@ -51,7 +58,7 @@ const PassKeyModal = () => {
         </ModalFooter>
       </ModalContent>
     </Modal>
-  )
-}
+  );
+};
 
-export default PassKeyModal
+export default PassKeyModal;
