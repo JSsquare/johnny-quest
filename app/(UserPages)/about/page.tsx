@@ -3,14 +3,15 @@ import React from 'react'
 
 const AboutPage: React.FC = () => {
   return (
-    <div className="h-screen flex flex-col items-center justify-center text-green-500">
-      <Link href="/" className="bg-orange-400 heading-nav-pill">
-        Go Back Home
-      </Link>
+    <main className="h-screen flex flex-col items-center justify-center text-green-500">
+      <header>
+        <Link href="/" className="bg-orange-400 heading-nav-pill">
+          Go Back Home
+        </Link>
+      </header>
 
-      <h1 className="text-4xl font-bold mb-4">About Johnny</h1>
-
-      <section className="mb-8">
+      <section className="text-center">
+        <h1 className="text-4xl font-bold mb-4">About Johnny</h1>
         <p>Johnny is the creator of this website</p>
       </section>
 
@@ -26,19 +27,16 @@ const AboutPage: React.FC = () => {
         </ul>
       </section>
 
-      <div className="flex items-center">
+      <footer className="flex items-center">
         <img
-          src="https://via.placeholder.com/150"
-          alt="Profile Picture"
-          className="rounded-full w-16 h-16 mr-4"
+          src="https://pbs.twimg.com/profile_images/1112475957103738880/qlB9fCjC_400x400.jpg"
+          width={80}
+          height={80}
+          alt="Johnny's profile picture"
+          className="rounded-full"
         />
-        <div>
-          <p className="text-lg font-bold">Contact:</p>
-          <p>Email: googling.johnny@gmail.com</p>
-          <Link href="https://instagram.com/foodie.youall">Instagram</Link>
-        </div>
-      </div>
-    </div>
+      </footer>
+    </main>
   )
 }
 
