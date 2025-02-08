@@ -39,7 +39,7 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
   }
 
   return (
-    <Modal isOpen={isOpen} size="full" onClose={() => setIsOpen(false)}>
+    <Modal isOpen={isOpen} size="full" onClose={() => setIsOpen(false)} closeOnEsc={false}>
       <ModalOverlay />
       <ModalContent alignItems="center">
         <ModalHeader>Enter Your Passkey Johnny Provided</ModalHeader>
