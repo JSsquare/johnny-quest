@@ -18,44 +18,53 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
     setIsOpen(true); // Ensure modal opens properly when rendered
   }, []);
 
-  // Function to set cookie when modal is closed
+  
   const setModalClosed = () => {  
-    Cookies.set("passkeyModalClosed", "true", { expires: 1 / 3, path: "/" }); // Expires in 1 day
+    Cookies.set("passkeyModalClosed", "true", { expires: 1 / 3, path: "/" }); // Expires in 8 hours
   };
 
-  const handleClose = () => {
+  const handleSubmitAndClose = () => {
     if (passkey === 'JSPFRIEND') {
       setModalClosed();
       setIsOpen(false);
-      onClose(); // Notify Home component to remove modal
+      onClose();
     } else {
-      setErrorMessage('Incorrect passkey');
+      setErrorMessage('Incorrect Please Try Again');
     }
-  };
+  }
+
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setErrorMessage('')
+    setPasskey(e.target.value)
+  }
 
   return (
     <Modal isOpen={isOpen} size="full" onClose={() => setIsOpen(false)}>
       <ModalOverlay />
       <ModalContent alignItems="center">
-        <ModalHeader>Enter Passkey</ModalHeader>
+        <ModalHeader>Enter Your Passkey Johnny Provided</ModalHeader>
         <ModalBody>
-          <Input
-            value={passkey}
-            onChange={(e) => setPasskey(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                handleClose();
-              }
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmitAndClose();
             }}
-            placeholder="Enter Passkey"
-            type='password'
-          />
-          {errorMessage && <Text color="red">{errorMessage}</Text>}
+            >
+            <Input
+              value={passkey}
+              onChange={handleOnChange}
+              placeholder="Type Your Passkey"
+              type='password'
+              mb={4}
+            />
+            {errorMessage && <Text color="red" mb={4}>{errorMessage}</Text>}
+            <Button colorScheme="blue" type="submit" display="block" mx="auto">
+              Open Gate
+            </Button>
+          </form>
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" onClick={handleClose}>
-            Open Gate
-          </Button>
+
         </ModalFooter>
       </ModalContent>
     </Modal>
