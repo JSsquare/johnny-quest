@@ -48,6 +48,7 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
               }
             }}
             placeholder="Enter Passkey"
+            type='password'
           />
           {errorMessage && <Text color="red">{errorMessage}</Text>}
         </ModalBody>

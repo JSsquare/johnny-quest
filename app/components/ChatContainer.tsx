@@ -8,11 +8,11 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  Show,
   Skeleton,
   Stack,
   Text,
   Textarea,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import {
@@ -21,7 +21,7 @@ import {
   SUBSTACK_NEWSLETTER,
 } from '../constants/commonConstants';
 import { ENABLE_SPECIFIC_QUESTION } from '../constants/configConstants';
-import { DEFAULT_INPUT_PLACEHOLDER, LOADING_INPUT_PLACEHOLDER } from '../constants/copyConstants';
+import { DEFAULT_INPUT_PLACEHOLDER, FETCHING_RESULTS_PLACEHOLDER } from '../constants/copyConstants';
 import { AboutJohnny } from './AboutJohnny';
 import AskSpecificQuestion from './AskSpecificQuestion';
 import { CityPillMainButton } from './CityPillMainButton';
@@ -37,6 +37,8 @@ const ChatContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isRecsAllowed, setIsRecsAllowed] = useState(true);
   const askSubmitButtonRef = useRef(null);
+  const isMobile = useBreakpointValue({ base: true, md: false });
+
 
   useEffect(() => {
     if (isRecsAllowed === false) {
@@ -95,7 +97,7 @@ const ChatContainer = () => {
     window.scrollTo(0, document.body.scrollHeight);
   }
 
-  const placeholderMessage = isLoading ? LOADING_INPUT_PLACEHOLDER : DEFAULT_INPUT_PLACEHOLDER;
+  const placeholderMessage = isLoading ? FETCHING_RESULTS_PLACEHOLDER : DEFAULT_INPUT_PLACEHOLDER;
 
   const RecsDisabledBanner = () => {
     return (
@@ -147,19 +149,25 @@ const ChatContainer = () => {
           )}
           {isRecsAllowed && (
             <form onSubmit={handleFormSubmit}>
-              <Stack spacing={4} className="mt-24" direction={{ base: 'column', md: 'row' }}>
+              <Stack spacing={4} className="mt-24" direction={{ base: 'column', md: 'row' }}>                
+                {isMobile ? 
+                  <Textarea
+                  value={input}
+                  variant="outline"
+                  placeholder={placeholderMessage}
+                  onChange={(e) => setInput(e.target.value)}
+                /> : 
                 <InputGroup>
-                  <InputLeftElement pointerEvents="none">
-                    <QuestionOutlineIcon color={DESIGN_COLORS.PRIMARY} />
-                  </InputLeftElement>
-                  <Input
-                    value={input}
-                    variant="outline"
-                    type="text"
-                    placeholder={placeholderMessage}
-                    onChange={(e) => setInput(e.target.value)}
-                  />
-                </InputGroup>
+                <InputLeftElement pointerEvents="none">
+                <QuestionOutlineIcon color={DESIGN_COLORS.PRIMARY} />
+              </InputLeftElement>
+                <Input
+                value={input}
+                variant="outline"
+                type="text"
+                placeholder={placeholderMessage}
+                onChange={(e) => setInput(e.target.value)}
+              /></InputGroup>}                                
                 <Button colorScheme={DESIGN_COLORS.PRIMARY} type="submit" isLoading={isLoading}>
                   Ask Johnny
                 </Button>

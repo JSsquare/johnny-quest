@@ -1,6 +1,6 @@
 'use client'
 import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons'
-import { Button, Collapse, HStack, Stack, Tooltip, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Collapse, HStack, Stack, Tooltip, useBreakpointValue, useDisclosure } from '@chakra-ui/react'
 import { DESIGN_COLORS } from '../constants/commonConstants'
 import { BUTTON_TEXTS } from '../constants/copyConstants'
 import {
@@ -17,45 +17,63 @@ export const CityPillMainButton = ({
   setUserAskQuery: any
 }) => {
   const { isOpen, onToggle } = useDisclosure()
+  const isMobile = useBreakpointValue({ base: true, md: false });
 
   const mainButtonText = isOpen ? BUTTON_TEXTS.CITIES_OPEN : BUTTON_TEXTS.CITIES_CLOSED
 
   return (
     <Stack direction="column" spacing={4} align="center" justify="center">
-      <Button
-        fontSize={{ base: 'xs', md: 'xl' }}
-        variant="outline"
-        colorScheme={isOpen ? DESIGN_COLORS.PRIMARY : DESIGN_COLORS.SECONDARY}
-        onClick={() => {
-          if (isOpen) setUserAskQuery('')
-          onToggle()
-        }}
-        size={{ base: 'xs', md: 'lg' }}
-        padding={8}
-        style={{
-          whiteSpace: 'normal',
-          wordWrap: 'break-word',
-        }}
-        borderColor={isOpen ? DESIGN_COLORS.SECONDARY : DESIGN_COLORS.PRIMARY}
-        leftIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
-        rightIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
-      >
-        {mainButtonText}
-      </Button>
+  {/* Main Ask Toggle Button */}
+  <Button
+    fontSize={{ base: "xs", md: "xl" }}
+    variant="outline"
+    colorScheme={isOpen ? DESIGN_COLORS.PRIMARY : DESIGN_COLORS.SECONDARY}
+    onClick={() => {
+      if (isOpen) setUserAskQuery("");
+      onToggle();
+    }}
+    size={{ base: "xs", md: "lg" }}
+    padding={8}
+    whiteSpace="normal"
+    borderColor={isOpen ? DESIGN_COLORS.SECONDARY : DESIGN_COLORS.PRIMARY}
+    leftIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
+    rightIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
+  >
+    {mainButtonText}
+  </Button>
 
-      <Collapse in={isOpen} animateOpacity>
-        <HStack spacing={6} overflowX="auto" wrap="wrap">
-          {Object.keys(CityStatesJohnnyHasBeenTo).map((city) => (
-            <CityButton
-              key={city}
-              city={city}
-              setUserAskQuery={setUserAskQuery}
-              askSubmitButtonRef={askSubmitButtonRef}
-            />
-          ))}
-        </HStack>
-      </Collapse>
-    </Stack>
+  {/* Scrollable City Buttons */}
+  <Collapse in={isOpen} animateOpacity>
+    <Box 
+      width="100%" 
+      maxWidth="100vw" 
+      overflowX={isMobile ? "auto" : "visible"} 
+      overflowY="hidden"
+      p={2}
+      sx={{
+        scrollbarWidth: "none", 
+        "&::-webkit-scrollbar": { display: "none" },
+        "-ms-overflow-style": "none",
+      }}
+    >
+      <HStack 
+        spacing={4} 
+         display="flex"
+        flexWrap={isMobile ? 'nowrap' : 'wrap'} /* Prevents wrapping */
+        minWidth={isMobile ? "max-content" : ''}  /* Prevents shrinking */
+      >
+        {Object.keys(CityStatesJohnnyHasBeenTo).map((city) => (
+          <CityButton
+            key={city}
+            city={city}
+            setUserAskQuery={setUserAskQuery}
+            askSubmitButtonRef={askSubmitButtonRef}
+          />
+        ))}
+      </HStack>
+    </Box>
+  </Collapse>
+</Stack>
   )
 }
 const CityButton = ({
