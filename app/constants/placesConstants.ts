@@ -26,6 +26,8 @@ export const StateCodeToState: StateCodeToStateType = {
   AZ: 'Arizona',
   PR: 'Puerto Rico',
   HI: 'Hawaii',
+  Kerala: 'Kerala',
+  Maharashtra: 'Maharashtra'
 }
 
 export type StateCountryType = {
