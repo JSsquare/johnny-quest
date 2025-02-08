@@ -3,6 +3,7 @@ import { QuestionOutlineIcon } from '@chakra-ui/icons';
 import {
   Alert,
   AlertDescription,
+  AlertIcon,
   AlertTitle,
   Button,
   Input,
@@ -24,9 +25,9 @@ import { ENABLE_SPECIFIC_QUESTION } from '../constants/configConstants';
 import { DEFAULT_INPUT_PLACEHOLDER, FETCHING_RESULTS_PLACEHOLDER } from '../constants/copyConstants';
 import { AboutJohnny } from './AboutJohnny';
 import AskSpecificQuestion from './AskSpecificQuestion';
-import { CityPillMainButton } from './CityPillMainButton';
+import { CityPillsMainButton } from './CityPillMainButton';
 
-const ChatContainer = () => {
+const MainChatContainer = () => {
   interface Message {
     role: string;
     content: string;
@@ -101,14 +102,14 @@ const ChatContainer = () => {
 
   const RecsDisabledBanner = () => {
     return (
-      <Alert status="info" className="flex flex-col mt-12 text-orange-500 text-xs text-center">
-        <AlertTitle>
-          I hope you found Johnnys Recommendation useful. Ask for more recommendations in 3 minutes.
+      <Alert status="info" className="fixed w-full flex flex-col text-xs text-center mt-20">        
+        <AlertTitle>        
+          I hope you found Johnnys Recommendation helpful. 
         </AlertTitle>
         <AlertDescription>
-          While you wait, buy him a coffee or checkout{' '}
+          Ask for more recommendations in 3 minutes. While you wait, buy him a coffee or checkout{' '}
           <a target="_blank" href={SUBSTACK_NEWSLETTER} className="underline">
-            His Newsletter
+        His Newsletter
           </a>
           !
         </AlertDescription>
@@ -123,7 +124,7 @@ const ChatContainer = () => {
 
       <Stack align="center" mt={48} marginX={16} className="w-100">
         {isRecsAllowed && (
-          <CityPillMainButton askSubmitButtonRef={askSubmitButtonRef} setUserAskQuery={setInput} />
+          <CityPillsMainButton askSubmitButtonRef={askSubmitButtonRef} setUserAskQuery={setInput} />
         )}
         {ENABLE_SPECIFIC_QUESTION && <AskSpecificQuestion />}
 
@@ -156,6 +157,8 @@ const ChatContainer = () => {
                   variant="outline"
                   placeholder={placeholderMessage}
                   onChange={(e) => setInput(e.target.value)}
+                  color={DESIGN_COLORS.PRIMARY}
+                  _placeholder={{ color: "inherit" }}
                 /> : 
                 <InputGroup>
                 <InputLeftElement pointerEvents="none">
@@ -167,6 +170,8 @@ const ChatContainer = () => {
                 type="text"
                 placeholder={placeholderMessage}
                 onChange={(e) => setInput(e.target.value)}
+                color={DESIGN_COLORS.PRIMARY}
+                _placeholder={{ color: "inherit" }}
               /></InputGroup>}                                
                 <Button colorScheme={DESIGN_COLORS.PRIMARY} type="submit" isLoading={isLoading}>
                   Ask Johnny
@@ -181,4 +186,4 @@ const ChatContainer = () => {
   );
 };
 
-export default ChatContainer
+export default MainChatContainer

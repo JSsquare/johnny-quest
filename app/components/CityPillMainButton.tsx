@@ -9,7 +9,7 @@ import {
   StateCountry,
 } from '../constants/placesConstants'
 
-export const CityPillMainButton = ({
+export const CityPillsMainButton = ({
   askSubmitButtonRef,
   setUserAskQuery,
 }: {

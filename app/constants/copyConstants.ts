@@ -1,7 +1,7 @@
-export const DEFAULT_INPUT_PLACEHOLDER = 'Message Johnny to get recommendations...'
-export const FETCHING_RESULTS_PLACEHOLDER = 'Johnny is thinking, hmmm ...'
+export const DEFAULT_INPUT_PLACEHOLDER = 'Ask Johnny for recommendations...'
+export const FETCHING_RESULTS_PLACEHOLDER = 'hmmmm ... Johnny is thinking'
 
 export enum BUTTON_TEXTS {
   CITIES_OPEN = 'No! Close it.',
-  CITIES_CLOSED = `Ask From The Cities Johnny Visited`,
+  CITIES_CLOSED = `Select From The Cities Johnny Visited`,
 }
