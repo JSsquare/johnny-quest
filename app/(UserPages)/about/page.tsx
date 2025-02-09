@@ -10,13 +10,22 @@ const AboutPage: React.FC = () => {
         </Link>
       </header>
 
+<section className='flex items-center'>
+      <img
+          src="https://pbs.twimg.com/profile_images/1112475957103738880/qlB9fCjC_400x400.jpg"
+          width={80}
+          height={80}
+          alt="Johnny's profile picture"
+          className="rounded-full"
+        />
+</section>
       <section className="text-center">
         <h1 className="text-4xl font-bold mb-4">About Johnny</h1>
         <p>Johnny is the creator of this website</p>
       </section>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-bold mb-2">Projects</h2>
+      <section className="m-8">
+        <h2 className="text-2xl font-bold mb-2">His Projects</h2>
         <ul>
           <li>
             <Link href="https://foodieyouall.substack.com">Johnny&apos;s Substack</Link>
@@ -26,16 +35,6 @@ const AboutPage: React.FC = () => {
           </li>
         </ul>
       </section>
-
-      <footer className="flex items-center">
-        <img
-          src="https://pbs.twimg.com/profile_images/1112475957103738880/qlB9fCjC_400x400.jpg"
-          width={80}
-          height={80}
-          alt="Johnny's profile picture"
-          className="rounded-full"
-        />
-      </footer>
     </main>
   )
 }
