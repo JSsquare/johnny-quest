@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import {
+  BUY_ME_A_COFFEE,
   DESIGN_COLORS,
   RECS_ALLOWED_MILLISECONDS,
   SUBSTACK_NEWSLETTER,
@@ -44,11 +45,11 @@ const MainChatContainer = () => {
   useEffect(() => {
     if (isRecsAllowed === false) {
       const timer = setTimeout(() => {
-        setIsRecsAllowed(true);
+        setIsRecsAllowed(true)
       }, RECS_ALLOWED_MILLISECONDS);
       return () => clearTimeout(timer);
     }
-  }, [isRecsAllowed]);
+  }, [isRecsAllowed, messages]);
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -94,7 +95,7 @@ const MainChatContainer = () => {
     }
 
     setIsLoading(false);
-    setIsRecsAllowed(false);
+    if(messages.length > 3) setIsRecsAllowed(false);
     window.scrollTo(0, document.body.scrollHeight);
   }
 
@@ -104,15 +105,17 @@ const MainChatContainer = () => {
     return (
       <Alert status="info" className="fixed w-full flex flex-col text-xs text-center mt-20">        
         <AlertTitle>        
-          I hope you found Johnnys Recommendation helpful. 
+          I hope you found Johnnys Recommendation helpful. You can ask for more recommendations in 3 minutes.  
         </AlertTitle>
         <AlertDescription>
-          Ask for more recommendations in 3 minutes. While you wait, buy him a coffee or checkout{' '}
+          While you wait, buy him a coffee or checkout{' '}
           <a target="_blank" href={SUBSTACK_NEWSLETTER} className="underline">
-        His Newsletter
+        His Free Newsletter!
           </a>
-          !
         </AlertDescription>
+        <Button as="a" href={BUY_ME_A_COFFEE} target="_blank" variant="link" style={{ marginTop: '20px' }}>
+            <img src="/orange-button.png" alt="Newsletter" style={{ width: '100px', height: '30px' }} />
+        </Button>
       </Alert>
     )
   }

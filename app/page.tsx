@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
-import MainChatContainer from './components/ChatContainer';
+import MainChatContainer from './components/MainChatContainer';
 import PassKeyModal from './components/PassKeyModal';
 import { SHOW_PASSKEY } from './constants/configConstants';
 import Cookies from "js-cookie";

@@ -16,6 +16,7 @@ export const OpenAIModelsParams: Record<OpenAIModelID, OpenAIModelParams> = {
 }
 
 export const SUBSTACK_NEWSLETTER = 'https://foodieyouall.substack.com'
+export const BUY_ME_A_COFFEE = 'https://buymeacoffee.com/johnnysp'
 
 export enum DESIGN_COLORS {
   PRIMARY = 'green',
