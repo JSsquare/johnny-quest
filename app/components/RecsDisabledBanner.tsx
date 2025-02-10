@@ -1,5 +1,5 @@
-import { BUY_ME_A_COFFEE, SUBSTACK_NEWSLETTER } from "@/app/constants/commonConstants"
-import { Alert, AlertDescription, AlertTitle, Button } from "@chakra-ui/react"
+import { BUY_ME_A_COFFEE_LINK, SUBSTACK_NEWSLETTER_LINK } from "@/app/constants/commonConstants"
+import { Alert, AlertDescription, AlertTitle, border, Button } from "@chakra-ui/react"
 
 export const RecsDisabledBanner = () => {
     return (
@@ -9,11 +9,11 @@ export const RecsDisabledBanner = () => {
         </AlertTitle>
         <AlertDescription>
           While you wait, buy him a coffee or checkout{' '}
-          <a target="_blank" href={SUBSTACK_NEWSLETTER} className="underline">
+          <a target="_blank" href={SUBSTACK_NEWSLETTER_LINK} className="underline">
         His Free Newsletter!
           </a>
         </AlertDescription>
-        <Button as="a" href={BUY_ME_A_COFFEE} target="_blank" variant="link" style={{ marginTop: '20px' }}>
+        <Button as="a" href={BUY_ME_A_COFFEE_LINK} target="_blank" variant="link" style={{ marginTop: '20px' }}>
             <img src="/orange-button.png" alt="Newsletter" style={{ width: '100px', height: '30px' }} />
         </Button>
       </Alert>

@@ -1,6 +1,11 @@
 import { OpenAIModelParams } from '../types/openai'
 import { minutesToMilliseconds } from '../utils/common'
 
+export const SUBSTACK_NEWSLETTER_LINK = 'https://foodieyouall.substack.com'
+export const BUY_ME_A_COFFEE_LINK = 'https://buymeacoffee.com/johnnysp'
+export const RECS_ALLOWED_MILLISECONDS = minutesToMilliseconds(2)
+export const RECS_ALLOWED_MESSAGE_LENGTH = 2
+
 export enum OpenAIModelID {
   GPT_4 = 'gpt-4',
 }
@@ -15,17 +20,12 @@ export const OpenAIModelsParams: Record<OpenAIModelID, OpenAIModelParams> = {
   },
 }
 
-export const SUBSTACK_NEWSLETTER = 'https://foodieyouall.substack.com'
-export const BUY_ME_A_COFFEE = 'https://buymeacoffee.com/johnnysp'
-
 export enum DESIGN_COLORS {
   PRIMARY = 'green',
   SECONDARY = 'orange',
   ATTENTION = 'red',
   SUBTLE = 'gray.300',
 }
-
-export const RECS_ALLOWED_MILLISECONDS = minutesToMilliseconds(2)
 
 export type AskRecsStepType = {
   stepNo: number

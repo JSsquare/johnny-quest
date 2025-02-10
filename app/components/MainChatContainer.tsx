@@ -14,6 +14,7 @@ import {
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import {
   DESIGN_COLORS,
+  RECS_ALLOWED_MESSAGE_LENGTH,
   RECS_ALLOWED_MILLISECONDS,
 } from '../constants/commonConstants';
 import { ENABLE_SPECIFIC_QUESTION } from '../constants/configConstants';
@@ -93,11 +94,12 @@ const MainChatContainer = () => {
    
     fetchAndDecodeMessage()
     setIsLoading(false);
-    if(messages.length > 3) setIsRecsAllowed(false);
+    if(messages.length > RECS_ALLOWED_MESSAGE_LENGTH) setIsRecsAllowed(false);
     window.scrollTo(0, document.body.scrollHeight);
   }
 
   const placeholderMessage = isLoading ? FETCHING_RESULTS_PLACEHOLDER : DEFAULT_INPUT_PLACEHOLDER;
+  const isRecsDisabledBanner = !isRecsAllowed && isLoading === false
 
 
   return (
@@ -163,7 +165,7 @@ const MainChatContainer = () => {
           )}
         </Stack>        
       </Stack>
-      {!isRecsAllowed && isLoading === false && <RecsDisabledBanner />}
+      {isRecsDisabledBanner && <RecsDisabledBanner />}
     </>
   );
 };
