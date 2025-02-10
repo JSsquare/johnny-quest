@@ -1,10 +1,6 @@
 'use client';
 import { QuestionOutlineIcon } from '@chakra-ui/icons';
 import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
   Button,
   Input,
   InputGroup,
@@ -17,16 +13,15 @@ import {
 } from '@chakra-ui/react';
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import {
-  BUY_ME_A_COFFEE,
   DESIGN_COLORS,
   RECS_ALLOWED_MILLISECONDS,
-  SUBSTACK_NEWSLETTER,
 } from '../constants/commonConstants';
 import { ENABLE_SPECIFIC_QUESTION } from '../constants/configConstants';
 import { DEFAULT_INPUT_PLACEHOLDER, FETCHING_RESULTS_PLACEHOLDER } from '../constants/copyConstants';
 import { AboutJohnny } from './AboutJohnny';
 import AskSpecificQuestion from './AskSpecificQuestion';
 import { CityPillsMainButton } from './CityPillMainButton';
+import { RecsDisabledBanner } from '@/app/components/RecsDisabledBanner';
 
 const MainChatContainer = () => {
   interface Message {
@@ -59,66 +54,50 @@ const MainChatContainer = () => {
     setMessages((prev) => [...prev, { role: 'user', content: input }]);
     setInput('');
 
-    const response = await fetch('/api/ask', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: [{ role: 'user', content: input }] }),
-    });
-
-    if (!response.ok) {
-      setMessages((prev) => [...prev, { role: 'assistant', content: 'Error fetching response.' }]);
-      setIsLoading(false);
-      return;
-    }
-
-    const reader = response.body?.getReader();
-    if (!reader) {
-      setMessages((prev) => [...prev, { role: 'assistant', content: 'Error reading response body.' }]);
-      setIsLoading(false);
-      return;
-    }
-    const decoder = new TextDecoder();
-    let accumulatedResponse = '';
-
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
-      const chunk = decoder.decode(value, { stream: true });
-      accumulatedResponse += chunk;
-      setMessages((prev) => {
-        const lastMessage = prev[prev.length - 1];
-        if (lastMessage?.role === 'assistant') {
-          return [...prev.slice(0, -1), { role: 'assistant', content: accumulatedResponse }];
-        }
-        return [...prev, { role: 'assistant', content: accumulatedResponse }];
+    const fetchAndDecodeMessage = async () => {
+      const response = await fetch('/api/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: [{ role: 'user', content: input }] }),
       });
+  
+      if (!response.ok) {
+        setMessages((prev) => [...prev, { role: 'assistant', content: 'Error fetching response.' }]);
+        setIsLoading(false);
+        return;
+      }
+  
+      const reader = response.body?.getReader();
+      if (!reader) {
+        setMessages((prev) => [...prev, { role: 'assistant', content: 'Error reading response body.' }]);
+        setIsLoading(false);
+        return;
+      }
+      const decoder = new TextDecoder();
+      let accumulatedResponse = '';
+  
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        accumulatedResponse += chunk;
+        setMessages((prev) => {
+          const lastMessage = prev[prev.length - 1];
+          if (lastMessage?.role === 'assistant') {
+            return [...prev.slice(0, -1), { role: 'assistant', content: accumulatedResponse }];
+          }
+          return [...prev, { role: 'assistant', content: accumulatedResponse }];
+        });
+      }
     }
-
+   
+    fetchAndDecodeMessage()
     setIsLoading(false);
     if(messages.length > 3) setIsRecsAllowed(false);
     window.scrollTo(0, document.body.scrollHeight);
   }
 
   const placeholderMessage = isLoading ? FETCHING_RESULTS_PLACEHOLDER : DEFAULT_INPUT_PLACEHOLDER;
-
-  const RecsDisabledBanner = () => {
-    return (
-      <Alert status="info" className="fixed w-full flex flex-col text-xs text-center mt-20">        
-        <AlertTitle>        
-          I hope you found Johnnys Recommendation helpful. You can ask for more recommendations in 3 minutes.  
-        </AlertTitle>
-        <AlertDescription>
-          While you wait, buy him a coffee or checkout{' '}
-          <a target="_blank" href={SUBSTACK_NEWSLETTER} className="underline">
-        His Free Newsletter!
-          </a>
-        </AlertDescription>
-        <Button as="a" href={BUY_ME_A_COFFEE} target="_blank" variant="link" style={{ marginTop: '20px' }}>
-            <img src="/orange-button.png" alt="Newsletter" style={{ width: '100px', height: '30px' }} />
-        </Button>
-      </Alert>
-    )
-  }
 
 
   return (
