@@ -164,4 +164,5 @@ export const RecommendationsFromYelp = `1. RestaurantName: Burma Superstar ; Res
 154. RestaurantName: Acme Bread Company ; RestaurantLocation: Berkeley, CA ; CuisineAndDishes: Bakeries ; MyNotes: N/A
 155. RestaurantName: Grégoire ; RestaurantLocation: Berkeley, CA ; CuisineAndDishes: French, Sandwiches ; MyNotes: Famous for Crispy Potato Puffs and Fried Buttermilk Chicken
 156. RestaurantName: Cocoa Tree ; RestaurantLocation: Kochi, Kerala ; CuisineAndDishes: Coffee Cafe ; MyNotes: Chill cafe, nice people, good place to hangout
-157. RestaurantName: Brindhavan ; RestaurantLocation: Kochi, Kerala ; CuisineAndDishes: Dosa, South Indian  ; MyNotes: Nice south indian authentic food, busy place`
+157. RestaurantName: Brindhavan ; RestaurantLocation: Kochi, Kerala ; CuisineAndDishes: Dosa, South Indian  ; MyNotes: Nice south indian authentic food, busy place
+158. RestaurantName: Vohuman Café ; RestaurantLocation: Pune, Maharastra ; CuisineAndDishes: Coffee, Chai  ; MyNotes: Pune's iconic spot for Irani chai`

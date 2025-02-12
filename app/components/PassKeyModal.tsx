@@ -48,7 +48,7 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
   }, [])
 
   const setModalClosed = () => {
-    Cookies.set("passkeyModalClosed", "true", { expires: 1 / 3, path: "/" }) // Expires in 8 hours
+    Cookies.set("passkeyModalClosed", "true", { expires: 1 / 5, path: "/" }) // Expires in 4.x hours
   }
 
   const validateEmail = (email: string) => {
