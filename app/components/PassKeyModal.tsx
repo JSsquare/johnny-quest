@@ -120,17 +120,13 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
     <Modal isOpen={isOpen} size="full" onClose={() => setIsOpen(false)} closeOnEsc={false}>
       <ModalOverlay />
       <ModalContent alignItems="center">
-        <ModalHeader textAlign={'center'}>Provide Either Your Password OR Email</ModalHeader>
-        <ModalBody minWidth={300}>
+        <ModalHeader textAlign={'center'}>Provide Either The Password OR Your Email</ModalHeader>
+        <ModalBody minWidth={300} alignContent={'center'}>
           <form onSubmit={handleSubmitAndClose}>
             <VStack spacing={4}>
-              <FormControl isInvalid={!!errorMessage}>
-                <Input
-                  value={passkey}
-                  onChange={handlePasskeyChange}
-                  placeholder="Type Your Provided Password"
-                  type="password"
-                />
+            <FormControl isInvalid={!!emailError}>
+                <Input value={emailId} onChange={handleEmailChange} placeholder="Provide Your Email" type="email" />
+                <FormErrorMessage>{emailError}</FormErrorMessage>
               </FormControl>
               <HStack w="100%" alignItems="center" justifyContent="center">
                 <Divider />
@@ -139,10 +135,13 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
                 </Box>
                 <Divider />
               </HStack>
-
-              <FormControl isInvalid={!!emailError}>
-                <Input value={emailId} onChange={handleEmailChange} placeholder="Or Provide Your Email" type="email" />
-                <FormErrorMessage>{emailError}</FormErrorMessage>
+              <FormControl isInvalid={!!errorMessage}>
+                <Input
+                  value={passkey}
+                  onChange={handlePasskeyChange}
+                  placeholder="Provide Your The Password"
+                  type="password"
+                />
               </FormControl>
               {errorMessage && <Text color="red">{errorMessage}</Text>}
               <Button
