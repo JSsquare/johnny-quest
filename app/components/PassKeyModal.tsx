@@ -77,7 +77,7 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
               type='password'              
             />
             {errorMessage && <Text color="red" mb={4}>{errorMessage}</Text>}
-            <Button mt={6} minW={300} isLoading={isLoading} colorScheme="blue" type="submit" display="block" mx="auto">
+            <Button display="flex" justifyContent="center" mt={6} minW={300} isLoading={isLoading} colorScheme="blue" type="submit">
               Open Gate
             </Button>
           </form>
