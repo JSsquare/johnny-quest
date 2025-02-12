@@ -32,11 +32,11 @@ export const POST = async (request: NextRequest) => {
 
     if (userMessage && SystemInstruction && RecommendationsFromYelp) {
       const response = await openai.chat.completions.create({
-        model: 'gpt-4o-mini',
+        model: OpenAIModelID.GPT_4o_MINI,
         messages: [
           {
             role: 'system',
-            content: TEST_MODE
+            content: TEST_MODE || userMessage === 'test'
               ? 'TESTING: Ignore this message'
               : SystemInstruction + RecommendationsFromYelp,
           },
@@ -45,9 +45,9 @@ export const POST = async (request: NextRequest) => {
             content: TEST_MODE ? 'TESTING: Ignore this message' : userMessage,
           },
         ],
-        max_tokens: OpenAIModelsParams[OpenAIModelID.GPT_4].maxTokens,
-        temperature: OpenAIModelsParams[OpenAIModelID.GPT_4].temperature,
-        stream: true, // ✅ Enable Streaming
+        max_tokens: OpenAIModelsParams[OpenAIModelID.GPT_4o_MINI].maxTokens,
+        temperature: OpenAIModelsParams[OpenAIModelID.GPT_4o_MINI].temperature,
+        stream: true,
       });
 
       const encoder = new TextEncoder();

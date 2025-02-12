@@ -15,7 +15,20 @@ import {
   HStack,
   Divider,
   Box,
+  keyframes,
 } from "@chakra-ui/react"
+
+const shake = keyframes`
+  0% { transform: translateX(0); }
+  12.5% { transform: translateX(-2px); }
+  25% { transform: translateX(2px); }
+  37.5% { transform: translateX(-2px); }
+  50% { transform: translateX(2px); }
+  62.5% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+  87.5% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+`;
 
 interface PassKeyModalProps {
   onClose: () => void
@@ -28,6 +41,7 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
   const [errorMessage, setErrorMessage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [emailError, setEmailError] = useState("")
+  const shakeAnimation = `${shake} 0.5s`;   
 
   useEffect(() => {
     setIsOpen(true) // Ensure modal opens properly when rendered
@@ -49,7 +63,7 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
     setEmailError("")
 
     if (!passkey && !emailId) {
-      setErrorMessage("Please provide either the password or your email.")
+      setErrorMessage("Please provide either the gatekeeper code or your email.")
       setIsLoading(false)
       return
     }
@@ -76,7 +90,7 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
           setIsOpen(false)
           onClose()
         } else {
-          setErrorMessage("Incorrect passkey. Please try again.")
+          setErrorMessage("Incorrect code. Please try again.")
         }
       }
 
@@ -96,11 +110,11 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
           setIsOpen(false)
           onClose()
         } else {
-          setErrorMessage("Failed to register email. Sorry Please try again.")
+          setErrorMessage("Oops! Failed to register email. Sorry Please try later.")
         }
       }
     } catch {
-      setErrorMessage("An error occurred. Please try again.")
+      setErrorMessage("Oops! An error occurred. Please try again.")
     } finally {
       setIsLoading(false)
     }
@@ -120,12 +134,12 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
     <Modal isOpen={isOpen} size="full" onClose={() => setIsOpen(false)} closeOnEsc={false}>
       <ModalOverlay />
       <ModalContent alignItems="center">
-        <ModalHeader textAlign={'center'}>Provide Either The Password OR Your Email</ModalHeader>
+        <ModalHeader textAlign={'center'}>Provide either the code OR your e-mail</ModalHeader>
         <ModalBody minWidth={300} alignContent={'center'}>
           <form onSubmit={handleSubmitAndClose}>
             <VStack spacing={4}>
-            <FormControl isInvalid={!!emailError}>
-                <Input value={emailId} onChange={handleEmailChange} placeholder="Provide Your Email" type="email" />
+            <FormControl isInvalid={!!emailError}>                  
+                <Input value={emailId} onChange={handleEmailChange} placeholder="Provide Your Email" animation={!!emailError ? shakeAnimation : ''} />
                 <FormErrorMessage>{emailError}</FormErrorMessage>
               </FormControl>
               <HStack w="100%" alignItems="center" justifyContent="center">
@@ -139,8 +153,9 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
                 <Input
                   value={passkey}
                   onChange={handlePasskeyChange}
-                  placeholder="Provide Your The Password"
+                  placeholder="Type Gatekeeper Code"
                   type="password"
+                  animation={!!errorMessage ? shakeAnimation : ''}
                 />
               </FormControl>
               {errorMessage && <Text color="red">{errorMessage}</Text>}

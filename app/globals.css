@@ -22,5 +22,4 @@
 
 body {
   background-color: #f7f5f3 !important; /* Force override Chakra UI */
-  font-family: "Albert Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }

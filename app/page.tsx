@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react';
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import MainChatContainer from './components/MainChatContainer';
 import PassKeyModal from './components/PassKeyModal';
 import { SHOW_PASSKEY } from './constants/configConstants';
@@ -20,7 +20,7 @@ export default function Home() {
 
   return (
     <ChakraProvider>
-      <main className="flex flex-col font-mono content-center">
+      <main className="flex flex-col font-sans content-center">
         {showModal && <PassKeyModal onClose={() => setShowModal(false)} />}
         <MainChatContainer />
       </main>
