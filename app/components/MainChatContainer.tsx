@@ -107,10 +107,15 @@ const MainChatContainer = () => {
       {isRecsAllowed && <AboutJohnnyLinkButton />}
 
       <Stack align="center" mt={48} marginX={16} className="w-100">
+        <Text fontSize="3xl" fontWeight="bold" mb={8} textAlign='center'>
+          Ask Johnny Where To Eat
+        </Text>
         {isRecsAllowed && (
           <CityPillsMainButton askSubmitButtonRef={askSubmitButtonRef} setUserAskQuery={setInput} />
         )}
-        {ENABLE_SPECIFIC_QUESTION && <AskSpecificQuestion />}
+        
+        {/* Ask A Specific Question Feature is work in progress
+        {ENABLE_SPECIFIC_QUESTION && <AskSpecificQuestion />} */}
 
         <Stack className="lg:w-3/4 min-w-56" gap="1rem">
           {messages.map((m, index) => (

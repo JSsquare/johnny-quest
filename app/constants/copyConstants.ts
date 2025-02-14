@@ -3,5 +3,5 @@ export const FETCHING_RESULTS_PLACEHOLDER = 'hmmmm ... Johnny is thinking'
 
 export enum BUTTON_TEXTS {
   CITIES_OPEN = 'No! Close it.',
-  CITIES_CLOSED = `Choose a City Johnny Visited`,
+  CITIES_CLOSED = `Pick a City Johnny Explored`,
 }
