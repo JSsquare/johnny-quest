@@ -17,6 +17,7 @@ import {
   Box,
   keyframes,
 } from "@chakra-ui/react"
+import { verifyPasskey, createUser } from "../../services/apiService"
 
 const shake = keyframes`
   0% { transform: translateX(0); }
@@ -76,15 +77,7 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
 
     try {
       if (passkey) {
-        const response = await fetch("/api/verify-passkey", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ passkey }),
-        })
-
-        const data = await response.json()
+        const data = await verifyPasskey(passkey)
         if (data.valid) {
           setModalClosed()
           setIsOpen(false)
@@ -95,15 +88,7 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
       }
 
       if (emailId) {
-        const response = await fetch("/api/new-user", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email_id: emailId }),
-        })
-
-        const { data } = await response.json()
+        const { data } = await createUser(emailId)
         
         if (data.success) {
           setModalClosed()

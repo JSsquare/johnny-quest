@@ -1,23 +1,19 @@
-export const verifyPasskey = async (passkey: string) => {
-  const response = await fetch("/api/verify-passkey", {
-    method: "POST",
+const apiRequest = async (url: string, method: string, body: any) => {
+  const response = await fetch(url, {
+    method,
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ passkey }),
+    body: JSON.stringify(body),
   })
 
   return response.json()
 }
 
-export const createUser = async (email_id: string) => {
-  const response = await fetch("/api/new-user", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email_id }),
-  })
+export const verifyPasskey = async (passkey: string) => {
+  return apiRequest("/api/verify-passkey", "POST", { passkey })
+}
 
-  return response.json()
+export const createUser = async (email_id: string) => {
+  return apiRequest("/api/new-user", "POST", { email_id })
 }
