@@ -5,10 +5,10 @@ export const RecsDisabledBanner = () => {
     return (
       <Alert status="info" className="fixed w-full flex flex-col text-xs text-center mt-20">        
         <AlertTitle>        
-        Hope you found Johnnys Food Recommendation helpful. You can ask more if you wait 3 minutes.  
+        Hope you found this helpful. You can ask more, if you just wait 3 minutes.  
         </AlertTitle>
         <AlertDescription>
-          While you wait, checkout His {' '}
+          While you wait, checkout Johnnys {' '}
           <a target="_blank" href={SUBSTACK_NEWSLETTER_LINK} className="underline">
         FREE Newsletter...
           </a><br/>OR

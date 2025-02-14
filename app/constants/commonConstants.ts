@@ -22,9 +22,9 @@ export const OpenAIModelsParams: Record<OpenAIModelID, OpenAIModelParams> = {
   [OpenAIModelID.GPT_4o_MINI]: {
     id: OpenAIModelID.GPT_4o_MINI,
     name: OpenAIModelID.GPT_4o_MINI,
-    maxLength: 24000,
-    maxTokens: 256,
-    temperature: 0.9,
+    maxLength: 32000,
+    maxTokens: 512,
+    temperature: 0.5,
   },
 }
 

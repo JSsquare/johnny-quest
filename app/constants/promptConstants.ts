@@ -204,6 +204,6 @@ export const RecommendationsFromYelp = `1. RestaurantName: Keeku da Dhaba ; Rest
 194. RestaurantName: Espresso Lab ; RestaurantLocation: Carolina, Puerto Rico ; CuisineAndDishes: Coffee & Tea ; MyNotes: N/A
 195. RestaurantName: Mi Casita Seafood ; RestaurantLocation: Loíza, Puerto Rico ; CuisineAndDishes: Puerto Rican, Seafood ; MyNotes: N/A`
 
-export const OtherRecommendations = `196. RestaurantName: Cocoa Tree ; RestaurantLocation: Kochi, Kerala ; CuisineAndDishes: Coffee Cafe ; MyNotes: Chill cafe, nice people, good place to hangout
-197. RestaurantName: Brindhavan ; RestaurantLocation: Kochi, Kerala ; CuisineAndDishes: Dosa, South Indian  ; MyNotes: Nice south indian authentic food, busy place
-198. RestaurantName: Vohuman Café ; RestaurantLocation: Pune, Maharastra ; CuisineAndDishes: Coffee, Chai  ; MyNotes: Pune's iconic spot for Irani chai`
+export const OtherRecommendations = `\n196. RestaurantName: Cocoa Tree ; RestaurantLocation: Kochi, Kerala ; CuisineAndDishes: Coffee Cafe ; MyNotes: Chill cafe, nice people, good place to hangout
+197. RestaurantName: Brindhavan ; RestaurantLocation: Kochi, Kerala ; CuisineAndDishes: Dosa, South Indian  ; MyNotes: Nice south indian authentic food, busy place. \n
+198. RestaurantName: Vohuman Café ; RestaurantLocation: Pune, Maharastra ; CuisineAndDishes: Coffee, Chai  ; MyNotes: Pune's iconic spot for Irani chai.`
