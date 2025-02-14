@@ -19,6 +19,7 @@ import {
 } from "@chakra-ui/react"
 import { verifyPasskey, createUser, createNewAccessedUser } from "../../services/apiService"
 import { AccessedUserTypes } from "@/app/types/servicesTypes"
+import { DESIGN_COLORS } from "@/app/constants/commonConstants"
 
 const shake = keyframes`
   0% { transform: translateX(0); }
@@ -65,7 +66,7 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
     setEmailError("")
 
     if (!passkey && !emailId) {
-      setErrorMessage("Please provide either the gatekeeper code or your email.")
+      setErrorMessage("Please enter either the gatekeeper code or your email.")
       setIsLoading(false)
       return
     }
@@ -144,7 +145,7 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
           <form onSubmit={handleSubmitAndClose}>
             <VStack spacing={4}>
               <FormControl isInvalid={!!emailError}>
-                <Input value={emailId} onChange={handleEmailChange} placeholder="Provide Your Email" animation={!!emailError ? shakeAnimation : ''} />
+                <Input value={emailId} onChange={handleEmailChange} placeholder="Provide Your Best Email" animation={!!emailError ? shakeAnimation : ''} />
                 <FormErrorMessage>{emailError}</FormErrorMessage>
               </FormControl>
               <HStack w="100%" alignItems="center" justifyContent="center">
@@ -158,7 +159,7 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
                 <Input
                   value={passkey}
                   onChange={handlePasskeyChange}
-                  placeholder="Type Gatekeeper Code"
+                  placeholder="Enter the Gatekeeper Code"
                   type="password"
                   animation={!!errorMessage ? shakeAnimation : ''}
                 />
@@ -169,8 +170,8 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
                 justifyContent="center"
                 minW={300}
                 isLoading={isLoading}
-                colorScheme="blue"
-                type="submit"
+                colorScheme={DESIGN_COLORS.PRIMARY}
+                type="submit"                       
               >
                 Open Gate
               </Button>
