@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next"
 import supabase from "../../utils/supabaseClient"
 import { handleError, validateMethod } from "../../utils/apiHelpers"
 import { logError, logInfo } from "../../utils/logger"
+import { AccessedUserTypes } from "@/app/types/servicesTypes"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!validateMethod(req, res, "POST")) return
@@ -13,6 +14,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
+    if (process.env.NODE_ENV === "development" && user_type === AccessedUserTypes.PASSKEY_CODE) {
+      logInfo("Skipping insert accessed user query in development environment for user_type passkey_code")
+      return res.status(200).json({ message: "Skipped insert accessed user  in development environment", data: { success: 'OK' } })
+    }
+
     const { error } = await supabase.from("accessed_users").insert([{ user_type, value }])
 
     if (error) {
