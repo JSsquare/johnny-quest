@@ -18,7 +18,7 @@ import {
   keyframes,
 } from "@chakra-ui/react"
 import { verifyPasskey, createUser, createNewAccessedUser } from "../../services/apiService"
-import { AccessedUserTypes } from "@/app/types/servicesTypes";
+import { AccessedUserTypes } from "@/app/types/servicesTypes"
 
 const shake = keyframes`
   0% { transform: translateX(0); }
@@ -30,7 +30,7 @@ const shake = keyframes`
   75% { transform: translateX(2px); }
   87.5% { transform: translateX(-2px); }
   100% { transform: translateX(0); }
-`;
+`
 
 interface PassKeyModalProps {
   onClose: () => void
@@ -43,14 +43,14 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
   const [errorMessage, setErrorMessage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [emailError, setEmailError] = useState("")
-  const shakeAnimation = `${shake} 0.5s`;   
+  const shakeAnimation = `${shake} 0.5s`
 
   useEffect(() => {
-    setIsOpen(true) // Ensure modal opens properly when rendered
+    setIsOpen(true)
   }, [])
 
   const setModalClosed = () => {
-    Cookies.set("passkeyModalClosed", "true", { expires: 1 / 5, path: "/" }) // Expires in 4.x hours
+    Cookies.set("passkeyModalClosed", "true", { expires: 1 / 5, path: "/" })
   }
 
   const validateEmail = (email: string) => {
@@ -78,42 +78,51 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
 
     try {
       if (passkey) {
-        const data = await verifyPasskey(passkey)
-        if (data.valid) {
-          const { data } = await createNewAccessedUser(AccessedUserTypes.PASSKEY_CODE, passkey)
-          if(data.success) {
-            setModalClosed()
-            setIsOpen(false)
-            onClose()
-          } else {
-            setErrorMessage("Oops! Failed to access the site for the email. Sorry Please try later.")
-          }
-        } else {
-          setErrorMessage("Incorrect code. Please try again.")
-        }
+        await handlePasskeySubmit(passkey)
       }
 
       if (emailId) {
-        const { data } = await createUser(emailId)
-        
-        if (data.success) {
-          const { data } = await createNewAccessedUser(AccessedUserTypes.EMAIL_ID, emailId)
-          if(data.success) {
-            setModalClosed()
-            setIsOpen(false)
-            onClose()
-          } else {
-          setErrorMessage("Oops! Failed to access the site for the email. Sorry Please try later.")
-          }
-        } else {
-          setErrorMessage("Oops! Failed to register email. Sorry Please try later.")
-        }
+        await handleEmailSubmit(emailId)
       }
     } catch {
       setErrorMessage("Oops! An error occurred. Please try again.")
     } finally {
       setIsLoading(false)
     }
+  }
+
+  const handlePasskeySubmit = async (passkey: string) => {
+    const data = await verifyPasskey(passkey)
+    if (data.valid) {
+      const { data } = await createNewAccessedUser(AccessedUserTypes.PASSKEY_CODE, passkey)
+      if (data.success) {
+        closeModal()
+      } else {
+        setErrorMessage("Oops! Failed to access the site for the email. Sorry Please try later.")
+      }
+    } else {
+      setErrorMessage("Incorrect code. Please try again.")
+    }
+  }
+
+  const handleEmailSubmit = async (emailId: string) => {
+    const { data } = await createUser(emailId)
+    if (data.success) {
+      const { data } = await createNewAccessedUser(AccessedUserTypes.EMAIL_ID, emailId)
+      if (data.success) {
+        closeModal()
+      } else {
+        setErrorMessage("Oops! Failed to access the site for the email. Sorry Please try later.")
+      }
+    } else {
+      setErrorMessage("Oops! Failed to register email. Sorry Please try later.")
+    }
+  }
+
+  const closeModal = () => {
+    setModalClosed()
+    setIsOpen(false)
+    onClose()
   }
 
   const handlePasskeyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -134,7 +143,7 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
         <ModalBody minWidth={300} alignContent={'center'}>
           <form onSubmit={handleSubmitAndClose}>
             <VStack spacing={4}>
-            <FormControl isInvalid={!!emailError}>                  
+              <FormControl isInvalid={!!emailError}>
                 <Input value={emailId} onChange={handleEmailChange} placeholder="Provide Your Email" animation={!!emailError ? shakeAnimation : ''} />
                 <FormErrorMessage>{emailError}</FormErrorMessage>
               </FormControl>
