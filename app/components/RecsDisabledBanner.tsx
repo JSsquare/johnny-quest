@@ -8,10 +8,10 @@ export const RecsDisabledBanner = () => {
         Hope you found Johnnys Food Recommendation helpful. You can ask more if you wait 3 minutes.  
         </AlertTitle>
         <AlertDescription>
-          While you wait, checkout{' '}
+          While you wait, checkout His {' '}
           <a target="_blank" href={SUBSTACK_NEWSLETTER_LINK} className="underline">
-        His FREE Newsletter...
-          </a> OR
+        FREE Newsletter...
+          </a><br/>OR
         </AlertDescription>
         <Button as="a" href={BUY_ME_A_COFFEE_LINK} target="_blank" variant="link" style={{ marginTop: '20px' }}>
             <img src="/orange-button.png" alt="Newsletter" style={{ width: '100px', height: '30px' }} />

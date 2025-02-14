@@ -92,7 +92,7 @@ const MainChatContainer = () => {
       }
     }
    
-    fetchAndDecodeMessage()
+    await fetchAndDecodeMessage()
     setIsLoading(false);
     if(messages.length > RECS_ALLOWED_MESSAGE_LENGTH) setIsRecsAllowed(false);
     window.scrollTo(0, document.body.scrollHeight);
