@@ -19,7 +19,7 @@ import {
 } from '../constants/commonConstants';
 import { ENABLE_SPECIFIC_QUESTION } from '../constants/configConstants';
 import { DEFAULT_INPUT_PLACEHOLDER, FETCHING_RESULTS_PLACEHOLDER } from '../constants/copyConstants';
-import { AboutJohnny } from './AboutJohnny';
+import { AboutJohnnyLinkButton } from './AboutJohnnyLinkButton';
 import AskSpecificQuestion from './AskSpecificQuestion';
 import { CityPillsMainButton } from './CityPillMainButton';
 import { RecsDisabledBanner } from '@/app/components/RecsDisabledBanner';
@@ -104,7 +104,7 @@ const MainChatContainer = () => {
 
   return (
     <>
-      {isRecsAllowed && <AboutJohnny />}
+      {isRecsAllowed && <AboutJohnnyLinkButton />}
 
       <Stack align="center" mt={48} marginX={16} className="w-100">
         {isRecsAllowed && (

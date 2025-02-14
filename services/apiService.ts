@@ -1,3 +1,5 @@
+import type { AccessedUserTypes } from "@/app/types/servicesTypes"
+
 const apiRequest = async (url: string, method: string, body: any) => {
   const response = await fetch(url, {
     method,
@@ -16,4 +18,8 @@ export const verifyPasskey = async (passkey: string) => {
 
 export const createUser = async (email_id: string) => {
   return apiRequest("/api/new-user", "POST", { email_id })
+}
+
+export const createNewAccessedUser = async (user_type: AccessedUserTypes, value: string) => {
+  return apiRequest("/api/accessed-user", "POST", { user_type, value })
 }

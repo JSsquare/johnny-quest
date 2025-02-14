@@ -17,7 +17,8 @@ import {
   Box,
   keyframes,
 } from "@chakra-ui/react"
-import { verifyPasskey, createUser } from "../../services/apiService"
+import { verifyPasskey, createUser, createNewAccessedUser } from "../../services/apiService"
+import { AccessedUserTypes } from "@/app/types/servicesTypes";
 
 const shake = keyframes`
   0% { transform: translateX(0); }
@@ -79,9 +80,14 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
       if (passkey) {
         const data = await verifyPasskey(passkey)
         if (data.valid) {
-          setModalClosed()
-          setIsOpen(false)
-          onClose()
+          const { data } = await createNewAccessedUser(AccessedUserTypes.PASSKEY_CODE, passkey)
+          if(data.success) {
+            setModalClosed()
+            setIsOpen(false)
+            onClose()
+          } else {
+            setErrorMessage("Oops! Failed to access the site for the email. Sorry Please try later.")
+          }
         } else {
           setErrorMessage("Incorrect code. Please try again.")
         }
@@ -91,9 +97,14 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
         const { data } = await createUser(emailId)
         
         if (data.success) {
-          setModalClosed()
-          setIsOpen(false)
-          onClose()
+          const { data } = await createNewAccessedUser(AccessedUserTypes.EMAIL_ID, emailId)
+          if(data.success) {
+            setModalClosed()
+            setIsOpen(false)
+            onClose()
+          } else {
+          setErrorMessage("Oops! Failed to access the site for the email. Sorry Please try later.")
+          }
         } else {
           setErrorMessage("Oops! Failed to register email. Sorry Please try later.")
         }
