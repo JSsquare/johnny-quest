@@ -14,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    if (process.env.NODE_ENV === "development" && user_type === AccessedUserTypes.PASSKEY_CODE) {
+    if (process.env.NODE_ENV === "development" && (user_type === AccessedUserTypes.PASSKEY_CODE || value === 'jonysebastin@gmail.com')) {
       logInfo("Skipping insert accessed user query in development environment for user_type passkey_code")
       return res.status(200).json({ message: "Skipped insert accessed user  in development environment", data: { success: 'OK' } })
     }
