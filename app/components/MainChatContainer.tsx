@@ -148,6 +148,7 @@ const MainChatContainer = () => {
                   onChange={(e) => setInput(e.target.value)}
                   color={DESIGN_COLORS.PRIMARY}
                   _placeholder={{ color: "inherit" }}
+                  minH={32}                  
                 /> : 
                 <InputGroup>
                 <InputLeftElement pointerEvents="none">
