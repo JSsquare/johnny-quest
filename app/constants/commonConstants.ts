@@ -4,7 +4,7 @@ import { minutesToMilliseconds } from '../utils/common'
 export const SUBSTACK_NEWSLETTER_LINK = 'https://foodieyouall.substack.com'
 export const BUY_ME_A_COFFEE_LINK = 'https://buymeacoffee.com/johnnysp'
 export const RECS_ALLOWED_MILLISECONDS = minutesToMilliseconds(2)
-export const RECS_ALLOWED_MESSAGE_LENGTH = 1
+export const RECS_ALLOWED_MESSAGE_LENGTH = 2
 
 export enum OpenAIModelID {
   GPT_4 = 'gpt-4',

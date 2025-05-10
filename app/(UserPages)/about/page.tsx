@@ -20,18 +20,20 @@ const AboutPage: React.FC = () => {
         />
 </section>
       <section className="text-center">
-        <h1 className="text-4xl font-bold m-4">About Johnny</h1>
-        <p>Johnny is the creator of this website</p>
+        <h1 className="text-4xl font-bold m-4">About Johnny</h1>        
       </section>
 
       <section className="m-8">
-        <h2 className="text-2xl font-bold mb-2">His Other Projects</h2>
+        <h2 className="text-2xl font-bold mb-2">His Projects</h2>
         <ul>
           <li>
             <Link href="https://foodieyouall.substack.com">Johnny&apos;s Substack</Link>
           </li>
           <li>
             <Link href="https://calppuccino.vercel.app">Calpuccino App</Link>
+          </li>
+          <li>
+            <Link href="https://www.instagram.com/foodie.youall/#">Insta Page</Link>
           </li>
         </ul>
       </section>
