@@ -163,7 +163,7 @@ const MainChatContainer = () => {
                 color={DESIGN_COLORS.PRIMARY}
                 _placeholder={{ color: "inherit" }}
               /></InputGroup>}                                
-                <Button colorScheme={DESIGN_COLORS.PRIMARY} type="submit" isLoading={isLoading}>
+                <Button color={DESIGN_COLORS.PRIMARY} type="submit" isLoading={isLoading}>
                   Ask Johnny
                 </Button>
               </Stack>

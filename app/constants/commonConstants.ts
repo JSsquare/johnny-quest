@@ -29,10 +29,11 @@ export const OpenAIModelsParams: Record<OpenAIModelID, OpenAIModelParams> = {
 }
 
 export enum DESIGN_COLORS {
-  PRIMARY = 'green',
+  PRIMARY = '#d97757',
   SECONDARY = 'orange',
   ATTENTION = 'red',
   SUBTLE = 'gray.300',
+  BLACK = 'black'
 }
 
 export type AskRecsStepType = {

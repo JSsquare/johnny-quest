@@ -1,6 +1,6 @@
 import { OpenAIModelID, OpenAIModelsParams } from '@/app/constants/commonConstants';
 import { BLOCK_REQUEST, TEST_MODE } from '@/app/constants/configConstants';
-import { OtherRecommendations, RecommendationsFromYelp, SystemInstruction } from '@/app/constants/promptConstants';
+import { OtherRecommendations, RecommendationsFromYelp, SystemInstructionPrompt } from '@/app/constants/promptConstants';
 import { delay } from '@/app/utils/common';
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
@@ -30,7 +30,7 @@ export const POST = async (request: NextRequest) => {
     const data = await request.json();
     const userMessage = data.messages?.[0]?.content;
 
-    if (userMessage && SystemInstruction && RecommendationsFromYelp) {
+    if (userMessage && SystemInstructionPrompt && RecommendationsFromYelp) {
       const response = await openai.chat.completions.create({
         model: OpenAIModelID.GPT_4o_MINI,
         messages: [
@@ -38,7 +38,7 @@ export const POST = async (request: NextRequest) => {
             role: 'system',
             content: TEST_MODE || userMessage === 'test'
               ? 'TESTING: Ignore this message'
-              : SystemInstruction + RecommendationsFromYelp + OtherRecommendations,
+              : SystemInstructionPrompt + RecommendationsFromYelp + OtherRecommendations,
           },
           {
             role: 'user',
