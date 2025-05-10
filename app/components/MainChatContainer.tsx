@@ -161,6 +161,7 @@ const MainChatContainer = () => {
                 placeholder={placeholderMessage}
                 onChange={(e) => setInput(e.target.value)}
                 color={DESIGN_COLORS.PRIMARY}
+                backgroundColor={'white'}
                 _placeholder={{ color: "inherit" }}
               /></InputGroup>}                                
                 <Button color={DESIGN_COLORS.PRIMARY} type="submit" isLoading={isLoading}>

@@ -5,8 +5,8 @@ const AboutPage: React.FC = () => {
   return (
     <main className="h-screen flex flex-col items-center justify-center text-green-500">
       <header>
-        <Link href="/" className="bg-orange-400 heading-nav-pill">
-          Go Back Home
+        <Link href="/" className="bg-orange-700 heading-nav-pill">
+        &#8592; Back Home
         </Link>
       </header>
 
@@ -20,12 +20,12 @@ const AboutPage: React.FC = () => {
         />
 </section>
       <section className="text-center">
-        <h1 className="text-4xl font-bold mb-4">About Johnny</h1>
+        <h1 className="text-4xl font-bold m-4">About Johnny</h1>
         <p>Johnny is the creator of this website</p>
       </section>
 
       <section className="m-8">
-        <h2 className="text-2xl font-bold mb-2">His Projects</h2>
+        <h2 className="text-2xl font-bold mb-2">His Other Projects</h2>
         <ul>
           <li>
             <Link href="https://foodieyouall.substack.com">Johnny&apos;s Substack</Link>
