@@ -159,7 +159,7 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
                 <Input
                   value={passkey}
                   onChange={handlePasskeyChange}
-                  placeholder="Enter the Gatekeeper Code"
+                  placeholder="Enter the Pass Code"
                   type="password"
                   animation={!!errorMessage ? shakeAnimation : ''}
                 />
@@ -170,7 +170,7 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
                 justifyContent="center"
                 minW={300}
                 isLoading={isLoading}
-                colorScheme={DESIGN_COLORS.PRIMARY}
+                color={'orange.700'}
                 type="submit"                       
               >
                 Open Gate
