@@ -99,80 +99,113 @@ const MainChatContainer = () => {
   }
 
   const placeholderMessage = isLoading ? FETCHING_RESULTS_PLACEHOLDER : DEFAULT_INPUT_PLACEHOLDER;
-  const isRecsDisabledBanner = !isRecsAllowed && isLoading === false
+  const isShowPromotionBanner = !isRecsAllowed && isLoading === false
 
 
   return (
     <>
       {isRecsAllowed && <AboutJohnnyLinkButton />}
 
-      <Stack align="center" mt={48} marginX={16} className="w-100">
-        <Text fontSize="3xl" fontWeight="bold" mb={8} textAlign='center'>
-          Ask Johnny Where To Eat
-        </Text>
-        {isRecsAllowed && (
-          <CityPillsMainButton askSubmitButtonRef={askSubmitButtonRef} setUserAskQuery={setInput} />
+      <Stack align="center" mt={48} marginX={16} className="w-100 ">
+      <Text fontSize="3xl" fontWeight="bold" mb={8} textAlign='center'>
+        Ask Johnny Where To Eat
+      </Text>
+      {isRecsAllowed && (
+        <CityPillsMainButton askSubmitButtonRef={askSubmitButtonRef} setUserAskQuery={setInput} />
+      )}
+      
+      {/* Ask A Specific Question Feature is work in progress
+      {ENABLE_SPECIFIC_QUESTION && <AskSpecificQuestion />} */}
+
+      <Stack
+        className={`lg:w-3/4 min-w-56 ${isShowPromotionBanner ? 'mb-40' : ''}`}
+        gap="1rem"
+      >
+        {messages.map((m, index) => (
+        <div
+          key={index}
+          className={`${
+          m.role === 'assistant' ? 'bg-green-200' : 'bg-green-50'
+          } rounded-shadow-card`}
+        >
+          <Text fontSize={{ base: 'xs', md: '2xl' }}>{m.content}</Text>
+        </div>
+        ))}
+
+        {isLoading && (
+        <Skeleton
+          startColor={DESIGN_COLORS.PRIMARY}
+          endColor={DESIGN_COLORS.SUBTLE}
+          height="30px"
+          className="mb-4 p4 min-w-52"
+        />
         )}
-        
-        {/* Ask A Specific Question Feature is work in progress
-        {ENABLE_SPECIFIC_QUESTION && <AskSpecificQuestion />} */}
-
-        <Stack className="lg:w-3/4 min-w-56" gap="1rem">
-          {messages.map((m, index) => (
-            <div
-              key={index}
-              className={`${
-                m.role === 'assistant' ? 'bg-green-200' : 'bg-green-50'
-              } rounded-shadow-card`}
-            >
-              <Text fontSize={{ base: 'xs', md: '2xl' }}>{m.content}</Text>
-            </div>
-          ))}
-
-          {isLoading && (
-            <Skeleton
-              startColor={DESIGN_COLORS.PRIMARY}
-              endColor={DESIGN_COLORS.SUBTLE}
-              height="30px"
-              className="mb-4 p4 min-w-52"
-            />
-          )}
-          {isRecsAllowed && (
-            <form onSubmit={handleFormSubmit}>
-              <Stack spacing={4} className="mt-24" direction={{ base: 'column', md: 'row' }}>                
-                {isMobile ? 
-                  <Textarea
-                  value={input}
-                  variant="outline"
-                  placeholder={placeholderMessage}
-                  onChange={(e) => setInput(e.target.value)}
-                  color={DESIGN_COLORS.PRIMARY}
-                  _placeholder={{ color: "inherit" }}
-                  minH={32}                  
-                /> : 
-                <InputGroup>
-                <InputLeftElement pointerEvents="none">
-                <QuestionOutlineIcon color={DESIGN_COLORS.PRIMARY} />
-              </InputLeftElement>
-                <Input
-                value={input}
-                variant="outline"
-                type="text"
-                placeholder={placeholderMessage}
-                onChange={(e) => setInput(e.target.value)}
-                color={DESIGN_COLORS.PRIMARY}
-                backgroundColor={'white'}
-                _placeholder={{ color: "inherit" }}
-              /></InputGroup>}                                
-                <Button color={DESIGN_COLORS.PRIMARY} type="submit" isLoading={isLoading}>
-                  Ask Johnny
-                </Button>
-              </Stack>
-            </form>
-          )}
-        </Stack>        
+        {isRecsAllowed && (
+        <form onSubmit={handleFormSubmit}>
+          <Stack spacing={4} className="mt-24" direction={{ base: 'column', md: 'row' }}>                
+          {isMobile ? 
+        <Textarea
+        value={input}
+        variant="outline"
+        placeholder={placeholderMessage}
+        onChange={(e) => setInput(e.target.value)}
+        color={DESIGN_COLORS.PRIMARY}
+        _placeholder={{ color: "inherit" }}
+        minH={32}                  
+          /> : 
+          <InputGroup>
+          <InputLeftElement pointerEvents="none">
+          <QuestionOutlineIcon color={DESIGN_COLORS.PRIMARY} />
+          </InputLeftElement>
+          <Input
+          value={input}
+          variant="outline"
+          type="text"
+          placeholder={placeholderMessage}
+          onChange={(e) => setInput(e.target.value)}
+          color={DESIGN_COLORS.PRIMARY}
+          backgroundColor={'white'}
+          _placeholder={{ color: "inherit" }}
+          /></InputGroup>}                                
+          <Button color={DESIGN_COLORS.PRIMARY} type="submit" isLoading={isLoading}>
+        Ask Johnny
+          </Button>
+          </Stack>
+        </form>
+        )}
+      </Stack>        
       </Stack>
-      {isRecsDisabledBanner && <RecsDisabledBanner />}
+      {isShowPromotionBanner && (
+      <div
+        style={{
+        animation: 'slideIn 0.8s ease-out, bounce 0.5s ease-out 0.8s',
+        position: 'fixed',
+        bottom: 0,
+        width: '100%',
+        zIndex: 1000,
+        }}
+      >
+        <RecsDisabledBanner />
+      </div>
+      )}
+      <style jsx>{`
+      @keyframes slideIn {
+        from {
+          transform: translateY(100%);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+      @keyframes bounce {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-30px);
+        }
+      }
+      `}</style>
     </>
   );
 };
