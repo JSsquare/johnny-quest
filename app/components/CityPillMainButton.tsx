@@ -53,7 +53,7 @@ export const CityPillsMainButton = ({
       sx={{
         scrollbarWidth: "none", 
         "&::-webkit-scrollbar": { display: "none" },
-        "-ms-overflow-style": "none",
+        msOverflowStyle: "none"
       }}
     >
       <HStack 

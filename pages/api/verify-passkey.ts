@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const { passkey } = req.body
 
   try {
-    const { data, error } = await supabase.from("passkeys").select("passkey").eq("passkey", passkey).single()
+    const { data, error } = await supabase.from("passkeys").select("passkey").eq("passkey", passkey).maybeSingle()
 
     if (error) {
       logError("Error checking passkey", error)
