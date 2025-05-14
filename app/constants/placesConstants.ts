@@ -43,6 +43,7 @@ export const StateCountry: StateCountryType = {
   NV: 'USA',
   PR: 'USA',
   HI: 'USA',
+  NY: 'USA',
   Kerala: 'India',
   Maharashtra: 'India',
 }
