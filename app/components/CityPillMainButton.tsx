@@ -4,7 +4,8 @@ import { Box, Button, Collapse, HStack, Stack, Tooltip, useBreakpointValue, useD
 import { DESIGN_COLORS } from '../constants/commonConstants'
 import { BUTTON_TEXTS } from '../constants/copyConstants'
 import {
-  CityStatesJohnnyHasBeenTo,
+  CityStatesJohnnyHasExplored,
+  CityStatesJohnnyHasExploredType,
   StateCodeToState,
   StateCountry,
 } from '../constants/placesConstants'
@@ -62,14 +63,16 @@ export const CityPillsMainButton = ({
         flexWrap={isMobile ? 'nowrap' : 'wrap'} /* Prevents wrapping */
         minWidth={isMobile ? "max-content" : ''}  /* Prevents shrinking */
       >
-        {Object.keys(CityStatesJohnnyHasBeenTo).map((city) => (
-          <CityButton
-            key={city}
-            city={city}
-            setUserAskQuery={setUserAskQuery}
-            askSubmitButtonRef={askSubmitButtonRef}
-          />
-        ))}
+        {Object.keys(CityStatesJohnnyHasExplored)
+          .sort((a, b) => a.localeCompare(b)) // Sort cities alphabetically
+          .map((city) => (
+            <CityButton
+              key={city}
+              city={city}
+              setUserAskQuery={setUserAskQuery}
+              askSubmitButtonRef={askSubmitButtonRef}
+            />
+          ))}
       </HStack>
     </Box>
   </Collapse>
@@ -85,7 +88,7 @@ const CityButton = ({
   setUserAskQuery: any
   askSubmitButtonRef: any
 }) => {
-  const stateCode = CityStatesJohnnyHasBeenTo[city]
+  const stateCode = CityStatesJohnnyHasExplored[city]
   return (
     <Tooltip
       hasArrow

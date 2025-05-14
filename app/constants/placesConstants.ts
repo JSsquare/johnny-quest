@@ -1,8 +1,8 @@
-export type CityStatesJohnnyHasBeenToType = {
+export type CityStatesJohnnyHasExploredType = {
   [city: string]: string
 }
 
-export const CityStatesJohnnyHasBeenTo: CityStatesJohnnyHasBeenToType = {
+export const CityStatesJohnnyHasExplored: CityStatesJohnnyHasExploredType = {
   'San Francisco': 'CA',
   'San Francisco Bay Area': 'CA',
   Berkeley: 'CA',

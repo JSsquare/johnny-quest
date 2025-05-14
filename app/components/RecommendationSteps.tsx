@@ -2,7 +2,7 @@ import { ChevronDownIcon } from '@chakra-ui/icons'
 import { Button, Select, Slide, useDisclosure } from '@chakra-ui/react'
 import { ChangeEvent, useState } from 'react'
 import { AskRecsStepType } from '../constants/commonConstants'
-import { CityStatesJohnnyHasBeenTo, StateCountry } from '../constants/placesConstants'
+import { CityStatesJohnnyHasExplored, CityStatesJohnnyHasExploredType, StateCountry } from '../constants/placesConstants'
 import { getUniqueCountryNames } from '../utils/common'
 
 export const RecommendationSteps = ({ step }: { step: AskRecsStepType }) => {
@@ -25,8 +25,8 @@ const StepOne = () => {
     onToggle()
   }
   const filterCitiesByCountry = () => {
-    const filteredCities = Object.keys(CityStatesJohnnyHasBeenTo).filter((city) => {
-      const state = CityStatesJohnnyHasBeenTo[city]
+    const filteredCities = Object.keys(CityStatesJohnnyHasExplored).filter((city) => {
+      const state = CityStatesJohnnyHasExplored[city]
       const country = StateCountry[state]
       console.log('country', country)
       console.log('selectedCountry', selectedCountry)
