@@ -167,7 +167,7 @@ const MainChatContainer = () => {
           backgroundColor={'white'}
           _placeholder={{ color: "inherit" }}
           /></InputGroup>}                                
-          <Button color={DESIGN_COLORS.PRIMARY} type="submit" isLoading={isLoading}>
+          <Button backgroundColor={DESIGN_COLORS.PRIMARY} color={DESIGN_COLORS.WHITE} type="submit" isLoading={isLoading}>
         Ask Johnny
           </Button>
           </Stack>

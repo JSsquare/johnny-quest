@@ -33,7 +33,8 @@ export enum DESIGN_COLORS {
   SECONDARY = 'orange',
   ATTENTION = 'red',
   SUBTLE = 'gray.300',
-  BLACK = 'black'
+  BLACK = 'black',
+  WHITE = 'white'
 }
 
 export type AskRecsStepType = {

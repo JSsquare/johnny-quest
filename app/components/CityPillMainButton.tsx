@@ -28,7 +28,7 @@ export const CityPillsMainButton = ({
   <Button
     fontSize={{ base: "xs", md: "xl" }}
     variant="outline"
-    colorScheme={isOpen ? DESIGN_COLORS.PRIMARY : DESIGN_COLORS.SECONDARY}
+    backgroundColor={isOpen ? DESIGN_COLORS.SUBTLE : DESIGN_COLORS.PRIMARY}
     onClick={() => {
       if (isOpen) setUserAskQuery("");
       onToggle();
@@ -36,7 +36,7 @@ export const CityPillsMainButton = ({
     size={{ base: "xs", md: "lg" }}
     padding={8}
     whiteSpace="normal"
-    borderColor={isOpen ? DESIGN_COLORS.SECONDARY : DESIGN_COLORS.PRIMARY}
+    borderColor={isOpen ? DESIGN_COLORS.SECONDARY : DESIGN_COLORS.WHITE}
     leftIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
     rightIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
   >
