@@ -94,7 +94,7 @@ const MainChatContainer = () => {
    
     await fetchAndDecodeMessage()
     setIsLoading(false);
-    if(messages.length > RECS_ALLOWED_MESSAGE_LENGTH) setIsRecsAllowed(false);
+    if(messages.length >= RECS_ALLOWED_MESSAGE_LENGTH) setIsRecsAllowed(false);
     window.scrollTo(0, document.body.scrollHeight);
   }
 
@@ -178,7 +178,7 @@ const MainChatContainer = () => {
       {isShowPromotionBanner && (
       <div
         style={{
-        animation: 'slideIn 0.8s ease-out, bounce 0.5s ease-out 0.8s',
+        animation: 'slideIn 0.7s ease-out, bounce 0.5s ease-out 0.8s',
         position: 'fixed',
         bottom: 0,
         width: '100%',
