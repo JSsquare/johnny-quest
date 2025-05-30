@@ -29,7 +29,7 @@ export const OpenAIModelsParams: Record<OpenAIModelID, OpenAIModelParams> = {
 }
 
 export enum DESIGN_COLORS {
-  PRIMARY = '#d97757',
+  PRIMARY = '#d97757', //Claude Terracotta Orange
   SECONDARY = 'orange',
   ATTENTION = 'red',
   SUBTLE = 'gray.300',

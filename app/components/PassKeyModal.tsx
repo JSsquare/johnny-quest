@@ -140,43 +140,69 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
     <Modal isOpen={isOpen} size="full" onClose={() => setIsOpen(false)} closeOnEsc={false}>
       <ModalOverlay />
       <ModalContent alignItems="center">
-        <ModalHeader textAlign={'center'}>Provide either the code OR your e-mail</ModalHeader>
+        <ModalHeader textAlign={'center'}>Welcome! Ask Johnny Where To Eat</ModalHeader>
         <ModalBody minWidth={300} alignContent={'center'}>
-          <form onSubmit={handleSubmitAndClose}>
-            <VStack spacing={4}>
-              <FormControl isInvalid={!!emailError}>
-                <Input value={emailId} onChange={handleEmailChange} placeholder="Provide Your Best Email" animation={!!emailError ? shakeAnimation : ''} />
-                <FormErrorMessage>{emailError}</FormErrorMessage>
-              </FormControl>
-              <HStack w="100%" alignItems="center" justifyContent="center">
-                <Divider />
-                <Box px={3} color="gray.500" fontWeight="medium">
-                  OR
-                </Box>
-                <Divider />
-              </HStack>
-              <FormControl isInvalid={!!errorMessage}>
-                <Input
-                  value={passkey}
-                  onChange={handlePasskeyChange}
-                  placeholder="Enter the Pass Code"
-                  type="password"
-                  animation={!!errorMessage ? shakeAnimation : ''}
-                />
-              </FormControl>
-              {errorMessage && <Text color="red">{errorMessage}</Text>}
-              <Button
-                display="flex"
-                justifyContent="center"
-                minW={300}
-                isLoading={isLoading}
-                color={'orange.700'}
-                type="submit"                       
-              >
-                Open Gate
-              </Button>
-            </VStack>
-          </form>
+            <Box w={{ base: "120px", md: "160px" }} mx="auto" mb={12}>
+              <img
+              src="/compassLogo.png"
+              alt="Compass Logo"
+              style={{
+                width: "100%",
+                height: "auto",
+                display: "block",
+                margin: "0 auto",
+                maxWidth: "100%",
+                borderRadius: "50%",
+                aspectRatio: "1 / 1",
+                objectFit: "cover",
+              }}
+              />
+            </Box>
+          <Text fontSize="lg" textAlign="center" mb={4}>
+              Please provide an e-mail or the code
+            </Text>
+          <VStack spacing={6} w="100%" maxW="400px" mx="auto">
+            <form onSubmit={handleSubmitAndClose} style={{ width: "100%" }}>
+              <VStack spacing={4}>
+          <FormControl isInvalid={!!emailError}>
+            <Input
+              value={emailId}
+              onChange={handleEmailChange}
+              placeholder="Provide Your Best Email"
+              animation={!!emailError ? shakeAnimation : ''}
+            />
+            <FormErrorMessage>{emailError}</FormErrorMessage>
+          </FormControl>
+          <HStack w="100%" alignItems="center" justifyContent="center">
+            <Divider />
+            <Box px={3} color="gray.500" fontWeight="medium">
+              OR
+            </Box>
+            <Divider />
+          </HStack>
+          <FormControl isInvalid={!!errorMessage}>
+            <Input
+              value={passkey}
+              onChange={handlePasskeyChange}
+              placeholder="Enter the Pass Code"
+              type="password"
+              animation={!!errorMessage ? shakeAnimation : ''}
+            />
+          </FormControl>
+          {errorMessage && <Text color="red">{errorMessage}</Text>}
+          <Button
+            display="flex"
+            justifyContent="center"
+            minW={300}
+            isLoading={isLoading}
+            color={'orange.700'}
+            type="submit"
+          >
+            Open Gate
+          </Button>
+              </VStack>
+            </form>
+          </VStack>
         </ModalBody>
       </ModalContent>
     </Modal>
