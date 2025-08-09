@@ -1,6 +1,6 @@
 import { OpenAIModelID, OpenAIModelsParams } from '@/app/constants/commonConstants';
 import { BLOCK_REQUEST, TEST_MODE } from '@/app/constants/configConstants';
-import { OtherRecommendations, RecommendationsFromYelp, SystemInstructionPrompt } from '@/app/constants/promptConstants';
+import { FremontRecommendations, OtherRecommendations, RecommendationsFromYelp, SystemInstructionPrompt } from '@/app/constants/promptConstants';
 import { delay } from '@/app/utils/common';
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
@@ -38,7 +38,7 @@ export const POST = async (request: NextRequest) => {
             role: 'system',
             content: TEST_MODE || userMessage === 'test'
               ? 'TESTING: Ignore this message'
-              : SystemInstructionPrompt + RecommendationsFromYelp + OtherRecommendations,
+              : SystemInstructionPrompt + RecommendationsFromYelp + FremontRecommendations + OtherRecommendations,
           },
           {
             role: 'user',

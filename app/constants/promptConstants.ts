@@ -1,32 +1,14 @@
 export const SystemInstructionPrompt = `
 You are a thoughtful, friendly, human like, cleverly concise and hilarious assistant with a knack for suggesting great restaurant options from Johnnys likings and preferences. 
-For suggesting the best recommendations, you will prioritize choices from Johnny's preferences list, along with any personalized notes he may have provided in 'MyNotes' if there are any. But do not give more than 3 suggestions.
+For suggesting the best recommendations, you will prioritize choices from Johnny's preferences list, along with any personalized notes he may have provided in 'MyNotes' if there are any. But give not more than 3 suggestions. However, please make sure you pause read and think the user prompt and if the user asked for Fremont, California locations recommendations you can give more than 3 and mention at the end that Johnny has explored a lot of Indian and Chinese places in Fremont and he has detailed notes about each dishes and make the response hilarious.
 The 'RestaurantName' indicates the restaurant's name, 'RestaurantLocation' indicates the city and state code, 
-'CuisineAndDishes' indicated the cuisine, and 'MyNotes' containing tips and notes about the restaurant Johnny added.  
+'CuisineAndDishes' indicated the cuisine, and everything 'MyNotes' containing tips and notes about the restaurant Johnny added.  
 If there are no specific notes from Johnny for a particular place, you will provide any additional information about the place. 
 In the case there are no recommendations you find from Johnny's preferences list for the users requested location, you will do a search in the location and make a wild guess and suggest maximum of 3 popular places you think Johnny might enjoy in the requested location. Typically Johnny enjoys south indian food or japanese or vietnamese food or any restaurants which has a widely popular chef. Or if nothing wokrs suggest a good modern third wave coffee shop.
-Make sure your response is clear, concise (not more than 50 words) and can be easily readable by humans. Do not include the bullet points, and texts 'RestaurantName', 'RestaurantLocation', 'MyNotes' and 'CuisineAndDishes' in your response. Here is the list of Johnny's preferences preferences and his recommended places to eat.
+Make sure your response is clear, concise (not more than 100 words) and can be easily readable by humans. Do not include any bullet points or special character or **, and texts 'RestaurantName', 'RestaurantLocation', 'MyNotes' and 'CuisineAndDishes' in your response. Here is the list of Johnny's preferences preferences and his recommended places to eat.
 `
 
-export const RecommendationsFromYelp = `1. RestaurantName: Keeku da Dhaba ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Indian, Food Trucks ; MyNotes: They have a limited menu, I loved everything. Very few places where Romali Roti is made perfect!
-2. RestaurantName: Idly Express - Fremont ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Vegetarian, Indian ; MyNotes: not just Idlys, Everything is excellent! All dishes taste super rich. Try the Jalebi, it has Saffron
-3. RestaurantName: Solkadhi ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Indian ; MyNotes: Excellent indo Chinese chilli chicken
-4. RestaurantName: Renegade By Devout Coffee ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Coffee & Tea, Breakfast & Brunch ; MyNotes: love the cappuccino and Kougin Amann
-5. RestaurantName: Country Way ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: American ; MyNotes: This is a good place for breakfast. But just breakfast and good service
-6. RestaurantName: Chaat Bhavan - Fremont ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Indian, Vegetarian ; MyNotes: Excellent! and fast service.. food above average. Mostly crowded in the evenings
-7. RestaurantName: Suju's Coffee & Tea ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Coffee & Tea ; MyNotes: No food is great here. just a nice place to hangout, work and have coffee. There are 3 locations of Sujus in Fremont
-8. RestaurantName: Billy Roys Burger ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Burgers, Salad ; MyNotes: Great service. You will like this place if you like Burgers. But definitely try the Butchers Cut burger
-9. RestaurantName: DOSA EXPRESS ; RestaurantLocation: FREMONT, CA ; CuisineAndDishes: Indian, Vegetarian ; MyNotes: N/A
-10. RestaurantName: Afghan Awasana Kabob ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Afghan, Halal ; MyNotes: N/A
-11. RestaurantName: Hops & Beans Cafe ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Cafes, Coffee & Tea ; MyNotes: Great vibe at this cafe. They serve Madras Filter Coffee the Italian way
-12. RestaurantName: Deccan Morsels ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Indian ; MyNotes: Surprisingly irani chai is better than safrani chai. Bun Shaami is great!
-13. RestaurantName: Kakushi Izakaya ; RestaurantLocation: Newark, CA ; CuisineAndDishes: Sushi Bars, Izakaya ; MyNotes: Try the mentaiko fries
-14. RestaurantName: Bundoo Khan ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Barbeque, Halal ; MyNotes: Vibe is just amazing. Open till 1AM, Kebobs are mind blowing
-15. RestaurantName: Samar Pastry ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Custom Cakes, Cupcakes ; MyNotes: She is really skilled and professional with her hands to make beautiful looking cakes
-16. RestaurantName: Karikku Cafe ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Indian ; MyNotes: N/A
-17. RestaurantName: Bosco's Roadhouse ; RestaurantLocation: Sunol, CA ; CuisineAndDishes: American, Seafood ; MyNotes: nice ambience. loved the artichoke salad
-18. RestaurantName: Mikonos Grill ; RestaurantLocation: Milpitas, CA ; CuisineAndDishes: Greek, Mediterranean ; MyNotes: The food tastes super great and authentic. Loved the Lamb. But the service isn't so great
-19. RestaurantName: Quattro Restaurant and Bar ; RestaurantLocation: East Palo Alto, CA ; CuisineAndDishes: Italian, Diners ; MyNotes: classy luxury ambience and such fluffy and crispy croissants
+export const RecommendationsFromYelp = `19. RestaurantName: Quattro Restaurant and Bar ; RestaurantLocation: East Palo Alto, CA ; CuisineAndDishes: Italian, Diners ; MyNotes: classy luxury ambience and such fluffy and crispy croissants
 20. RestaurantName: Zareen's ; RestaurantLocation: Mountain View, CA ; CuisineAndDishes: Halal, Pakistani ; MyNotes: best Indian food in Bay area. but poor ambiance
 21. RestaurantName: Zareen's ; RestaurantLocation: Palo Alto, CA ; CuisineAndDishes: Indian, Halal ; MyNotes: N/A
 22. RestaurantName: Smitten Ice Cream ; RestaurantLocation: San Jose, CA ; CuisineAndDishes: Ice Cream & Frozen Yogurt ; MyNotes: Guitard Chocolate Ice Cream is amazing
@@ -207,3 +189,51 @@ export const RecommendationsFromYelp = `1. RestaurantName: Keeku da Dhaba ; Rest
 export const OtherRecommendations = `\n196. RestaurantName: Cocoa Tree ; RestaurantLocation: Kochi, Kerala ; CuisineAndDishes: Coffee Cafe ; MyNotes: Chill cafe, nice people, good place to hangout
 197. RestaurantName: Brindhavan ; RestaurantLocation: Kochi, Kerala ; CuisineAndDishes: Dosa, South Indian  ; MyNotes: Nice south indian authentic food, busy place. \n
 198. RestaurantName: Vohuman Café ; RestaurantLocation: Pune, Maharastra ; CuisineAndDishes: Coffee, Chai  ; MyNotes: Pune's iconic spot for Irani chai.`
+
+export const FremontRecommendations = `\n199. RestaurantName: Mylapore - Fremont ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: South Indian (Dosa) ; MyNotes: Benne Dosa is lip smacking good. Benne means butter in Kannada
+200. RestaurantName: Rasoi Xpress - Cafe and Chaat ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: North Indian Fast Food, Chaat ; MyNotes: Punjabi Samosa and Indian Style Spring rolls, freshly squeezed sugar cane juice. (not the best ambience to sit down to eat)
+201. RestaurantName: Ping's Bistro Fremont ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Chinese (Fried Rice) ; MyNotes: House special pickle fried rice is just delicious
+202. RestaurantName: Maiwand Market ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Afghan Grocery, Meat Market ; MyNotes: Authentic Afghani supermarket. Also has a good meat market
+203. RestaurantName: Madras Idli Kadai Warm Springs ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: South Indian ; MyNotes: Loved crispy dosas
+204. RestaurantName: Special Noodle ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Chinese Noodles, Lamb ; MyNotes: Lamb stir fried
+205. RestaurantName: Dish N Dash ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Middle Eastern ; MyNotes: Delicious mansaf
+206. RestaurantName: ChaChaGo ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Bubble Tea, Boba, Asian Snacks ; MyNotes: It's a Boba place. But I like to have sugar cane juice. And the fried buns
+207. RestaurantName: De Afghanan Kabob House ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Afghani, Kebabs ; MyNotes: Amazing kebabs. I would do pickups
+208. RestaurantName: Idly Express - Fremont ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: South Indian, Sweets, Coffee ; MyNotes: No! not the Idlys. Johnny loved the Jelebi, so rich, real sweet and it has Saffron in it. Also definitely the Filter Coffee, ask for strong or extra strong to really bring out the flavor
+209. RestaurantName: Ya! Daebak ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Korean ; MyNotes: Try the Mandu Dumpling. This is a Counter in food hall
+210. RestaurantName: Qamaria Yemeni Coffee Co. ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Yemeni Coffee, Café ; MyNotes: I liked only the pistachio latte. But this place has an amazing vibe
+211. RestaurantName: Bosco's Roadhouse ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Grill/American ; MyNotes: Unfortunately closed down...Loved the artichoke salad. Unique flavor
+212. RestaurantName: Dosa Place ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: South Indian ; MyNotes: Freshly made orange juice and watermelon juice for $6
+213. RestaurantName: Fremont Street Eats ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Food Trucks - Nashville Chicken Sandwich ; MyNotes: Try out the Chick N Bros Nashville Chicken sandwich...it's so crispy crunchy and amazing. But they aren't always there 😢
+214. RestaurantName: Dosa Express ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: South Indian ; MyNotes: Loved the Kerala Ghee Roast. And the Poori is so perfect! Thumbs up for the buttermilk. But I wouldn't go here for the ambience
+215. RestaurantName: Solkadhi ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Indian, Indo-Chinese ; MyNotes: The best Indo Chinese chilli chicken ever had in the US. Just like how you get in India! Well fried, nice and spicy 🔥
+216. RestaurantName: Keeku da Dhaba ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: North Indian Dhaba, Kebabs ; MyNotes: Limited menu but I liked everything. Mutton Sheesh Kebab is great
+217. RestaurantName: 786 Kabob House Newark ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Middle Eastern, Kebabs ; MyNotes: Lamb kebobs are legit!
+218. RestaurantName: Zaitoon - South Indian Non-Vegetarian Restaurant (Halal) ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: South Indian (Halal) ; MyNotes: Fish Malabar Curry tastes authentic! Jigarthanda is a rich and sweet milky drink. Try that out
+219. RestaurantName: Bundoo Khan ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Pakistani, Kebabs, Chai ; MyNotes: Beef Bihari Boti kebab is amazing and rich, super tender and soft. Desi Chai is definitely above average for a $2 unlimited refills
+220. RestaurantName: Capture Coffee ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Café, Specialty Coffee ; MyNotes: Black Sesame Latte is great! if you like the flavor of Black Sesame
+221. RestaurantName: Renegade by Devout Coffee ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Café,Patisserie ; MyNotes: High quality coffee. If you have a sweet tooth you would love the apple kouign amann
+222. RestaurantName: Rameshwaram Cafe | Fremont ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: South Indian ; MyNotes: Loved the Lemon Idlies, crispy vadas and sweet blasting flavorful sambhar. Heads-up on poor ambience and all DIY services
+223. RestaurantName: Bill's Cafe ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Breakfast ; MyNotes: Excellent freshly squeezed OJ.
+224. RestaurantName: Karikku Cafe ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Indian, Café ; MyNotes: Malabar Fish curry is amazing and Authentic tasting. Ask for Chaya tastes different from other Chai. I grew up in Kerala so I can vouch for that
+225. RestaurantName: Chaiwala Shop ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Coffee Shop, South Indian Café ; MyNotes: Loved the South Indian Filter cold brew coffee..nice idea!
+226. RestaurantName: Hub61 The Indian Bistro ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Indo-Chinese ; MyNotes: Noodles taste awesome! if you like the Indo Chinese flavor
+227. RestaurantName: Chandni Chowk ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Indian, Street Food, Momos ; MyNotes: Delhi Wala Momos at Momo Cook cart are amazing! Love the red chutney that comes with it
+228. RestaurantName: Afghan Awasana Kabob House ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Afghani ; MyNotes: Quabili Pulao
+1. RestaurantName: Keeku da Dhaba ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Indian, Food Trucks ; MyNotes: They have a limited menu, I loved everything. Very few places where Romali Roti is made perfect!
+3. RestaurantName: Solkadhi ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Indian ; MyNotes: Excellent indo Chinese chilli chicken
+4. RestaurantName: Renegade By Devout Coffee ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Coffee & Tea, Breakfast & Brunch ; MyNotes: love the cappuccino and Kougin Amann
+5. RestaurantName: Country Way ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: American ; MyNotes: This is a good place for breakfast. But just breakfast and good service
+6. RestaurantName: Chaat Bhavan - Fremont ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Indian, Vegetarian ; MyNotes: Excellent! and fast service.. food above average. Mostly crowded in the evenings
+7. RestaurantName: Suju's Coffee & Tea ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Coffee & Tea ; MyNotes: No food is great here. just a nice place to hangout, work and have coffee. There are 3 locations of Sujus in Fremont
+8. RestaurantName: Billy Roys Burger ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Burgers, Salad ; MyNotes: Great service. You will like this place if you like Burgers. But definitely try the Butchers Cut burger
+9. RestaurantName: DOSA EXPRESS ; RestaurantLocation: FREMONT, CA ; CuisineAndDishes: Indian, Vegetarian ; MyNotes: N/A
+10. RestaurantName: Afghan Awasana Kabob ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Afghan, Halal ; MyNotes: N/A
+11. RestaurantName: Hops & Beans Cafe ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Cafes, Coffee & Tea ; MyNotes: Great vibe at this cafe. They serve Madras Filter Coffee the Italian way
+12. RestaurantName: Deccan Morsels ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Indian ; MyNotes: Surprisingly irani chai is better than safrani chai. Bun Shaami is great!
+13. RestaurantName: Kakushi Izakaya ; RestaurantLocation: Newark, CA ; CuisineAndDishes: Sushi Bars, Izakaya ; MyNotes: Try the mentaiko fries
+14. RestaurantName: Bundoo Khan ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Barbeque, Halal ; MyNotes: Vibe is just amazing. Open till 1AM, Kebobs are mind blowing
+15. RestaurantName: Samar Pastry ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Custom Cakes, Cupcakes ; MyNotes: She is really skilled and professional with her hands to make beautiful looking cakes
+16. RestaurantName: Karikku Cafe ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Indian ; MyNotes: N/A
+17. RestaurantName: Bosco's Roadhouse ; RestaurantLocation: Sunol, CA ; CuisineAndDishes: American, Seafood ; MyNotes: nice ambience. loved the artichoke salad
+18. RestaurantName: Mikonos Grill ; RestaurantLocation: Milpitas, CA ; CuisineAndDishes: Greek, Mediterranean ; MyNotes: The food tastes super great and authentic. Loved the Lamb. But the service isn't so great`;
