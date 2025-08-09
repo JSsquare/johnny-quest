@@ -142,29 +142,57 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
       <ModalContent alignItems="center">
         <ModalHeader textAlign={'center'}>Welcome! Ask Johnny Where To Eat</ModalHeader>
         <ModalBody minWidth={300} alignContent={'center'}>
-            <Box w={{ base: "120px", md: "160px" }} mx="auto" mb={12}>
+            <Box
+              w={{ base: "120px", md: "160px" }}
+              mx="auto"
+              mb={12}
+              position={{ base: "absolute", md: "static" }}
+              top={{ base: 24, md: "auto" }}
+              left={0}
+              right={0}
+            >
               <img
-              src="/compassLogo.png"
-              alt="Compass Logo"
-              style={{
-                width: "100%",
-                height: "auto",
-                display: "block",
-                margin: "0 auto",
-                maxWidth: "100%",
-                borderRadius: "50%",
-                aspectRatio: "1 / 1",
-                objectFit: "cover",
-              }}
+                src="/compassLogo.png"
+                alt="Compass Logo"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  display: "block",
+                  margin: "0 auto",
+                  maxWidth: "100%",
+                  borderRadius: "50%",
+                  aspectRatio: "1 / 1",
+                  objectFit: "cover",
+                }}
               />
             </Box>
-          <Text fontSize="lg" textAlign="center" mb={4}>
+            <Text fontSize="lg" textAlign="center" mb={4}
+            sx={{
+              animation: "fadeIn 2s",
+              "@keyframes fadeIn": {
+              from: { opacity: 0 },
+              to: { opacity: 1 },
+              },
+            }}
+            >
               Please provide an e-mail or the code
             </Text>
-          <VStack spacing={6} w="100%" maxW="400px" mx="auto">
+            <VStack
+            spacing={6}
+            w="100%"
+            maxW="400px"
+            mx="auto"
+            sx={{
+              animation: "fadeIn 5s",
+              "@keyframes fadeIn": {
+              from: { opacity: 0 },
+              to: { opacity: 1 },
+              },
+            }}
+            >
             <form onSubmit={handleSubmitAndClose} style={{ width: "100%" }}>
               <VStack spacing={4}>
-          <FormControl isInvalid={!!emailError}>
+            <FormControl isInvalid={!!emailError}>
             <Input
               value={emailId}
               onChange={handleEmailChange}
@@ -172,15 +200,15 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
               animation={!!emailError ? shakeAnimation : ''}
             />
             <FormErrorMessage>{emailError}</FormErrorMessage>
-          </FormControl>
-          <HStack w="100%" alignItems="center" justifyContent="center">
+            </FormControl>
+            <HStack w="100%" alignItems="center" justifyContent="center">
             <Divider />
             <Box px={3} color="gray.500" fontWeight="medium">
               OR
             </Box>
             <Divider />
-          </HStack>
-          <FormControl isInvalid={!!errorMessage}>
+            </HStack>
+            <FormControl isInvalid={!!errorMessage}>
             <Input
               value={passkey}
               onChange={handlePasskeyChange}
@@ -188,21 +216,21 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
               type="password"
               animation={!!errorMessage ? shakeAnimation : ''}
             />
-          </FormControl>
-          {errorMessage && <Text color="red">{errorMessage}</Text>}
-          <Button
+            </FormControl>
+            {errorMessage && <Text color="red">{errorMessage}</Text>}
+            <Button
             display="flex"
             justifyContent="center"
             minW={300}
             isLoading={isLoading}
             color={'orange.700'}
             type="submit"
-          >
+            >
             Open Gate
-          </Button>
+            </Button>
               </VStack>
             </form>
-          </VStack>
+            </VStack>
         </ModalBody>
       </ModalContent>
     </Modal>
