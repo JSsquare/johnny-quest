@@ -190,6 +190,7 @@ export const OtherRecommendations = `\n196. RestaurantName: Cocoa Tree ; Restaur
 197. RestaurantName: Brindhavan ; RestaurantLocation: Kochi, Kerala ; CuisineAndDishes: Dosa, South Indian  ; MyNotes: Nice south indian authentic food, busy place. \n
 198. RestaurantName: Vohuman Café ; RestaurantLocation: Pune, Maharastra ; CuisineAndDishes: Coffee, Chai  ; MyNotes: Pune's iconic spot for Irani chai.`
 
+// got this from Comet browser agent
 export const FremontRecommendations = `\n199. RestaurantName: Mylapore - Fremont ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: South Indian (Dosa) ; MyNotes: Benne Dosa is lip smacking good. Benne means butter in Kannada
 200. RestaurantName: Rasoi Xpress - Cafe and Chaat ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: North Indian Fast Food, Chaat ; MyNotes: Punjabi Samosa and Indian Style Spring rolls, freshly squeezed sugar cane juice. (not the best ambience to sit down to eat)
 201. RestaurantName: Ping's Bistro Fremont ; RestaurantLocation: Fremont, CA ; CuisineAndDishes: Chinese (Fried Rice) ; MyNotes: House special pickle fried rice is just delicious
