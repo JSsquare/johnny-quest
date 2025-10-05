@@ -15,6 +15,7 @@ import {
   HStack,
   Divider,
   Box,
+  chakra,
   keyframes,
 } from "@chakra-ui/react"
 import { verifyPasskey, createUser, createNewAccessedUser } from "../../services/apiService"
@@ -31,6 +32,11 @@ const shake = keyframes`
   75% { transform: translateX(2px); }
   87.5% { transform: translateX(-2px); }
   100% { transform: translateX(0); }
+`
+
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 `
 
 interface PassKeyModalProps {
@@ -174,7 +180,11 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
               <Text fontSize="md" textAlign="center" color={DESIGN_COLORS.TEXT_MUTED}>
                 Enter your email to unlock recommendations, or drop in a passcode if you have one.
               </Text>
-              <form onSubmit={handleSubmitAndClose} style={{ width: "100%" }}>
+              <chakra.form
+                onSubmit={handleSubmitAndClose}
+                w="100%"
+                animation={`${fadeIn} 2s ease`}
+              >
                 <VStack spacing={5}>
               <FormControl isInvalid={!!emailError}>
               <Input
@@ -224,7 +234,7 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
               Unlock me
               </Button>
                 </VStack>
-              </form>
+              </chakra.form>
             </VStack>
         </ModalBody>
       </ModalContent>
