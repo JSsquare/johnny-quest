@@ -66,7 +66,7 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
     setEmailError("")
 
     if (!passkey && !emailId) {
-      setErrorMessage("Please enter either the gatekeeper code or your email.")
+      setErrorMessage("Please enter either the passcode or your email.")
       setIsLoading(false)
       return
     }
@@ -138,98 +138,93 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
 
   return (
     <Modal isOpen={isOpen} size="full" onClose={() => setIsOpen(false)} closeOnEsc={false}>
-      <ModalOverlay />
-      <ModalContent alignItems="center">
-        <ModalHeader textAlign={'center'}>Welcome! Ask Johnny Where To Eat</ModalHeader>
-        <ModalBody minWidth={300} alignContent={'center'}>
-            <Box
-              w={{ base: "120px", md: "160px" }}
-              mx="auto"
-              mb={12}
-              position={{ base: "absolute", md: "static" }}
-              top={{ base: 24, md: "auto" }}
-              left={0}
-              right={0}
-            >
-              <img
-                src="/compassLogo.png"
-                alt="Compass Logo"
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  display: "block",
-                  margin: "0 auto",
-                  maxWidth: "100%",
-                  borderRadius: "50%",
-                  aspectRatio: "1 / 1",
-                  objectFit: "cover",
-                }}
+      <ModalOverlay backdropFilter="blur(6px)" bg="rgba(244, 243, 238, 0.85)" />
+      <ModalContent
+        alignItems="center"
+        bg={DESIGN_COLORS.SURFACE}
+        color={DESIGN_COLORS.TEXT_PRIMARY}
+        borderRadius="2xl"
+        mx={{ base: 4, md: 10 }}
+        my={{ base: 6, md: 12 }}
+        px={{ base: 5, md: 10 }}
+        py={{ base: 8, md: 10 }}
+        borderWidth="1px"
+        borderColor="rgba(177, 173, 161, 0.6)"
+        boxShadow="0 18px 48px rgba(64, 53, 48, 0.2)"
+      >
+        <ModalHeader textAlign={'center'} fontSize={{ base: '2xl', md: '3xl' }} fontWeight="semibold">
+          Welcome to Ask Johnny
+        </ModalHeader>
+        <ModalBody minWidth={300} alignContent={'center'} px={0} w="full">
+            <VStack spacing={8} w="100%" maxW="420px" mx="auto">
+              <Box
+                w={{ base: '96px', md: '120px' }}
+                h={{ base: '96px', md: '120px' }}
+                borderRadius="full"
+                overflow="hidden"
+                border="1px solid rgba(177, 173, 161, 0.6)"
+                boxShadow="0 8px 20px rgba(64, 53, 48, 0.18)"
+              >
+                <img
+                  src="/compassLogo.png"
+                  alt="Compass mark"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              </Box>
+              <Text fontSize="md" textAlign="center" color={DESIGN_COLORS.TEXT_MUTED}>
+                Enter your email to unlock recommendations, or drop in a passcode if you have one.
+              </Text>
+              <form onSubmit={handleSubmitAndClose} style={{ width: "100%" }}>
+                <VStack spacing={5}>
+              <FormControl isInvalid={!!emailError}>
+              <Input
+                value={emailId}
+                onChange={handleEmailChange}
+                placeholder="you@example.com"
+                bg={DESIGN_COLORS.SURFACE}
+                borderColor="rgba(177, 173, 161, 0.7)"
+                _focus={{ borderColor: DESIGN_COLORS.PRIMARY, boxShadow: '0 0 0 1px #C15F3C' }}
+                _placeholder={{ color: DESIGN_COLORS.TEXT_MUTED }}
+                animation={!!emailError ? shakeAnimation : ''}
               />
-            </Box>
-            <Text fontSize="lg" textAlign="center" mb={4}
-            sx={{
-              animation: "fadeIn 2s",
-              "@keyframes fadeIn": {
-              from: { opacity: 0 },
-              to: { opacity: 1 },
-              },
-            }}
-            >
-              Please provide an e-mail or the code
-            </Text>
-            <VStack
-            spacing={6}
-            w="100%"
-            maxW="400px"
-            mx="auto"
-            sx={{
-              animation: "fadeIn 5s",
-              "@keyframes fadeIn": {
-              from: { opacity: 0 },
-              to: { opacity: 1 },
-              },
-            }}
-            >
-            <form onSubmit={handleSubmitAndClose} style={{ width: "100%" }}>
-              <VStack spacing={4}>
-            <FormControl isInvalid={!!emailError}>
-            <Input
-              value={emailId}
-              onChange={handleEmailChange}
-              placeholder="Provide Your Best Email"
-              animation={!!emailError ? shakeAnimation : ''}
-            />
-            <FormErrorMessage>{emailError}</FormErrorMessage>
-            </FormControl>
-            <HStack w="100%" alignItems="center" justifyContent="center">
-            <Divider />
-            <Box px={3} color="gray.500" fontWeight="medium">
-              OR
-            </Box>
-            <Divider />
-            </HStack>
-            <FormControl isInvalid={!!errorMessage}>
-            <Input
-              value={passkey}
-              onChange={handlePasskeyChange}
-              placeholder="Enter the Pass Code"
-              type="password"
-              animation={!!errorMessage ? shakeAnimation : ''}
-            />
-            </FormControl>
-            {errorMessage && <Text color="red">{errorMessage}</Text>}
-            <Button
-            display="flex"
-            justifyContent="center"
-            minW={300}
-            isLoading={isLoading}
-            color={'orange.700'}
-            type="submit"
-            >
-            Open Gate
-            </Button>
-              </VStack>
-            </form>
+              <FormErrorMessage>{emailError}</FormErrorMessage>
+              </FormControl>
+              <HStack w="100%" alignItems="center" justifyContent="center">
+              <Divider borderColor="rgba(177, 173, 161, 0.6)" />
+              <Box px={3} color={DESIGN_COLORS.TEXT_MUTED} fontWeight="medium">
+                OR
+              </Box>
+              <Divider borderColor="rgba(177, 173, 161, 0.6)" />
+              </HStack>
+              <FormControl isInvalid={!!errorMessage}>
+              <Input
+                value={passkey}
+                onChange={handlePasskeyChange}
+                placeholder="Enter the passcode"
+                type="password"
+                bg={DESIGN_COLORS.SURFACE}
+                borderColor="rgba(177, 173, 161, 0.7)"
+                _focus={{ borderColor: DESIGN_COLORS.PRIMARY, boxShadow: '0 0 0 1px #C15F3C' }}
+                _placeholder={{ color: DESIGN_COLORS.TEXT_MUTED }}
+                animation={!!errorMessage ? shakeAnimation : ''}
+              />
+              <FormErrorMessage>{errorMessage}</FormErrorMessage>
+              </FormControl>
+              <Button
+              display="flex"
+              justifyContent="center"
+              minW={{ base: '100%', md: 300 }}
+              minH="48px"
+              isLoading={isLoading}
+              backgroundColor={DESIGN_COLORS.PRIMARY}
+              _hover={{ backgroundColor: '#a64f32' }}
+              color={DESIGN_COLORS.WHITE}
+              type="submit"
+              >
+              Unlock me
+              </Button>
+                </VStack>
+              </form>
             </VStack>
         </ModalBody>
       </ModalContent>
@@ -238,4 +233,3 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
 }
 
 export default PassKeyModal
-

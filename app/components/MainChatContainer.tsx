@@ -1,6 +1,7 @@
 'use client';
 import { QuestionOutlineIcon } from '@chakra-ui/icons';
 import {
+  Box,
   Button,
   Input,
   InputGroup,
@@ -106,10 +107,15 @@ const MainChatContainer = () => {
     <>
       {isRecsAllowed && <AboutJohnnyLinkButton />}
 
-      <Stack align="center" mt={48} marginX={16} className="w-100 ">
-      <Text fontSize="3xl" fontWeight="bold" mb={8} textAlign='center'>
-        Ask Johnny Where To Eat
-      </Text>
+      <Stack align="center" mt={{ base: 20, md: 28 }} mx={{ base: 4, md: 12 }} spacing={10} color={DESIGN_COLORS.TEXT_PRIMARY}>
+      <Stack spacing={4} textAlign="center" maxW="2xl">
+        <Text fontSize={{ base: '2xl', md: '3xl' }} fontWeight="semibold" color={DESIGN_COLORS.PRIMARY}>
+          Ask Johnny Where To Eat
+        </Text>
+        <Text color={DESIGN_COLORS.TEXT_MUTED} fontSize={{ base: 'md', md: 'lg' }}>
+          Share what you are craving for in the location you are in, Johnny will craft a set of personal picks.
+        </Text>
+      </Stack>
       {isRecsAllowed && (
         <CityPillsMainButton askSubmitButtonRef={askSubmitButtonRef} setUserAskQuery={setInput} />
       )}
@@ -119,17 +125,20 @@ const MainChatContainer = () => {
 
       <Stack
         className={`lg:w-3/4 min-w-56 ${isShowPromotionBanner ? 'mb-40' : ''}`}
-        gap="1rem"
+        gap="1.25rem"
       >
         {messages.map((m, index) => (
-        <div
+        <Box
           key={index}
-          className={`${
-          m.role === 'assistant' ? 'bg-green-200' : 'bg-green-50'
-          } rounded-shadow-card`}
+          borderRadius="xl"
+          bg={m.role === 'assistant' ? 'rgba(193, 95, 60, 0.12)' : 'rgba(177, 173, 161, 0.35)'}
+          border="1px solid rgba(177, 173, 161, 0.6)"
+          p={{ base: 4, md: 6 }}
         >
-          <Text fontSize={{ base: 'xs', md: '2xl' }}>{m.content}</Text>
-        </div>
+          <Text fontSize={{ base: 'sm', md: 'lg' }} color={DESIGN_COLORS.TEXT_PRIMARY}>
+            {m.content}
+          </Text>
+        </Box>
         ))}
 
         {isLoading && (
@@ -149,8 +158,11 @@ const MainChatContainer = () => {
         variant="outline"
         placeholder={placeholderMessage}
         onChange={(e) => setInput(e.target.value)}
-        color={DESIGN_COLORS.PRIMARY}
-        _placeholder={{ color: "inherit" }}
+        color={DESIGN_COLORS.TEXT_PRIMARY}
+        backgroundColor={DESIGN_COLORS.SURFACE}
+        borderColor="rgba(177, 173, 161, 0.6)"
+        _focus={{ borderColor: DESIGN_COLORS.PRIMARY, boxShadow: '0 0 0 1px #C15F3C' }}
+        _placeholder={{ color: DESIGN_COLORS.TEXT_MUTED }}
         minH={32}                  
           /> : 
           <InputGroup>
@@ -163,11 +175,13 @@ const MainChatContainer = () => {
           type="text"
           placeholder={placeholderMessage}
           onChange={(e) => setInput(e.target.value)}
-          color={DESIGN_COLORS.PRIMARY}
-          backgroundColor={'white'}
-          _placeholder={{ color: "inherit" }}
+          color={DESIGN_COLORS.TEXT_PRIMARY}
+          backgroundColor={DESIGN_COLORS.SURFACE}
+          borderColor="rgba(177, 173, 161, 0.6)"
+          _focus={{ borderColor: DESIGN_COLORS.PRIMARY, boxShadow: '0 0 0 1px #C15F3C' }}
+          _placeholder={{ color: DESIGN_COLORS.TEXT_MUTED }}
           /></InputGroup>}                                
-          <Button backgroundColor={DESIGN_COLORS.PRIMARY} color={DESIGN_COLORS.WHITE} type="submit" isLoading={isLoading}>
+          <Button backgroundColor={DESIGN_COLORS.PRIMARY} color={DESIGN_COLORS.WHITE} _hover={{ backgroundColor: '#a64f32' }} type="submit" isLoading={isLoading}>
         Ask Johnny
           </Button>
           </Stack>

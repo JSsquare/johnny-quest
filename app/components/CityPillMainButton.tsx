@@ -26,19 +26,24 @@ export const CityPillsMainButton = ({
     <Stack direction="column" spacing={4} align="center" justify="center">
   {/* Main Ask Toggle Button */}
   <Button
-    fontSize={{ base: "xs", md: "xl" }}
-    variant="outline"
-    backgroundColor={isOpen ? DESIGN_COLORS.SUBTLE : DESIGN_COLORS.PRIMARY}
+    fontSize={{ base: "sm", md: "lg" }}
+    variant="solid"
+    backgroundColor={isOpen ? 'rgba(193, 95, 60, 0.18)' : DESIGN_COLORS.PRIMARY}
+    color={DESIGN_COLORS.WHITE}
     onClick={() => {
       if (isOpen) setUserAskQuery("");
       onToggle();
     }}
-    size={{ base: "xs", md: "lg" }}
-    padding={8}
+    size={{ base: "md", md: "lg" }}
+    px={{ base: 6, md: 10 }}
+    py={{ base: 4, md: 5 }}
     whiteSpace="normal"
-    borderColor={isOpen ? DESIGN_COLORS.SECONDARY : DESIGN_COLORS.WHITE}
+    borderWidth="1px"
+    borderColor="rgba(177, 173, 161, 0.7)"
     leftIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
     rightIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
+    _hover={{ backgroundColor: isOpen ? 'rgba(193, 95, 60, 0.28)' : '#a64f32' }}
+    boxShadow="0 10px 28px rgba(64, 53, 48, 0.25)"
   >
     {mainButtonText}
   </Button>
@@ -98,8 +103,12 @@ const CityButton = ({
       color="black"
     >
       <Button
-        colorScheme={DESIGN_COLORS.PRIMARY}
-        variant="outline"
+        variant="ghost"
+        backgroundColor="rgba(255, 255, 255, 0.9)"
+        borderWidth="1px"
+        borderColor="rgba(177, 173, 161, 0.6)"
+        color={DESIGN_COLORS.TEXT_PRIMARY}
+        _hover={{ backgroundColor: 'rgba(193, 95, 60, 0.12)' }}
         onClick={() => {
           setUserAskQuery(
             `Can you give me recommendations from ${city}, ${StateCodeToState[stateCode]}, ${StateCountry[stateCode]}`,

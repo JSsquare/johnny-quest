@@ -4,10 +4,10 @@
 
 @layer components {
   .city-pill {
-    @apply fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30;
+    @apply fixed left-0 top-0 flex w-full justify-center border-b pb-6 pt-8 backdrop-blur-2xl bg-white/90 border-[#B1ADA1] lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-white lg:p-4;
   }
   .heading-nav-pill {
-    @apply fixed top-5 left-5 flex justify-center font-bold items-center w-24 h-8  text-white rounded-full shadow-xl text-xs;
+    @apply fixed top-5 left-5 flex justify-center font-bold items-center w-24 h-8 text-white rounded-full shadow-xl text-xs bg-[#C15F3C];
   }
   .heading-nav-pill:hover {
     @apply drop-shadow-xl;
@@ -16,10 +16,16 @@
     @apply drop-shadow-none;
   }
   .rounded-shadow-card {
-    @apply rounded-md shadow-2xl p-5;
+    @apply rounded-xl shadow-xl p-6 bg-white border border-[#B1ADA1] text-[#403530];
   }
 }
 
 body {
-  background-color: #faf9f5 !important; /* Force override Chakra UI */
+  background: linear-gradient(135deg, #F4F3EE 0%, rgba(244, 243, 238, 0.9) 65%, rgba(244, 243, 238, 0.95) 100%) !important;
+  color: #403530 !important;
+  min-height: 100vh;
+}
+
+main {
+  color: inherit;
 }
