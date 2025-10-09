@@ -113,7 +113,7 @@ const MainChatContainer = () => {
           Ask Johnny Where To Eat
         </Text>
         <Text color={DESIGN_COLORS.TEXT_MUTED} fontSize={{ base: 'md', md: 'lg' }}>
-          Share what you are craving for in the location you are in, Johnny will craft a set of personal picks.
+          Tell Johnny what you&apos;re craving and where, he&apos;ll craft his personal picks.
         </Text>
       </Stack>
       {isRecsAllowed && (
