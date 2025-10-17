@@ -98,7 +98,3 @@ Open http://localhost:3000
 
 ## License
 - This repository does not include a license file. Add one if you wish to publish or share the project publicly.
-
-If you'd like, I can:
-- Add a short architecture diagram to this README.
-- Expand the "Contributing" section with local testing instructions.
