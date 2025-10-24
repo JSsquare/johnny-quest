@@ -36,6 +36,8 @@ const MainChatContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isRecsAllowed, setIsRecsAllowed] = useState(true);
   const [composerHeight, setComposerHeight] = useState(0);
+  const [composerOffset, setComposerOffset] = useState(0);
+  const [isComposerFocused, setIsComposerFocused] = useState(false);
   const askSubmitButtonRef = useRef<HTMLButtonElement | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
   const composerRef = useRef<HTMLFormElement | null>(null);
@@ -57,6 +59,7 @@ const MainChatContainer = () => {
     const composer = composerRef.current;
     if (!isRecsAllowed || !composer) {
       setComposerHeight(0);
+      setComposerOffset(0);
       return;
     }
 
@@ -66,15 +69,56 @@ const MainChatContainer = () => {
 
     updateHeight();
 
-    if (typeof window !== 'undefined' && 'ResizeObserver' in window) {
-      const observer = new ResizeObserver(updateHeight);
-      observer.observe(composer);
-      return () => observer.disconnect();
+    if (typeof window !== 'undefined') {
+      if ('ResizeObserver' in window) {
+        const observer = new ResizeObserver(updateHeight);
+        observer.observe(composer);
+        return () => observer.disconnect();
+      }
+      window.addEventListener('resize', updateHeight);
+      return () => window.removeEventListener('resize', updateHeight);
     }
-    // @ts-ignore -- IGNORE --
-    window.addEventListener('resize', updateHeight);
-    return () => window.removeEventListener('resize', updateHeight);
   }, [isRecsAllowed, isMobileLayout]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !isMobileLayout) {
+      setComposerOffset(0);
+      return;
+    }
+
+    const visualViewport = window.visualViewport;
+    if (!visualViewport) {
+      return;
+    }
+
+    const handleViewportChange = () => {
+      if (!isComposerFocused) {
+        setComposerOffset(0);
+        return;
+      }
+
+      const keyboardHeight = window.innerHeight - visualViewport.height - visualViewport.offsetTop;
+      const offset = Math.max(keyboardHeight, 0);
+      setComposerOffset(offset);
+    };
+
+    handleViewportChange();
+
+    visualViewport.addEventListener('resize', handleViewportChange);
+    visualViewport.addEventListener('scroll', handleViewportChange);
+
+    return () => {
+      visualViewport.removeEventListener('resize', handleViewportChange);
+      visualViewport.removeEventListener('scroll', handleViewportChange);
+    };
+  }, [isMobileLayout, isComposerFocused]);
+
+  useEffect(() => {
+    if (!isComposerFocused) return;
+    if (typeof window === 'undefined') return;
+    if ('visualViewport' in window) return;
+    composerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, [isComposerFocused, isMobileLayout]);
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -155,6 +199,16 @@ const MainChatContainer = () => {
       ? `calc(${composerHeight + 48}px + max(env(safe-area-inset-bottom), 0px))`
       : 'calc(12rem + max(env(safe-area-inset-bottom), 0px))'
     : 'calc(2rem + max(env(safe-area-inset-bottom), 0px))';
+  const handleComposerFocus = () => {
+    setIsComposerFocused(true);
+    endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    if (typeof window === 'undefined' || window.visualViewport) return;
+    composerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+  const handleComposerBlur = () => {
+    setIsComposerFocused(false);
+    setComposerOffset(0);
+  };
 
 
   return (
@@ -245,7 +299,7 @@ const MainChatContainer = () => {
             position="fixed"
             left="50%"
             bottom={{ base: 'calc(env(safe-area-inset-bottom, 0px) + 16px)', md: '40px' }}
-            transform="translateX(-50%)"
+            transform={`translate3d(-50%, ${composerOffset ? -composerOffset : 0}px, 0)`}
             width="min(680px, calc(100% - 2rem))"
             bg={`${DESIGN_COLORS.SURFACE}F2`}
             borderRadius={{ base: '2xl', md: 'full' }}
@@ -256,6 +310,7 @@ const MainChatContainer = () => {
             zIndex={900}
             backdropFilter="blur(12px)"
             pointerEvents="auto"
+            transition="transform 0.2s ease, box-shadow 0.2s ease"
           >
             <Stack
               spacing={{ base: 3, md: 4 }}
@@ -268,6 +323,8 @@ const MainChatContainer = () => {
                   variant="unstyled"
                   placeholder={placeholderMessage}
                   onChange={(e) => setInput(e.target.value)}
+                  onFocus={handleComposerFocus}
+                  onBlur={handleComposerBlur}
                   color={DESIGN_COLORS.TEXT_PRIMARY}
                   backgroundColor="transparent"
                   borderRadius="xl"
@@ -286,6 +343,8 @@ const MainChatContainer = () => {
                     type="text"
                     placeholder={placeholderMessage}
                     onChange={(e) => setInput(e.target.value)}
+                    onFocus={handleComposerFocus}
+                    onBlur={handleComposerBlur}
                     color={DESIGN_COLORS.TEXT_PRIMARY}
                     backgroundColor="transparent"
                     border="1px solid rgba(177, 173, 161, 0.45)"
