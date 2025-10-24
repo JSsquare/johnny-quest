@@ -75,6 +75,7 @@ const MainChatContainer = () => {
         observer.observe(composer);
         return () => observer.disconnect();
       }
+      // @ts-ignore - Fallback for browsers without ResizeObserver
       window.addEventListener('resize', updateHeight);
       return () => window.removeEventListener('resize', updateHeight);
     }
