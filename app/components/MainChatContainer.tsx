@@ -35,8 +35,13 @@ const MainChatContainer = () => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isRecsAllowed, setIsRecsAllowed] = useState(true);
-  const askSubmitButtonRef = useRef(null);
+  const [composerHeight, setComposerHeight] = useState(0);
+  const askSubmitButtonRef = useRef<HTMLButtonElement | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const composerRef = useRef<HTMLFormElement | null>(null);
+  const endOfMessagesRef = useRef<HTMLDivElement | null>(null);
   const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobileLayout = isMobile ?? false;
 
 
   useEffect(() => {
@@ -47,6 +52,29 @@ const MainChatContainer = () => {
       return () => clearTimeout(timer);
     }
   }, [isRecsAllowed, messages]);
+
+  useEffect(() => {
+    const composer = composerRef.current;
+    if (!isRecsAllowed || !composer) {
+      setComposerHeight(0);
+      return;
+    }
+
+    const updateHeight = () => {
+      setComposerHeight(composer.offsetHeight);
+    };
+
+    updateHeight();
+
+    if (typeof window !== 'undefined' && 'ResizeObserver' in window) {
+      const observer = new ResizeObserver(updateHeight);
+      observer.observe(composer);
+      return () => observer.disconnect();
+    }
+    // @ts-ignore -- IGNORE --
+    window.addEventListener('resize', updateHeight);
+    return () => window.removeEventListener('resize', updateHeight);
+  }, [isRecsAllowed, isMobileLayout]);
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -96,99 +124,197 @@ const MainChatContainer = () => {
     await fetchAndDecodeMessage()
     setIsLoading(false);
     if(messages.length >= RECS_ALLOWED_MESSAGE_LENGTH) setIsRecsAllowed(false);
-    window.scrollTo(0, document.body.scrollHeight);
   }
 
+  useEffect(() => {
+    const scrollToBottom = () => {
+      endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    };
+
+    if (typeof window !== 'undefined' && 'requestAnimationFrame' in window) {
+      requestAnimationFrame(scrollToBottom);
+    } else {
+      scrollToBottom();
+    }
+  }, [messages, isLoading, composerHeight]);
+
   const placeholderMessage = isLoading ? FETCHING_RESULTS_PLACEHOLDER : DEFAULT_INPUT_PLACEHOLDER;
-  const isShowPromotionBanner = !isRecsAllowed && isLoading === false
+  const isShowPromotionBanner = !isRecsAllowed && isLoading === false;
+  const mobileSpacingBuffer = 96;
+  const desktopSpacingBuffer = 80;
+  const conversationPaddingBottom = {
+    base: isRecsAllowed && composerHeight
+      ? `calc(${composerHeight + mobileSpacingBuffer}px + max(env(safe-area-inset-bottom), 0px))`
+      : isRecsAllowed ? 'calc(14rem + max(env(safe-area-inset-bottom), 0px))' : 'calc(8rem + max(env(safe-area-inset-bottom), 0px))',
+    md: isRecsAllowed && composerHeight
+      ? `calc(${composerHeight + desktopSpacingBuffer}px + max(env(safe-area-inset-bottom), 0px))`
+      : isRecsAllowed ? 'calc(10rem + max(env(safe-area-inset-bottom), 0px))' : 'calc(6rem + max(env(safe-area-inset-bottom), 0px))',
+  };
+  const bottomSpacerHeight = isRecsAllowed
+    ? composerHeight
+      ? `calc(${composerHeight + 48}px + max(env(safe-area-inset-bottom), 0px))`
+      : 'calc(12rem + max(env(safe-area-inset-bottom), 0px))'
+    : 'calc(2rem + max(env(safe-area-inset-bottom), 0px))';
 
 
   return (
     <>
-      {isRecsAllowed && <AboutJohnnyLinkButton />}
-
-      <Stack align="center" mt={{ base: 20, md: 28 }} mx={{ base: 4, md: 12 }} spacing={10} color={DESIGN_COLORS.TEXT_PRIMARY}>
-      <Stack spacing={4} textAlign="center" maxW="2xl">
-        <Text fontSize={{ base: '2xl', md: '3xl' }} fontWeight="semibold" color={DESIGN_COLORS.PRIMARY}>
-          Ask Johnny Where To Eat
-        </Text>
-        <Text color={DESIGN_COLORS.TEXT_MUTED} fontSize={{ base: 'md', md: 'lg' }}>
-          Tell Johnny what you&apos;re craving and where, he&apos;ll craft his personal picks.
-        </Text>
-      </Stack>
-      {isRecsAllowed && (
-        <CityPillsMainButton askSubmitButtonRef={askSubmitButtonRef} setUserAskQuery={setInput} />
-      )}
-      
-      {/* Ask A Specific Question Feature is work in progress
-      {ENABLE_SPECIFIC_QUESTION && <AskSpecificQuestion />} */}
-
-      <Stack
-        className={`lg:w-3/4 min-w-56 ${isShowPromotionBanner ? 'mb-40' : ''}`}
-        gap="1.25rem"
+      <Box
+        minH="100vh"
+        display="flex"
+        flexDirection="column"
+        position="relative"
+        bg="transparent"
       >
-        {messages.map((m, index) => (
-        <Box
-          key={index}
-          borderRadius="xl"
-          bg={m.role === 'assistant' ? 'rgba(193, 95, 60, 0.12)' : 'rgba(177, 173, 161, 0.35)'}
-          border="1px solid rgba(177, 173, 161, 0.6)"
-          p={{ base: 4, md: 6 }}
-        >
-          <Text fontSize={{ base: 'sm', md: 'lg' }} color={DESIGN_COLORS.TEXT_PRIMARY}>
-            {m.content}
-          </Text>
-        </Box>
-        ))}
-
-        {isLoading && (
-        <Skeleton
-          startColor={DESIGN_COLORS.PRIMARY}
-          endColor={DESIGN_COLORS.SUBTLE}
-          height="30px"
-          className="mb-4 p4 min-w-52"
-        />
-        )}
         {isRecsAllowed && (
-        <form onSubmit={handleFormSubmit}>
-          <Stack spacing={4} className="mt-24" direction={{ base: 'column', md: 'row' }}>                
-          {isMobile ? 
-        <Textarea
-        value={input}
-        variant="outline"
-        placeholder={placeholderMessage}
-        onChange={(e) => setInput(e.target.value)}
-        color={DESIGN_COLORS.TEXT_PRIMARY}
-        backgroundColor={DESIGN_COLORS.SURFACE}
-        borderColor="rgba(177, 173, 161, 0.6)"
-        _focus={{ borderColor: DESIGN_COLORS.PRIMARY, boxShadow: '0 0 0 1px #C15F3C' }}
-        _placeholder={{ color: DESIGN_COLORS.TEXT_MUTED }}
-        minH={32}                  
-          /> : 
-          <InputGroup>
-          <InputLeftElement pointerEvents="none">
-          <QuestionOutlineIcon color={DESIGN_COLORS.PRIMARY} />
-          </InputLeftElement>
-          <Input
-          value={input}
-          variant="outline"
-          type="text"
-          placeholder={placeholderMessage}
-          onChange={(e) => setInput(e.target.value)}
-          color={DESIGN_COLORS.TEXT_PRIMARY}
-          backgroundColor={DESIGN_COLORS.SURFACE}
-          borderColor="rgba(177, 173, 161, 0.6)"
-          _focus={{ borderColor: DESIGN_COLORS.PRIMARY, boxShadow: '0 0 0 1px #C15F3C' }}
-          _placeholder={{ color: DESIGN_COLORS.TEXT_MUTED }}
-          /></InputGroup>}                                
-          <Button backgroundColor={DESIGN_COLORS.PRIMARY} color={DESIGN_COLORS.WHITE} _hover={{ backgroundColor: '#a64f32' }} type="submit" isLoading={isLoading}>
-        Ask Johnny
-          </Button>
-          </Stack>
-        </form>
+          <Box
+            position="absolute"
+            top={{ base: 2, md: 6 }}
+            left={{ base: 2, md: 12 }}
+            zIndex={920}
+          >
+            <AboutJohnnyLinkButton />
+          </Box>
         )}
-      </Stack>        
-      </Stack>
+
+        <Box
+          ref={scrollContainerRef}
+          flex="1"
+          width="100%"
+          display="flex"
+          justifyContent="center"
+          px={{ base: 4, md: 12 }}
+          pt={{ base: 20, md: 28 }}
+          pb={conversationPaddingBottom}
+          overflowY="auto"
+          sx={{
+            scrollBehavior: 'smooth',
+            scrollbarWidth: 'thin',
+          }}
+        >
+          <Stack spacing={10} maxW="3xl" width="100%" align="stretch" color={DESIGN_COLORS.TEXT_PRIMARY}>
+            <Stack spacing={4} textAlign="center" width="100%">
+              <Text fontSize={{ base: '2xl', md: '3xl' }} fontWeight="semibold" color={DESIGN_COLORS.PRIMARY}>
+                Ask Johnny Where To Eat
+              </Text>
+              <Text color={DESIGN_COLORS.TEXT_MUTED} fontSize={{ base: 'md', md: 'lg' }}>
+                Tell Johnny what you&apos;re craving and where, he&apos;ll craft his personal picks.
+              </Text>
+            </Stack>
+
+            {isRecsAllowed && (
+              <CityPillsMainButton askSubmitButtonRef={askSubmitButtonRef} setUserAskQuery={setInput} />
+            )}
+
+            {/* Ask A Specific Question Feature is work in progress
+            {ENABLE_SPECIFIC_QUESTION && <AskSpecificQuestion />} */}
+
+            <Stack width="100%" minW="14rem" gap="1.25rem">
+              {messages.map((m, index) => (
+                <Box
+                  key={index}
+                  borderRadius="xl"
+                  bg={m.role === 'assistant' ? 'rgba(193, 95, 60, 0.12)' : 'rgba(177, 173, 161, 0.35)'}
+                  border="1px solid rgba(177, 173, 161, 0.6)"
+                  p={{ base: 4, md: 6 }}
+                >
+                  <Text fontSize={{ base: 'sm', md: 'lg' }} color={DESIGN_COLORS.TEXT_PRIMARY}>
+                    {m.content}
+                  </Text>
+                </Box>
+              ))}
+
+              {isLoading && (
+                <Skeleton
+                  startColor={DESIGN_COLORS.PRIMARY}
+                  endColor={DESIGN_COLORS.SUBTLE}
+                  height="30px"
+                  borderRadius="xl"
+                />
+              )}
+              <Box ref={endOfMessagesRef} height={bottomSpacerHeight} pointerEvents="none" />
+            </Stack>
+          </Stack>
+        </Box>
+
+        {isRecsAllowed && (
+          <Box
+            as="form"
+            onSubmit={handleFormSubmit}
+            ref={composerRef}
+            position="fixed"
+            left="50%"
+            bottom={{ base: 'calc(env(safe-area-inset-bottom, 0px) + 16px)', md: '40px' }}
+            transform="translateX(-50%)"
+            width="min(680px, calc(100% - 2rem))"
+            bg={`${DESIGN_COLORS.SURFACE}F2`}
+            borderRadius={{ base: '2xl', md: 'full' }}
+            boxShadow="0px 24px 46px rgba(24, 23, 19, 0.25)"
+            border="1px solid rgba(177, 173, 161, 0.45)"
+            px={{ base: 4, md: 6 }}
+            py={{ base: 3, md: 4 }}
+            zIndex={900}
+            backdropFilter="blur(12px)"
+            pointerEvents="auto"
+          >
+            <Stack
+              spacing={{ base: 3, md: 4 }}
+              direction={isMobileLayout ? 'column' : 'row'}
+              align={isMobileLayout ? 'stretch' : 'center'}
+            >
+              {isMobileLayout ? (
+                <Textarea
+                  value={input}
+                  variant="unstyled"
+                  placeholder={placeholderMessage}
+                  onChange={(e) => setInput(e.target.value)}
+                  color={DESIGN_COLORS.TEXT_PRIMARY}
+                  backgroundColor="transparent"
+                  borderRadius="xl"
+                  border="1px solid rgba(177, 173, 161, 0.45)"
+                  px={4}
+                  py={3}
+                  _focus={{ borderColor: DESIGN_COLORS.PRIMARY, boxShadow: '0 0 0 2px rgba(193, 95, 60, 0.25)' }}
+                  _placeholder={{ color: DESIGN_COLORS.TEXT_MUTED }}
+                  minH={isMobileLayout ? 24 : 32}
+                />
+              ) : (
+                <InputGroup flex="1">
+                  <Input
+                    value={input}
+                    variant="unstyled"
+                    type="text"
+                    placeholder={placeholderMessage}
+                    onChange={(e) => setInput(e.target.value)}
+                    color={DESIGN_COLORS.TEXT_PRIMARY}
+                    backgroundColor="transparent"
+                    border="1px solid rgba(177, 173, 161, 0.45)"
+                    borderRadius="full"
+                    pl={12}
+                    pr={6}
+                    py={4}
+                    _focus={{ borderColor: DESIGN_COLORS.PRIMARY, boxShadow: '0 0 0 2px rgba(193, 95, 60, 0.25)' }}
+                    _placeholder={{ color: DESIGN_COLORS.TEXT_MUTED }}
+                  />
+                </InputGroup>
+              )}
+              <Button
+                ref={askSubmitButtonRef}
+                backgroundColor={DESIGN_COLORS.PRIMARY}
+                color={DESIGN_COLORS.WHITE}
+                _hover={{ backgroundColor: '#a64f32' }}
+                type="submit"
+                isLoading={isLoading}
+                minW={{ base: '100%', md: 'auto' }}
+                borderRadius="full"
+                py={{ base: 3, md: 4 }}
+              >
+                Ask him
+              </Button>
+            </Stack>
+          </Box>
+        )}
+      </Box>
       {isShowPromotionBanner && (
       <div
         style={{
