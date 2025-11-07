@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from "react"
 import Cookies from "js-cookie"
 import {
@@ -16,8 +18,8 @@ import {
   Divider,
   Box,
   chakra,
-  keyframes,
 } from "@chakra-ui/react"
+import { keyframes } from "@emotion/react"
 import { verifyPasskey, createUser, createNewAccessedUser } from "../../services/apiService"
 import { AccessedUserTypes } from "@/app/types/servicesTypes"
 import { DESIGN_COLORS } from "@/app/constants/commonConstants"
@@ -143,99 +145,141 @@ const PassKeyModal = ({ onClose }: PassKeyModalProps) => {
   }
 
   return (
-    <Modal isOpen={isOpen} size="full" onClose={() => setIsOpen(false)} closeOnEsc={false}>
+    <Modal
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+      closeOnEsc={false}
+      isCentered
+      motionPreset="scale"
+    >
       <ModalOverlay backdropFilter="blur(6px)" bg="rgba(244, 243, 238, 0.85)" />
       <ModalContent
         alignItems="center"
         bg={DESIGN_COLORS.SURFACE}
         color={DESIGN_COLORS.TEXT_PRIMARY}
-        borderRadius="2xl"
-        mx={{ base: 4, md: 10 }}
-        my={{ base: 6, md: 12 }}
-        px={{ base: 5, md: 10 }}
-        py={{ base: 8, md: 10 }}
+        borderRadius={{ base: "lg", md: "2xl" }}
+        mx={{ base: 4, md: 0 }}
+        px={{ base: 4, md: 10 }}
+        py={{ base: 5, md: 9 }}
         borderWidth="1px"
         borderColor="rgba(177, 173, 161, 0.6)"
         boxShadow="0 18px 48px rgba(64, 53, 48, 0.2)"
+        w="full"
+        maxW={{ base: "400px", md: "560px" }}
+        maxH={{
+          base: "min(560px, calc(100dvh - 20px))",
+          md: "min(640px, calc(100dvh - 48px))",
+        }}
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        overflow="visible"
       >
-        <ModalHeader textAlign={'center'} fontSize={{ base: '2xl', md: '3xl' }} fontWeight="semibold">
+        <ModalHeader
+          textAlign="center"
+          fontSize={{ base: 'xl', md: '3xl' }}
+          fontWeight="semibold"
+          pt={0}
+          pb={{ base: 2, md: 4 }}
+        >
           Welcome to Ask Johnny
         </ModalHeader>
-        <ModalBody minWidth={300} alignContent={'center'} px={0} w="full">
-            <VStack spacing={8} w="100%" maxW="420px" mx="auto">
-              <Box
-                w={{ base: '96px', md: '120px' }}
-                h={{ base: '96px', md: '120px' }}
-                borderRadius="full"
-                overflow="hidden"
-                border="1px solid rgba(177, 173, 161, 0.6)"
-                boxShadow="0 8px 20px rgba(64, 53, 48, 0.18)"
-              >
-                <img
-                  src="/compassLogo.png"
-                  alt="Compass mark"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
-              </Box>
-              <Text fontSize="md" textAlign="center" color={DESIGN_COLORS.TEXT_MUTED}>
-                Enter your email to unlock recommendations, or drop in a passcode if you have one.
-              </Text>
-              <chakra.form
-                onSubmit={handleSubmitAndClose}
-                w="100%"
-                animation={`${fadeIn} 2s ease`}
-              >
-                <VStack spacing={5}>
-              <FormControl isInvalid={!!emailError}>
-              <Input
-                value={emailId}
-                onChange={handleEmailChange}
-                placeholder="you@example.com"
-                bg={DESIGN_COLORS.SURFACE}
-                borderColor="rgba(177, 173, 161, 0.7)"
-                _focus={{ borderColor: DESIGN_COLORS.PRIMARY, boxShadow: '0 0 0 1px #C15F3C' }}
-                _placeholder={{ color: DESIGN_COLORS.TEXT_MUTED }}
-                animation={!!emailError ? shakeAnimation : ''}
+        <ModalBody
+          minWidth={300}
+          alignContent="center"
+          px={0}
+          py={0}
+          w="full"
+          display="flex"
+          justifyContent="center"
+          overflow="visible"
+        >
+          <VStack
+            spacing={{ base: 4, md: 8 }}
+            w="100%"
+            maxW="420px"
+            mx="auto"
+            align="center"
+          >
+            <Box
+              w={{ base: '72px', md: '120px' }}
+              h={{ base: '72px', md: '120px' }}
+              borderRadius="full"
+              overflow="hidden"
+              border="1px solid rgba(177, 173, 161, 0.6)"
+              boxShadow="0 8px 20px rgba(64, 53, 48, 0.18)"
+            >
+              <img
+                src="/compassLogo.png"
+                alt="Compass mark"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
-              <FormErrorMessage>{emailError}</FormErrorMessage>
-              </FormControl>
-              <HStack w="100%" alignItems="center" justifyContent="center">
-              <Divider borderColor="rgba(177, 173, 161, 0.6)" />
-              <Box px={3} color={DESIGN_COLORS.TEXT_MUTED} fontWeight="medium">
-                OR
-              </Box>
-              <Divider borderColor="rgba(177, 173, 161, 0.6)" />
-              </HStack>
-              <FormControl isInvalid={!!errorMessage}>
-              <Input
-                value={passkey}
-                onChange={handlePasskeyChange}
-                placeholder="Enter the passcode"
-                type="password"
-                bg={DESIGN_COLORS.SURFACE}
-                borderColor="rgba(177, 173, 161, 0.7)"
-                _focus={{ borderColor: DESIGN_COLORS.PRIMARY, boxShadow: '0 0 0 1px #C15F3C' }}
-                _placeholder={{ color: DESIGN_COLORS.TEXT_MUTED }}
-                animation={!!errorMessage ? shakeAnimation : ''}
-              />
-              <FormErrorMessage>{errorMessage}</FormErrorMessage>
-              </FormControl>
-              <Button
-              display="flex"
-              justifyContent="center"
-              minW={{ base: '100%', md: 300 }}
-              minH="48px"
-              isLoading={isLoading}
-              backgroundColor={DESIGN_COLORS.PRIMARY}
-              _hover={{ backgroundColor: '#a64f32' }}
-              color={DESIGN_COLORS.WHITE}
-              type="submit"
-              >
-              Unlock me
-              </Button>
-                </VStack>
-              </chakra.form>
-            </VStack>
+            </Box>
+            <Text
+              fontSize={{ base: 'sm', md: 'md' }}
+              textAlign="center"
+              color={DESIGN_COLORS.TEXT_MUTED}
+              lineHeight={{ base: 'tall', md: 'shorter' }}
+              px={{ base: 2, md: 0 }}
+            >
+              Enter your email to unlock recommendations, or drop in a passcode if you have one.
+            </Text>
+            <chakra.form
+              onSubmit={handleSubmitAndClose}
+              w="100%"
+              animation={`${fadeIn} 2s ease`}
+            >
+              <VStack spacing={{ base: 3, md: 5 }} align="stretch">
+                <FormControl isInvalid={!!emailError}>
+                  <Input
+                    value={emailId}
+                    onChange={handleEmailChange}
+                    placeholder="you@example.com"
+                    bg={DESIGN_COLORS.SURFACE}
+                    borderColor="rgba(177, 173, 161, 0.7)"
+                    _focus={{ borderColor: DESIGN_COLORS.PRIMARY, boxShadow: '0 0 0 1px #C15F3C' }}
+                    _placeholder={{ color: DESIGN_COLORS.TEXT_MUTED }}
+                    animation={!!emailError ? shakeAnimation : ''}
+                  />
+                  <FormErrorMessage>{emailError}</FormErrorMessage>
+                </FormControl>
+                <HStack w="100%" alignItems="center" justifyContent="center">
+                  <Divider borderColor="rgba(177, 173, 161, 0.6)" />
+                  <Box px={3} color={DESIGN_COLORS.TEXT_MUTED} fontWeight="medium">
+                    OR
+                  </Box>
+                  <Divider borderColor="rgba(177, 173, 161, 0.6)" />
+                </HStack>
+                <FormControl isInvalid={!!errorMessage}>
+                  <Input
+                    value={passkey}
+                    onChange={handlePasskeyChange}
+                    placeholder="Enter the passcode"
+                    type="password"
+                    bg={DESIGN_COLORS.SURFACE}
+                    borderColor="rgba(177, 173, 161, 0.7)"
+                    _focus={{ borderColor: DESIGN_COLORS.PRIMARY, boxShadow: '0 0 0 1px #C15F3C' }}
+                    _placeholder={{ color: DESIGN_COLORS.TEXT_MUTED }}
+                    animation={!!errorMessage ? shakeAnimation : ''}
+                  />
+                  <FormErrorMessage>{errorMessage}</FormErrorMessage>
+                </FormControl>
+                <Button
+                  display="flex"
+                  justifyContent="center"
+                  minW={{ base: '100%', md: 300 }}
+                  minH={{ base: '44px', md: '48px' }}
+                  isLoading={isLoading}
+                  backgroundColor={DESIGN_COLORS.PRIMARY}
+                  _hover={{ backgroundColor: '#a64f32' }}
+                  color={DESIGN_COLORS.WHITE}
+                  type="submit"
+                >
+                  Unlock me
+                </Button>
+              </VStack>
+            </chakra.form>
+          </VStack>
         </ModalBody>
       </ModalContent>
     </Modal>
