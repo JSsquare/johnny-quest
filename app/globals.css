@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --font-sans-fallback: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono-fallback: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
 @layer components {
   .city-pill {
     @apply fixed left-0 top-0 flex w-full justify-center border-b pb-6 pt-8 backdrop-blur-2xl bg-white/90 border-[#B1ADA1] lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-white lg:p-4;
@@ -24,8 +29,18 @@ body {
   background: linear-gradient(135deg, #F4F3EE 0%, rgba(244, 243, 238, 0.9) 65%, rgba(244, 243, 238, 0.95) 100%) !important;
   color: #403530 !important;
   min-height: 100vh;
+  font-family: var(--font-sans), var(--font-sans-fallback);
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 main {
   color: inherit;
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-mono), var(--font-mono-fallback);
 }
