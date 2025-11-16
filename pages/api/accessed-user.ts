@@ -19,6 +19,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(200).json({ message: "Skipped insert accessed user  in development environment", data: { success: 'OK' } })
     }
 
+    // check if the value (email or passkey_code) already exists
+    const { data: existing, error: selectError } = await supabase
+      .from("accessed_users")
+      .select("id")
+      .eq("value", value)
+      .limit(1)
+
+    if (selectError) {
+      logError("Error checking existing accessed user", selectError)
+      return handleError(res, selectError, "An error occurred while checking existing accessed user")
+    }
+
+    if (Array.isArray(existing) ? existing.length > 0 : !!existing) {
+      logInfo("Accessed user already exists, skipping insert")
+      return res.status(200).json({ message: "Accessed User already exists", data: { success: "OK", skipped: true } })
+    }
+
     const { error } = await supabase.from("accessed_users").insert([{ user_type, value }])
 
     if (error) {
