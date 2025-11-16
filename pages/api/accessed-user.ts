@@ -8,17 +8,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (!validateMethod(req, res, "POST")) return
 
   const { user_type, value } = req.body
+  const env = process.env.NODE_ENV || "production"
 
   if (!user_type || !value) {
     return res.status(400).json({ error: "user_type or value required for adding new accessed user" })
   }
 
   try {
-    if (process.env.NODE_ENV === "development" && (user_type === AccessedUserTypes.PASSKEY_CODE || value === 'jonysebastin@gmail.com')) {
-      logInfo("Skipping insert accessed user query in development environment for user_type passkey_code")
-      return res.status(200).json({ message: "Skipped insert accessed user  in development environment", data: { success: 'OK' } })
-    }
-
     // check if the value (email or passkey_code) already exists
     const { data: existing, error: selectError } = await supabase
       .from("accessed_users")
@@ -36,7 +32,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(200).json({ message: "Accessed User already exists", data: { success: "OK", skipped: true } })
     }
 
-    const { error } = await supabase.from("accessed_users").insert([{ user_type, value }])
+    const { error } = await supabase.from("accessed_users").insert([{ user_type, value, env }])
 
     if (error) {
       logError("Error creating new accessed user", error)
