@@ -126,14 +126,15 @@ const MainChatContainer = () => {
     if (!input.trim()) return;
 
     setIsLoading(true);
-    setMessages((prev) => [...prev, { role: 'user', content: input }]);
+    const newMessages = [...messages, { role: 'user', content: input }];
+    setMessages(newMessages);
     setInput('');
 
     const fetchAndDecodeMessage = async () => {
       const response = await fetch('/api/ask', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: [{ role: 'user', content: input }] }),
+        body: JSON.stringify({ messages: newMessages }),
       });
   
       if (!response.ok) {

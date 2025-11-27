@@ -28,23 +28,29 @@ export const POST = async (request: NextRequest) => {
 
   try {
     const data = await request.json();
-    const userMessage = data.messages?.[0]?.content;
+    const messages = data.messages || [];
+    const lastMessage = messages[messages.length - 1];
+    const userMessageContent = lastMessage?.content || '';
 
-    if (userMessage && SystemInstructionPrompt && RecommendationsFromYelp) {
+    if (messages.length > 0 && SystemInstructionPrompt && RecommendationsFromYelp) {
+      const systemMessage = {
+        role: 'system',
+        content: TEST_MODE || userMessageContent === 'test'
+          ? 'TESTING: Ignore this message'
+          : SystemInstructionPrompt + RecommendationsFromYelp + FremontRecommendations + OtherRecommendations,
+      };
+
+      const apiMessages = [
+        systemMessage,
+        ...messages.map((msg: any) => ({
+          role: msg.role,
+          content: TEST_MODE ? 'TESTING: Ignore this message' : msg.content,
+        })),
+      ];
+
       const response = await openai.chat.completions.create({
         model: OpenAIModelID.GPT_4o_MINI,
-        messages: [
-          {
-            role: 'system',
-            content: TEST_MODE || userMessage === 'test'
-              ? 'TESTING: Ignore this message'
-              : SystemInstructionPrompt + RecommendationsFromYelp + FremontRecommendations + OtherRecommendations,
-          },
-          {
-            role: 'user',
-            content: TEST_MODE ? 'TESTING: Ignore this message' : userMessage,
-          },
-        ],
+        messages: apiMessages,
         max_tokens: OpenAIModelsParams[OpenAIModelID.GPT_4o_MINI].maxTokens,
         temperature: OpenAIModelsParams[OpenAIModelID.GPT_4o_MINI].temperature,
         stream: true,
