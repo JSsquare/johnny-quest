@@ -1,6 +1,8 @@
+'use client'
 import Link from 'next/link'
 import React from 'react'
 import { DESIGN_COLORS } from '../../constants/commonConstants'
+import { useTheme } from '../../components/ThemeProvider'
 
 const palette = DESIGN_COLORS
 
@@ -39,17 +41,18 @@ const principles = [
 ]
 
 const AboutPage: React.FC = () => {
+  const { theme } = useTheme()
   return (
     <main
       className="min-h-screen"
       style={
         {
-          backgroundColor: palette.BACKGROUND,
-          color: palette.TEXT_PRIMARY,
+          backgroundColor: theme === 'dark' ? '#000000' : palette.BACKGROUND,
+          color: theme === 'dark' ? '#FFFFFF' : palette.TEXT_PRIMARY,
           '--primary-color': palette.PRIMARY,
-          '--secondary-color': palette.SECONDARY,
-          '--muted-color': palette.TEXT_MUTED,
-          '--surface-color': palette.SURFACE,
+          '--secondary-color': theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : palette.SECONDARY,
+          '--muted-color': theme === 'dark' ? '#A0A0A0' : palette.TEXT_MUTED,
+          '--surface-color': theme === 'dark' ? '#1a1a1a' : palette.SURFACE,
           '--attention-color': palette.ATTENTION,
         } as React.CSSProperties
       }
@@ -60,7 +63,7 @@ const AboutPage: React.FC = () => {
             href="/"
             className="inline-flex items-center gap-2 rounded-full border border-[var(--secondary-color)] bg-[var(--surface-color)] px-5 py-2 text-sm font-semibold shadow-[0_10px_30px_-20px_rgba(64,53,48,0.65)] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-color)]"
             style={{
-              color: palette.TEXT_PRIMARY,
+              color: theme === 'dark' ? '#FFFFFF' : palette.TEXT_PRIMARY,
             }}
           >
             <span aria-hidden>←</span>
@@ -74,7 +77,7 @@ const AboutPage: React.FC = () => {
               aria-hidden
               className="absolute inset-0 rounded-full"
               style={{
-                backgroundColor: palette.SECONDARY,
+                backgroundColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : palette.SECONDARY,
                 opacity: 0.32,
                 filter: 'blur(28px)',
               }}
@@ -86,7 +89,7 @@ const AboutPage: React.FC = () => {
               alt="Johnny smiling"
               className="relative h-40 w-40 rounded-full object-cover"
               style={{
-                border: `4px solid ${palette.SURFACE}`,
+                border: `4px solid ${theme === 'dark' ? '#1a1a1a' : palette.SURFACE}`,
                 boxShadow: '0 28px 50px -28px rgba(64, 53, 48, 0.55)',
               }}
             />
@@ -94,7 +97,7 @@ const AboutPage: React.FC = () => {
           <div className="space-y-6">
             <p
               className="text-xs uppercase tracking-[0.35em]"
-              style={{ color: palette.TEXT_MUTED }}
+              style={{ color: theme === 'dark' ? '#A0A0A0' : palette.TEXT_MUTED }}
             >
               Creator • Software Engineer • Food Explorer
             </p>
@@ -103,7 +106,7 @@ const AboutPage: React.FC = () => {
             </h1>
             <p
               className="text-sm leading-relaxed md:text-base"
-              style={{ color: palette.TEXT_MUTED }}
+              style={{ color: theme === 'dark' ? '#A0A0A0' : palette.TEXT_MUTED }}
             >
               Johnny is the creator of this site. Explore his projects and writings below.
             </p>
@@ -150,7 +153,7 @@ const AboutPage: React.FC = () => {
             </div>
             <span
               className="text-xs uppercase tracking-[0.25em]"
-              style={{ color: palette.SECONDARY }}
+              style={{ color: theme === 'dark' ? 'rgba(255, 255, 255, 0.5)' : palette.SECONDARY }}
             >
               Selected Work
             </span>
@@ -209,7 +212,7 @@ const AboutPage: React.FC = () => {
         </section> */}
 
         <footer className="rounded-3xl border border-[var(--secondary-color)] bg-[var(--surface-color)] p-8 text-center shadow-[0_20px_35px_-30px_rgba(64,53,48,0.35)]">
-          <p className="text-sm md:text-base" style={{ color: palette.TEXT_MUTED }}>
+          <p className="text-sm md:text-base" style={{ color: theme === 'dark' ? '#A0A0A0' : palette.TEXT_MUTED }}>
             Want to pick his brain or collaborate over a virtual cappuccino?
           </p>
           <Link

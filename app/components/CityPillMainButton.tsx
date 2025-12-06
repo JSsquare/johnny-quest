@@ -9,6 +9,7 @@ import {
   StateCodeToState,
   StateCountry,
 } from '../constants/placesConstants'
+import { useTheme } from './ThemeProvider'
 
 export const CityPillsMainButton = ({
   askSubmitButtonRef,
@@ -19,6 +20,7 @@ export const CityPillsMainButton = ({
 }) => {
   const { isOpen, onToggle } = useDisclosure()
   const isMobile = useBreakpointValue({ base: true, md: false });
+  const { theme } = useTheme()
 
   const mainButtonText = isOpen ? BUTTON_TEXTS.CITIES_OPEN : BUTTON_TEXTS.CITIES_CLOSED
 
@@ -39,7 +41,7 @@ export const CityPillsMainButton = ({
     py={{ base: 4, md: 5 }}
     whiteSpace="normal"
     borderWidth="1px"
-    borderColor="rgba(177, 173, 161, 0.7)"
+    borderColor={theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(177, 173, 161, 0.7)'}
     leftIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
     rightIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
     _hover={{ backgroundColor: isOpen ? 'rgba(193, 95, 60, 0.28)' : '#a64f32' }}
@@ -93,6 +95,7 @@ const CityButton = ({
   setUserAskQuery: any
   askSubmitButtonRef: any
 }) => {
+  const { theme } = useTheme()
   const stateCode = CityStatesJohnnyHasExplored[city]
   return (
     <Tooltip
@@ -104,11 +107,11 @@ const CityButton = ({
     >
       <Button
         variant="ghost"
-        backgroundColor="rgba(255, 255, 255, 0.9)"
+        backgroundColor={theme === 'dark' ? 'rgba(30, 30, 30, 0.9)' : 'rgba(255, 255, 255, 0.9)'}
         borderWidth="1px"
-        borderColor="rgba(177, 173, 161, 0.6)"
-        color={DESIGN_COLORS.TEXT_PRIMARY}
-        _hover={{ backgroundColor: 'rgba(193, 95, 60, 0.12)' }}
+        borderColor={theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(177, 173, 161, 0.6)'}
+        color={theme === 'dark' ? 'white' : DESIGN_COLORS.TEXT_PRIMARY}
+        _hover={{ backgroundColor: theme === 'dark' ? 'rgba(193, 95, 60, 0.25)' : 'rgba(193, 95, 60, 0.12)' }}
         onClick={() => {
           setUserAskQuery(
             `Can you give me recommendations from ${city}, ${StateCodeToState[stateCode]}, ${StateCountry[stateCode]}`,

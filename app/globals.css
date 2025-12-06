@@ -9,7 +9,7 @@
 
 @layer components {
   .city-pill {
-    @apply fixed left-0 top-0 flex w-full justify-center border-b pb-6 pt-8 backdrop-blur-2xl bg-white/90 border-[#B1ADA1] lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-white lg:p-4;
+    @apply fixed left-0 top-0 flex w-full justify-center border-b pb-6 pt-8 backdrop-blur-2xl bg-white/90 border-[#B1ADA1] lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-white lg:p-4 dark:bg-black/90 dark:border-gray-800 dark:lg:bg-black;
   }
   .heading-nav-pill {
     @apply fixed top-5 left-5 flex justify-center font-bold items-center w-24 h-8 text-white rounded-full shadow-xl text-xs bg-[#C15F3C];
@@ -21,17 +21,22 @@
     @apply drop-shadow-none;
   }
   .rounded-shadow-card {
-    @apply rounded-xl shadow-xl p-6 bg-white border border-[#B1ADA1] text-[#403530];
+    @apply rounded-xl shadow-xl p-6 bg-white border border-[#B1ADA1] text-[#403530] dark:bg-gray-900 dark:border-gray-800 dark:text-gray-100;
   }
 }
 
 body {
-  background: linear-gradient(135deg, #F4F3EE 0%, rgba(244, 243, 238, 0.9) 65%, rgba(244, 243, 238, 0.95) 100%) !important;
-  color: #403530 !important;
+  background: linear-gradient(135deg, #F4F3EE 0%, rgba(244, 243, 238, 0.9) 65%, rgba(244, 243, 238, 0.95) 100%);
+  color: #403530;
   min-height: 100vh;
   font-family: var(--font-sans), var(--font-sans-fallback);
   font-weight: 400;
   letter-spacing: -0.01em;
+}
+
+.dark body {
+  background: #000000 !important;
+  color: #FFFFFF !important;
 }
 
 main {

@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { IBM_Plex_Mono, Inter } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/next'
+import { ThemeToggle } from './components/ThemeToggle'
+import { Providers } from './providers'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -25,7 +27,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${plexMono.variable}`}>
       <body>
-        {children}
+        <Providers>
+          {children}
+          <ThemeToggle />
+        </Providers>
         <Analytics />
       </body>
     </html>

@@ -1,4 +1,5 @@
 'use client';
+import { useTheme } from './ThemeProvider';
 import { QuestionOutlineIcon } from '@chakra-ui/icons';
 import {
   Box,
@@ -26,6 +27,7 @@ import { CityPillsMainButton } from './CityPillMainButton';
 import { RecsDisabledBanner } from '@/app/components/RecsDisabledBanner';
 
 const MainChatContainer = () => {
+  const { theme } = useTheme();
   interface Message {
     role: string;
     content: string;
@@ -248,12 +250,12 @@ const MainChatContainer = () => {
             scrollbarWidth: 'thin',
           }}
         >
-          <Stack spacing={10} maxW="3xl" width="100%" align="stretch" color={DESIGN_COLORS.TEXT_PRIMARY}>
+          <Stack spacing={10} maxW="3xl" width="100%" align="stretch" color={theme === 'dark' ? 'white' : DESIGN_COLORS.TEXT_PRIMARY}>
             <Stack spacing={4} textAlign="center" width="100%">
               <Text fontSize={{ base: '2xl', md: '3xl' }} fontWeight="semibold" color={DESIGN_COLORS.PRIMARY}>
                 Ask Johnny Where To Eat
               </Text>
-              <Text color={DESIGN_COLORS.TEXT_MUTED} fontSize={{ base: 'md', md: 'lg' }}>
+              <Text color={theme === 'dark' ? 'gray.400' : DESIGN_COLORS.TEXT_MUTED} fontSize={{ base: 'md', md: 'lg' }}>
                 Tell Johnny what you&apos;re craving and where, he&apos;ll craft his personal picks.
               </Text>
             </Stack>
@@ -270,11 +272,11 @@ const MainChatContainer = () => {
                 <Box
                   key={index}
                   borderRadius="xl"
-                  bg={m.role === 'assistant' ? 'rgba(193, 95, 60, 0.12)' : 'rgba(177, 173, 161, 0.35)'}
-                  border="1px solid rgba(177, 173, 161, 0.6)"
+                  bg={m.role === 'assistant' ? (theme === 'dark' ? 'rgba(193, 95, 60, 0.25)' : 'rgba(193, 95, 60, 0.12)') : (theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(177, 173, 161, 0.35)')}
+                  border={theme === 'dark' ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(177, 173, 161, 0.6)'}
                   p={{ base: 4, md: 6 }}
                 >
-                  <Text fontSize={{ base: 'sm', md: 'lg' }} color={DESIGN_COLORS.TEXT_PRIMARY}>
+                  <Text fontSize={{ base: 'sm', md: 'lg' }} color={theme === 'dark' ? 'white' : DESIGN_COLORS.TEXT_PRIMARY}>
                     {m.content}
                   </Text>
                 </Box>
@@ -303,10 +305,10 @@ const MainChatContainer = () => {
             bottom={{ base: 'calc(env(safe-area-inset-bottom, 0px) + 16px)', md: '40px' }}
             transform={`translate3d(-50%, ${composerOffset ? -composerOffset : 0}px, 0)`}
             width="min(680px, calc(100% - 2rem))"
-            bg={`${DESIGN_COLORS.SURFACE}F2`}
+            bg={theme === 'dark' ? '#1a1a1aF2' : `${DESIGN_COLORS.SURFACE}F2`}
             borderRadius={{ base: '2xl', md: 'full' }}
             boxShadow="0px 24px 46px rgba(24, 23, 19, 0.25)"
-            border="1px solid rgba(177, 173, 161, 0.45)"
+            border={theme === 'dark' ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(177, 173, 161, 0.45)'}
             px={{ base: 4, md: 6 }}
             py={{ base: 3, md: 4 }}
             zIndex={900}
@@ -327,10 +329,10 @@ const MainChatContainer = () => {
                   onChange={(e) => setInput(e.target.value)}
                   onFocus={handleComposerFocus}
                   onBlur={handleComposerBlur}
-                  color={DESIGN_COLORS.TEXT_PRIMARY}
+                  color={theme === 'dark' ? 'white' : DESIGN_COLORS.TEXT_PRIMARY}
                   backgroundColor="transparent"
                   borderRadius="xl"
-                  border="1px solid rgba(177, 173, 161, 0.45)"
+                  border={theme === 'dark' ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(177, 173, 161, 0.45)'}
                   px={4}
                   py={3}
                   _focus={{ borderColor: DESIGN_COLORS.PRIMARY, boxShadow: '0 0 0 2px rgba(193, 95, 60, 0.25)' }}
@@ -347,9 +349,9 @@ const MainChatContainer = () => {
                     onChange={(e) => setInput(e.target.value)}
                     onFocus={handleComposerFocus}
                     onBlur={handleComposerBlur}
-                    color={DESIGN_COLORS.TEXT_PRIMARY}
+                    color={theme === 'dark' ? 'white' : DESIGN_COLORS.TEXT_PRIMARY}
                     backgroundColor="transparent"
-                    border="1px solid rgba(177, 173, 161, 0.45)"
+                    border={theme === 'dark' ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(177, 173, 161, 0.45)'}
                     borderRadius="full"
                     pl={12}
                     pr={6}

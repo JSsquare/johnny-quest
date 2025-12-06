@@ -1,10 +1,9 @@
 'use client'
-import { useEffect, useState } from 'react';
-import { ChakraProvider } from '@chakra-ui/react';
-import MainChatContainer from './components/MainChatContainer';
-import PassKeyModal from './components/PassKeyModal';
-import { SHOW_PASSKEY } from './constants/configConstants';
-import Cookies from "js-cookie";
+import { useEffect, useState } from 'react'
+import MainChatContainer from './components/MainChatContainer'
+import PassKeyModal from './components/PassKeyModal'
+import { SHOW_PASSKEY } from './constants/configConstants'
+import Cookies from 'js-cookie'
 
 export default function Home() {
   const [openModal, setOpenModal] = useState(false);
@@ -26,11 +25,9 @@ export default function Home() {
   };
 
   return (
-    <ChakraProvider>
-      <main className="flex flex-col font-sans content-center">
-        {openModal && <PassKeyModal onClose={handleModalClose} />}
-        {isModalClosedSuccessfully && <MainChatContainer />}
-      </main>
-    </ChakraProvider>
-  );
+    <main className="flex flex-col font-sans content-center">
+      {openModal && <PassKeyModal onClose={handleModalClose} />}
+      {isModalClosedSuccessfully && <MainChatContainer />}
+    </main>
+  )
 }
