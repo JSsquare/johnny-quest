@@ -14,6 +14,7 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import { FormEvent, useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   DESIGN_COLORS,
   RECS_ALLOWED_MESSAGE_LENGTH,
@@ -251,6 +252,12 @@ const MainChatContainer = () => {
           }}
         >
           <Stack spacing={10} maxW="3xl" width="100%" align="stretch" color={theme === 'dark' ? 'white' : DESIGN_COLORS.TEXT_PRIMARY}>
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.5, type: 'spring', bounce: 0.3 }}
+              style={{ width: '100%' }}
+            >
             <Stack spacing={4} textAlign="center" width="100%">
               <Text fontSize={{ base: '2xl', md: '3xl' }} fontWeight="semibold" color={DESIGN_COLORS.PRIMARY}>
                 Ask Johnny Where To Eat
@@ -259,9 +266,17 @@ const MainChatContainer = () => {
                 Tell Johnny what you&apos;re craving and where, he&apos;ll craft his personal picks.
               </Text>
             </Stack>
+            </motion.div>
 
             {isRecsAllowed && (
-              <CityPillsMainButton askSubmitButtonRef={askSubmitButtonRef} setUserAskQuery={setInput} />
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1, type: 'spring' }}
+                style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+              >
+                <CityPillsMainButton askSubmitButtonRef={askSubmitButtonRef} setUserAskQuery={setInput} />
+              </motion.div>
             )}
 
             {/* Ask A Specific Question Feature is work in progress
@@ -296,25 +311,41 @@ const MainChatContainer = () => {
         </Box>
 
         {isRecsAllowed && (
+          <motion.div
+            initial={{ opacity: 0, y: 100, x: '-50%', scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, x: '-50%', scale: 1 }}
+            transition={{
+              type: 'spring',
+              stiffness: 400,
+              damping: 25,
+              mass: 1,
+              delay: 0.2
+            }}
+            style={{
+                position: 'fixed',
+                left: '50%',
+                bottom: isMobileLayout ? 'calc(env(safe-area-inset-bottom, 0px) + 16px)' : '40px',
+                width: 'min(680px, calc(100% - 2rem))',
+                zIndex: 900,
+            }}
+          >
           <Box
             as="form"
             onSubmit={handleFormSubmit}
             ref={composerRef}
-            position="fixed"
-            left="50%"
-            bottom={{ base: 'calc(env(safe-area-inset-bottom, 0px) + 16px)', md: '40px' }}
-            transform={`translate3d(-50%, ${composerOffset ? -composerOffset : 0}px, 0)`}
-            width="min(680px, calc(100% - 2rem))"
+            width="100%"
             bg={theme === 'dark' ? '#1a1a1aF2' : `${DESIGN_COLORS.SURFACE}F2`}
             borderRadius={{ base: '2xl', md: 'full' }}
             boxShadow="0px 24px 46px rgba(24, 23, 19, 0.25)"
             border={theme === 'dark' ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(177, 173, 161, 0.45)'}
             px={{ base: 4, md: 6 }}
             py={{ base: 3, md: 4 }}
-            zIndex={900}
             backdropFilter="blur(12px)"
             pointerEvents="auto"
             transition="transform 0.2s ease, box-shadow 0.2s ease"
+            style={{
+                transform: `translate3d(0, ${composerOffset ? -composerOffset : 0}px, 0)`
+            }}
           >
             <Stack
               spacing={{ base: 3, md: 4 }}
@@ -376,6 +407,7 @@ const MainChatContainer = () => {
               </Button>
             </Stack>
           </Box>
+          </motion.div>
         )}
       </Box>
       {isShowPromotionBanner && (
