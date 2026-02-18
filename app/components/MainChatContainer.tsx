@@ -263,7 +263,7 @@ const MainChatContainer = () => {
                 Ask Johnny Where To Eat
               </Text>
               <Text color={theme === 'dark' ? 'gray.400' : DESIGN_COLORS.TEXT_MUTED} fontSize={{ base: 'md', md: 'lg' }}>
-                Tell Johnny what you&apos;re craving and where, he&apos;ll craft his personal picks.
+                Tell Johnny what you&apos;re craving for, he&apos;ll craft a personal pick for you.
               </Text>
             </Stack>
             </motion.div>
