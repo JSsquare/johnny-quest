@@ -4,12 +4,15 @@ import { FremontRecommendations, OtherRecommendations, RecommendationsFromYelp, 
 import { delay } from '@/app/utils/common';
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import { ChatCompletionCreateParamsStreaming } from 'openai/resources/chat/completions';
 
 export const runtime = 'edge';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
+
+const ACTIVE_CHAT_MODEL = OpenAIModelID.GPT_5_NANO;
 
 export const POST = async (request: NextRequest) => {
   if (!process.env.OPENAI_API_KEY) {
@@ -48,13 +51,19 @@ export const POST = async (request: NextRequest) => {
         })),
       ];
 
-      const response = await openai.chat.completions.create({
-        model: OpenAIModelID.GPT_4o_MINI,
+      const activeModelParams = OpenAIModelsParams[ACTIVE_CHAT_MODEL];
+      const shouldIncludeTemperature = !ACTIVE_CHAT_MODEL.startsWith('gpt-5');
+      const completionRequest: ChatCompletionCreateParamsStreaming = {
+        model: ACTIVE_CHAT_MODEL,
         messages: apiMessages,
-        max_tokens: OpenAIModelsParams[OpenAIModelID.GPT_4o_MINI].maxTokens,
-        temperature: OpenAIModelsParams[OpenAIModelID.GPT_4o_MINI].temperature,
+        max_tokens: activeModelParams.maxTokens,
         stream: true,
-      });
+        ...(shouldIncludeTemperature && {
+          temperature: activeModelParams.temperature,
+        }),
+      };
+
+      const response = await openai.chat.completions.create(completionRequest);
 
       const encoder = new TextEncoder();
       const stream = new ReadableStream({

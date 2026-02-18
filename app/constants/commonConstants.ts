@@ -8,7 +8,8 @@ export const RECS_ALLOWED_MESSAGE_LENGTH = 2
 
 export enum OpenAIModelID {
   GPT_4 = 'gpt-4',
-  GPT_4o_MINI = 'gpt-4o-mini'
+  GPT_4o_MINI = 'gpt-4o-mini',
+  GPT_5_NANO = 'gpt-5-nano'
 }
 
 export const OpenAIModelsParams: Record<OpenAIModelID, OpenAIModelParams> = {
@@ -24,6 +25,13 @@ export const OpenAIModelsParams: Record<OpenAIModelID, OpenAIModelParams> = {
     name: OpenAIModelID.GPT_4o_MINI,
     maxLength: 32000,
     maxTokens: 512,
+    temperature: 0.5,
+  },
+  [OpenAIModelID.GPT_5_NANO]: {
+    id: OpenAIModelID.GPT_5_NANO,
+    name: OpenAIModelID.GPT_5_NANO,
+    maxLength: 32000,
+    max_completion_tokens: 512,
     temperature: 0.5,
   },
 }
