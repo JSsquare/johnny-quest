@@ -27,8 +27,8 @@ const projects = [
       '',
   },
   {
-    href: 'https://calppuccino.vercel.app',
-    title: 'Calpuccino App',
+    href: 'https://skill-deploy-jqa1a8s70a.vercel.app/',
+    title: 'World Conflict AI Agent',
     description:
       '',
   },
@@ -108,7 +108,7 @@ const AboutPage: React.FC = () => {
               className="text-sm leading-relaxed md:text-base"
               style={{ color: theme === 'dark' ? '#A0A0A0' : palette.TEXT_MUTED }}
             >
-              Johnny is the creator of this site. Explore his projects and writings below.
+              Explore Johnnys projects and writings below.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link
@@ -149,7 +149,7 @@ const AboutPage: React.FC = () => {
         <section className="space-y-6">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 className="text-xl md:text-3xl" style={{ color: DESIGN_COLORS.ATTENTION }}>Johnnys Featured Projects</h2>
+              <h2 className="text-xl md:text-3xl" style={{ color: DESIGN_COLORS.ATTENTION }}>Johnnys Projects</h2>
             </div>
             <span
               className="text-xs uppercase tracking-[0.25em]"
@@ -216,7 +216,7 @@ const AboutPage: React.FC = () => {
             Want to pick his brain or collaborate over a virtual cappuccino?
           </p>
           <Link
-            href="https://calendar.app.google/J5GnYrUAzfGY8gMV8"
+            href="https://calendar.app.google/VTG7m58MH9cLUKwQ8"
             target="_blank"
             rel="noreferrer"
             className="mt-4 inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-color)]"
@@ -225,7 +225,7 @@ const AboutPage: React.FC = () => {
               boxShadow: '0 20px 40px -18px rgba(193, 95, 60, 0.45)',
             }}
           >
-            Set Time With Johnny
+            Set time with Johnny
           </Link>
         </footer>
       </div>
