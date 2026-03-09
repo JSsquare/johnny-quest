@@ -28,7 +28,7 @@ const projects = [
   },
   {
     href: 'https://skill-deploy-jqa1a8s70a.vercel.app/',
-    title: 'World Conflict AI Agent',
+    title: 'World Conflict Daily Reporter Agent',
     description:
       '',
   },
