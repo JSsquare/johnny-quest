@@ -64,7 +64,8 @@ export const POST = async (request: NextRequest) => {
       };
 
       const response = await openai.chat.completions.create(completionRequest);
-
+      console.log("Payload being sent to OpenAI:", JSON.stringify(completionRequest, null, 2));
+      
       const encoder = new TextEncoder();
       const stream = new ReadableStream({
         async start(controller) {
